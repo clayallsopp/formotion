@@ -1,4 +1,4 @@
-module Formation
+module Formotion
   class Form
     attr_reader :table
     attr_reader :controller
@@ -31,30 +31,9 @@ module Formation
     def reload_data
       previous_row, next_row = nil
 
-      self.sections.each_with_index {|section, section_index|
-        next_section = nil
-        if section_index + 1 < self.sections.count
-          next_section = sections[section_index + 1]
-        end
-
-        section.rows.each_with_index { |row, row_index|
-          if (row_index + 1) < section.rows.count
-            next_row = section.rows[row_index + 1]
-          else
-            if next_section && next_section.rows.count > 0
-              next_row = next_section.rows[0]
-            end
-          end
-
-          row.previous_row = previous_row
-          row.next_row = next_row
-
-          previous_row = row
-        }
-      }
-
-      if previous_row
-        previous_row.return_key ||= UIReturnKeyDone
+      last_row = self.sections[-1].rows[-1]
+      if last_row
+        last_row.return_key ||= UIReturnKeyDone
       end
 
       @table.reloadData
@@ -88,18 +67,20 @@ module Formation
     def tableView(tableView, didSelectRowAtIndexPath:indexPath)
       tableView.deselectRowAtIndexPath(indexPath, animated:true)
       row = row_for_index_path(indexPath)
-      if row.checkable?
+      if row.submit_button?
+        self.submit
+      elsif row.checkable?
         if row.section.select_one and !row.value
           row.section.rows.each {|other_row|
             other_row.value = (other_row == row)
-            Formation::RowCellBuilder.make_check_cell(other_row, tableView.cellForRowAtIndexPath(other_row.index_path))
+            Formotion::RowCellBuilder.make_check_cell(other_row, tableView.cellForRowAtIndexPath(other_row.index_path))
           }
         elsif !row.section.select_one
           row.value = !row.value
-          Formation::RowCellBuilder.make_check_cell(row, tableView.cellForRowAtIndexPath(row.index_path))
+          Formotion::RowCellBuilder.make_check_cell(row, tableView.cellForRowAtIndexPath(row.index_path))
         end
       elsif row.editable?
-        row.field.becomeFirstResponder
+        row.text_field.becomeFirstResponder
       end
     end
   end

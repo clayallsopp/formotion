@@ -2,52 +2,65 @@ class AppDelegate
   def application(application, didFinishLaunchingWithOptions:launchOptions)
     @window = UIWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)
 
-    form = Formation::Form.new({
+    form = Formotion::Form.new({
       sections: [{
         title: "Register",
         rows: [{
           title: "Email",
+          key: :email,
           placeholder: "me@mail.com",
-          type: Formation::RowType::EMAIL,
-          editable: true,
-          auto_correction:  UITextAutocorrectionTypeNo,
-          auto_capitalization: UITextAutocapitalizationTypeNone
+          type: :email,
+          auto_correction: :no,
+          auto_capitalization: :none
         }, {
           title: "Password",
+          key: :password,
           placeholder: "required",
-          type: Formation::RowType::STRING,
-          editable: true,
+          type: :string,
           secure: true
         }, {
-          title: "Confirm",
+          title: "Password",
+          subtitle: "Confirmation",
+          key: :confirm,
           placeholder: "required",
-          type: Formation::RowType::STRING,
-          editable: true,
+          type: :string,
           secure: true
-        }]
-      }, {
-        select_one: true,
-        rows: [{
+        }, {
           title: "Remember?",
-          switchable: true,
+          key: :remember,
+          type: :switch,
         }]
       }, {
         title: "Account Type",
+        key: :account_type,
         select_one: true,
         rows: [{
           title: "Free",
-          checkable: true,
+          key: :free,
+          type: :check,
         }, {
           title: "Basic",
-          checkable: true,
+          value: true,
+          key: :basic,
+          type: :check,
         }, {
           title: "Pro",
-          checkable: true,
+          key: :pro,
+          type: :check,
+        }]
+      }, {
+        rows: [{
+          title: "Sign Up",
+          type: :submit,
         }]
       }]
     })
 
-    @view_controller = Formation::Controller.alloc.initWithForm(form)
+    @view_controller = Formotion::FormController.alloc.initWithForm(form)
+    @view_controller.form.on_submit do |form|
+        p @view_controller.form.render
+      end
+
     @window.rootViewController = @view_controller
     @window.makeKeyAndVisible
     true

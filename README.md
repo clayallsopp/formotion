@@ -2,58 +2,75 @@
 
 Make this:
 
-![Complex data form][]
+![Complex data form](http://i.imgur.com/TMwXI.png)
 
 using just this:
 
 ```ruby
-form = Formation::Form.new({
+@form = Formotion::Form.new({
   sections: [{
     title: "Register",
     rows: [{
       title: "Email",
+      key: :email,
       placeholder: "me@mail.com",
-      type: Formation::RowType::EMAIL,
-      editable: true,
-      auto_correction:  UITextAutocorrectionTypeNo,
-      auto_capitalization: UITextAutocapitalizationTypeNone
+      type: :email,
+      auto_correction: :no,
+      auto_capitalization: :none
     }, {
       title: "Password",
+      key: :password,
       placeholder: "required",
-      type: Formation::RowType::STRING,
-      editable: true,
+      type: :string,
       secure: true
     }, {
-      title: "Confirm",
+      title: "Password",
+      subtitle: "Confirmation"
+      key: :confirm,
       placeholder: "required",
-      type: Formation::RowType::STRING,
-      editable: true,
+      type: :string,
       secure: true
-    }]
-  }, {
-    select_one: true,
-    rows: [{
+    }, {
       title: "Remember?",
-      switchable: true,
+      key: :remember,
+      type: :switch,
     }]
   }, {
     title: "Account Type",
+    key: :account_type,
     select_one: true,
     rows: [{
       title: "Free",
-      checkable: true,
+      key: :free,
+      type: :check,
     }, {
       title: "Basic",
-      checkable: true,
+      value: true,
+      key: :basic,
+      type: :check,
     }, {
       title: "Pro",
-      checkable: true,
+      key: :pro,
+      type: :check,
+    }]
+  }, {
+    rows: [{
+      title: "Sign Up",
+      type: :submit,
     }]
   }]
 })
 
-@form_controller = FormController.alloc.initWithForm(form)
+@form_controller = FormController.alloc.initWithForm(@form)
 @window.rootViewController = @form_controller
+```
+
+And after the user enters some data, do this:
+
+```ruby
+@form.render
+=> {:email=>"me@email.com", :password=>"password", 
+    :confirm=>"password", :remember=>true, :account_type=>:pro}
 ```
 
 ## Installation
@@ -71,7 +88,7 @@ In your `Rakefile`:
 You can initialize a `Formotion::Form` using either a hash (as above) or the DSL:
 
 ```ruby
-form = Formation::Form.new
+form = Formotion::Form.new
 
 form.build_section do |section|
   section.title = "Title"
@@ -86,7 +103,7 @@ end
 Then attach it to a `Formotion::Controller` and you're ready to rock and roll:
 
 ```ruby
-@controller = Formation::Controller.alloc.initWithForm(form)
+@controller = Formotion::Controller.alloc.initWithForm(form)
 self.navigationController.pushViewController(@controller, animated: true)
 ```
 
@@ -109,7 +126,7 @@ class PeopleController < Formotion::Controller
 end
 ```
 
-Why would you use `form#on_submit`? In case you want to use `Formation::RowType::SUBMIT`. Ex:
+Why would you use `form#on_submit`? In case you want to use `Formotion::RowType::SUBMIT`. Ex:
 
 ```ruby
 @form = Formotion::Form.new({
@@ -118,7 +135,7 @@ Why would you use `form#on_submit`? In case you want to use `Formation::RowType:
   }, {
     rows: [{
       title: "Save",
-      type: Formation::RowType::SUBMIT
+      type: Formotion::RowType::SUBMIT
     }]
   }]
 })
@@ -132,5 +149,18 @@ end
 
 ### Data Types
 
-`Formotion::Form`, `Formotion::Section`, and `Formotion::Row` all respond to a `::PROPERTIES` attribute. These are settable as a property (ie `section.title = 'title'`) or in the initialization hash (ie `{sections: [{title: 'title', ...}]}`).
+Formotion current supports static and editable text, switches, and checkboxes.
 
+`Formotion::Form`, `Formotion::Section`, and `Formotion::Row` all respond to a `::PROPERTIES` attribute. These are settable as an attribute (ie `section.title = 'title'`) or in the initialization hash (ie `{sections: [{title: 'title', ...}]}`). Check the comments in the 3 main files (`form.rb`, `section.rb`, and `row.rb` for details on what these do).
+
+## Forking
+
+Feel free to fork and submit pull requests! And if you end up using Formotion in your app, I'd love to hear about your experience.
+
+## Todo
+
+- Not very efficient right now (creates a unique reuse idenitifer for each cell)
+- More data entry types (dates, etc)
+- More tests
+- Styling/overriding the form for custom UITableViewDelegate/Data Source behaviors.
+- Custom cell text field alignments

@@ -1,22 +1,33 @@
-module Formation
-  class Controller < UIViewController
+#################
+#
+# Formotion::FormController
+# Use #initWithForm to create a view controller
+# loaded with your form.
+#
+#################
+module Formotion
+  class FormController < UIViewController
     attr_accessor :form
     attr_reader :table_view
 
+    # Initializes controller with a form
+    # PARAMS form.is_a? [Hash, Formotion::Form]
+    # RETURNS An instance of Formotion::FormController
     def initWithForm(form)
-      self.init()
-      if form.is_a? Hash
-        self.form = Formation::Form.new(form)
-      else
-        self.form = form
-      end
+      self.initWithNibName(nil, bundle: nil)
+      self.form = form
       self
     end
 
-    def loadView
-      height = 460
-      height -= 44 if self.navigationController
-      self.view = UIView.alloc.initWithFrame(CGRectMake(0,20,320,height))
+    # Set the form; ensure it is/can be converted to Formotion::Form
+    # or raises an exception.
+    def form=(form)
+      if form.is_a? Hash
+        form = Formotion::Form.new(form)
+      elsif not form.is_a? Formotion::Form
+        raise Formotion::InvalidClassError, "Attempted FormController.form = #{form.inspect} should be of type Formotion::Form or Hash"
+      end
+      @form = form
     end
 
     def viewDidLoad
@@ -30,16 +41,23 @@ module Formation
       @table_view = UITableView.alloc.initWithFrame(self.view.bounds, style: UITableViewStyleGrouped)
       self.view.addSubview @table_view
 
+      # Triggers this block when the enter key is pressed 
+      # while editing the last text field.
       @form.sections[-1] && @form.sections[-1].rows[-1].on_enter do |row|
-        @form.submit
-        row.field.resignFirstResponder
+        if row.text_field
+          @form.submit
+          row.text_field.resignFirstResponder
+        end
       end
+
+      # Setting @form.controller assigns
+      # @form as the datasource and delegate
+      # and reloads the data.
       @form.controller = self
-      @form.on_submit do
-        p @form.render
-      end
     end
 
+    # This re-sizes + scrolls the tableview to account for the keyboard size.
+    # TODO: Test this on iPads, etc.
     def keyboardWillHideOrShow(note)
       last_note = @keyboard_state
       @keyboard_state = note.name
