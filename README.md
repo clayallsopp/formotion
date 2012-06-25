@@ -153,7 +153,7 @@ Formotion current supports static and editable text, switches, and checkboxes.
 
 `Formotion::Form`, `Formotion::Section`, and `Formotion::Row` all respond to a `::PROPERTIES` attribute. These are settable as an attribute (ie `section.title = 'title'`) or in the initialization hash (ie `{sections: [{title: 'title', ...}]}`). Check the comments in the 3 main files (`form.rb`, `section.rb`, and `row.rb` for details on what these do).
 
-See the [KitchenSink example](http://clayallsopp.com/github/tree/master/examples/KitchenSink) for a bunch of options in action.
+See the [KitchenSink example](https://github.com/clayallsopp/formotion/tree/master/examples/KitchenSink) for a bunch of options in action.
 
 ## Forking
 
