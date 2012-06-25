@@ -33,6 +33,15 @@ module Formotion
     def viewDidLoad
       super
 
+      # via https://gist.github.com/330916, could be wrong.
+      tabBarHeight = self.tabBarController && self.tabBarController.tabBar.bounds.size.height
+      tabBarHeight ||= 0
+      navBarHeight = self.navigationController && (self.navigationController.isNavigationBarHidden ? 0.0 : self.navigationController.navigationBar.bounds.size.height)
+      navBarHeight ||= 0
+      frame = self.view.frame
+      frame.size.height = frame.size.height - navBarHeight - tabBarHeight
+      self.view.frame = frame
+
       self.title = self.form.title
 
       NSNotificationCenter.defaultCenter.addObserver(self, selector:'keyboardWillHideOrShow:', name:UIKeyboardWillHideNotification, object:nil);
