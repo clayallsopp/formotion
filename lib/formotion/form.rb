@@ -125,11 +125,7 @@ module Formotion
       h[:sections] = self.sections.collect { |section|
         section.to_hash 
       }
-      delete_empty = Proc.new { |k, v| 
-        v.delete_if(&delete_empty) if v.kind_of?(Hash)
-        v.nil?
-      }
-      h.delete_if &delete_empty
+      recursive_delete_nil(h)
       h
     end
 
@@ -161,7 +157,17 @@ module Formotion
           }
         end
       }
+      kv.delete_if {|k, v| k.nil? }
       kv
+    end
+
+    private
+    def recursive_delete_nil(h)
+      delete_empty = Proc.new { |k, v|
+        v.delete_if(&delete_empty) if v.kind_of?(Hash)
+        v.nil?
+      }
+      h.delete_if &delete_empty
     end
   end
 end
