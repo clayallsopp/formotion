@@ -7,8 +7,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Clay Allsopp"]
   s.email       = ["clay.allsopp@gmail.com"]
   s.homepage    = "https://github.com/clayallsopp/Formotion"
-  s.summary     = "Making UITableView Forms awesome with RubyMotion"
-  s.description = "Making UITableView Forms awesome with RubyMotion"
+  s.summary     = "Making iOS Forms insanely great with RubyMotion"
+  s.description = "Making iOS Forms insanely great with RubyMotion"
 
   s.files         = `git ls-files`.split($\)
   s.test_files    = s.files.grep(%r{^(test|spec|features)/})
