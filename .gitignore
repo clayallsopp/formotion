@@ -4,3 +4,7 @@ resources/*.nib
 resources/*.momd
 resources/*.storyboardc
 .DS_STORE
+*.gem
+.bundle
+Gemfile.lock
+pkg/*
