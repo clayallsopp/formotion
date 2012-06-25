@@ -26,8 +26,8 @@ class AppDelegate
           type: :string,
           secure: true
         }, {
-          title: "Remember?",
-          key: :remember,
+          title: "Switch",
+          key: :switch,
           type: :switch,
         }]
       }, {
