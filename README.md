@@ -4,7 +4,7 @@ Make this:
 
 ![Complex data form](http://i.imgur.com/TMwXI.png)
 
-using just this:
+using this:
 
 ```ruby
 @form = Formotion::Form.new({
@@ -61,7 +61,7 @@ using just this:
   }]
 })
 
-@form_controller = FormController.alloc.initWithForm(@form)
+@form_controller = Formotion::FormController.alloc.initWithForm(@form)
 @window.rootViewController = @form_controller
 ```
 
@@ -100,10 +100,10 @@ form.build_section do |section|
 end
 ```
 
-Then attach it to a `Formotion::Controller` and you're ready to rock and roll:
+Then attach it to a `Formotion::FormController` and you're ready to rock and roll:
 
 ```ruby
-@controller = Formotion::Controller.alloc.initWithForm(form)
+@controller = Formotion::FormController.alloc.initWithForm(form)
 self.navigationController.pushViewController(@controller, animated: true)
 ```
 
@@ -112,7 +112,7 @@ self.navigationController.pushViewController(@controller, animated: true)
 You have `form#submit`, `form#on_submit`, and `form#render` at your disposal. Here's an example:
 
 ```ruby
-class PeopleController < Formotion::Controller
+class PeopleController < Formotion::FormController
   def viewDidLoad
     self.navigationItem.rightBarButtonItem = UIBarButtonItem.alloc.initWithBarButtonSystemItem(UIBarButtonSystemItemSave, target:self, action:'submit')
   end
