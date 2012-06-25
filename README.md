@@ -4,7 +4,7 @@ Make this:
 
 ![Complex data form](http://i.imgur.com/TMwXI.png)
 
-using just this:
+using this:
 
 ```ruby
 @form = Formotion::Form.new({
