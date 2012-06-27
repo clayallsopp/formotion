@@ -25,7 +25,7 @@ using this:
       secure: true
     }, {
       title: "Password",
-      subtitle: "Confirmation"
+      subtitle: "Confirmation",
       key: :confirm,
       placeholder: "required",
       type: :string,
