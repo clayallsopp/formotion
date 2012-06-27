@@ -67,21 +67,7 @@ module Formotion
     def tableView(tableView, didSelectRowAtIndexPath:indexPath)
       tableView.deselectRowAtIndexPath(indexPath, animated:true)
       row = row_for_index_path(indexPath)
-      if row.submit_button?
-        self.submit
-      elsif row.checkable?
-        if row.section.select_one and !row.value
-          row.section.rows.each {|other_row|
-            other_row.value = (other_row == row)
-            Formotion::RowCellBuilder.make_check_cell(other_row, tableView.cellForRowAtIndexPath(other_row.index_path))
-          }
-        elsif !row.section.select_one
-          row.value = !row.value
-          Formotion::RowCellBuilder.make_check_cell(row, tableView.cellForRowAtIndexPath(row.index_path))
-        end
-      elsif row.editable?
-        row.text_field.becomeFirstResponder
-      end
+      row.object.on_select(tableView, self)
     end
   end
 end

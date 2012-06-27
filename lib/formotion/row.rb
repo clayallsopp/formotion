@@ -6,7 +6,7 @@ module Formotion
       # the user's (or configured) value for this row.
       :value,
       # set as cell.titleLabel.text
-      :title, 
+      :title,
       # set as cell.detailLabel.text
       :subtitle,
       # configures the type of input this is (string, phone, switch, etc)
@@ -19,7 +19,7 @@ module Formotion
       # placeholder text
       :placeholder,
       # whether or not the entry field is secure (like a password)
-      :secure, 
+      :secure,
       # given by a UIReturnKey___ integer, string, or symbol
       # EX :default, :google
       :return_key,
@@ -62,6 +62,9 @@ module Formotion
     # starts editing #text_field.
     attr_accessor :on_begin_callback
 
+    # row type object
+    attr_accessor :object
+
     def initialize(params = {})
       super
 
@@ -74,7 +77,7 @@ module Formotion
     # these should be done with alias_method but there's currently a bug
     # in RM which messes up attr_accessors with alias_method
     # EX
-    # row.editable?
+    # row.secure?
     # => true
     # row.checkable?
     # => nil
@@ -103,7 +106,7 @@ module Formotion
 
     def next_row
       # if there are more rows in this section, use that.
-      return self.section.rows[self.index + 1] if self.index < (self.section.rows.count - 1)        
+      return self.section.rows[self.index + 1] if self.index < (self.section.rows.count - 1)
 
       # if there are more sections, then use the first row of that section.
       return self.section.next_section.rows[0] if self.section.next_section
@@ -112,7 +115,7 @@ module Formotion
     end
 
     def previous_row
-      return self.section.rows[self.index - 1] if self.index > 0        
+      return self.section.rows[self.index - 1] if self.index > 0
 
       # if there are more sections, then use the first row of that section.
       return self.section.previous_section.rows[-1] if self.section.previous_section
@@ -120,41 +123,30 @@ module Formotion
       nil
     end
 
-    def editable?
-      Formotion::RowType::TEXT_FIELD_TYPES.member? self.type
-    end
-
     def submit_button?
-      self.type == Formotion::RowType::SUBMIT
-    end
-
-    def switchable?
-      self.type == Formotion::RowType::SWITCH
-    end
-
-    def checkable?
-      self.type == Formotion::RowType::CHECK
+      object.submit_button?
     end
 
     #########################
     #  setter overrides
     def type=(type)
-      @type = Formotion::RowType.for(type)
+      @object = Formotion::RowType.for(type).new(self)
+      @type = type
     end
 
     def return_key=(value)
       @return_key = const_int_get("UIReturnKey", value)
     end
 
-    def auto_correction=(value)        
+    def auto_correction=(value)
       @auto_correction = const_int_get("UITextAutocorrectionType", value)
     end
 
-    def auto_capitalization=(value)        
+    def auto_capitalization=(value)
       @auto_capitalization = const_int_get("UITextAutocapitalizationType", value)
     end
 
-    def clear_button=(value)        
+    def clear_button=(value)
       @clear_button = const_int_get("UITextFieldViewMode", value)
     end
 
@@ -197,12 +189,12 @@ module Formotion
     # directly in your code, they don't get added
     # to Kernel and const_int_get crashes.
     def load_constants_hack
-      [UITextAutocapitalizationTypeNone, UITextAutocapitalizationTypeWords, 
+      [UITextAutocapitalizationTypeNone, UITextAutocapitalizationTypeWords,
         UITextAutocapitalizationTypeSentences,UITextAutocapitalizationTypeAllCharacters,
         UITextAutocorrectionTypeNo, UITextAutocorrectionTypeYes, UITextAutocorrectionTypeDefault,
-        UIReturnKeyDefault, UIReturnKeyGo, UIReturnKeyGoogle, UIReturnKeyJoin, 
+        UIReturnKeyDefault, UIReturnKeyGo, UIReturnKeyGoogle, UIReturnKeyJoin,
         UIReturnKeyNext, UIReturnKeyRoute, UIReturnKeySearch, UIReturnKeySend,
-        UIReturnKeyYahoo, UIReturnKeyDone, UIReturnKeyEmergencyCall, 
+        UIReturnKeyYahoo, UIReturnKeyDone, UIReturnKeyEmergencyCall,
         UITextFieldViewModeNever, UITextFieldViewModeAlways, UITextFieldViewModeWhileEditing,
         UITextFieldViewModeUnlessEditing
       ]
