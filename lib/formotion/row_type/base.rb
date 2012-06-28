@@ -1,7 +1,7 @@
 module Formotion
   module RowType
     class Base
-      attr_accessor :row
+      attr_accessor :row, :tableView
 
       def initialize(row)
         @row = row

@@ -32,7 +32,12 @@ module Formotion
       # field.clearButtonMode; given by a UITextFieldViewMode__ integer, string, symbol
       # EX :never, :while_editing
       # DEFAULT is nil, which is used as :while_editing
-      :clear_button]
+      :clear_button,
+      # row height as integer; used for heightForRowAtIndexPath
+      # EX 200
+      # DEFAULT is nil, which is used as the tableView.rowHeight
+      :rowHeight,
+    ]
     PROPERTIES.each {|prop|
       attr_accessor prop
     }

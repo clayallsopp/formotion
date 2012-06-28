@@ -63,6 +63,11 @@ module Formotion
       cell
     end
 
+    def tableView(tableView, heightForRowAtIndexPath: indexPath)
+      row = row_for_index_path(indexPath)
+      row.rowHeight || tableView.rowHeight
+    end
+
     # UITableViewDelegate Methods
     def tableView(tableView, didSelectRowAtIndexPath:indexPath)
       tableView.deselectRowAtIndexPath(indexPath, animated:true)

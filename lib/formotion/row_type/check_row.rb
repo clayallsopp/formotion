@@ -13,10 +13,12 @@ module Formotion
 
       def on_select(tableView, tableViewDelegate)
         if row.section.select_one and !row.value
-          row.section.rows.each {|other_row|
+          row.section.rows.each do |other_row|
             other_row.value = (other_row == row)
-            other_row.object.build_cell(tableView.cellForRowAtIndexPath(other_row.index_path))
-          }
+
+            cell = tableView.cellForRowAtIndexPath(other_row.index_path)
+            other_row.object.build_cell(cell) if cell
+          end
         elsif !row.section.select_one
           row.value = !row.value
           build_cell(tableView.cellForRowAtIndexPath(row.index_path))
