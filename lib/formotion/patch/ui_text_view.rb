@@ -80,13 +80,6 @@ class UITextView_Delegate
     attr_accessor (method.to_s + "_callback").to_sym
   }
 
-  # Called from
-  # [textView addTarget:block
-  #              action:'call'
-  #    forControlEvents:UIControlEventEditingChanged],
-  # NOT a UItextViewDelegate method.
-  attr_accessor :on_change_callback
-
   def textViewShouldBeginEditing(theTextView)
     if self.textViewShouldBeginEditing_callback
       return self.textViewShouldBeginEditing_callback.call(theTextView)
@@ -121,8 +114,8 @@ class UITextView_Delegate
   end
 
   def textViewDidChange(theTextView)
-    if self.on_change_callback
-      self.on_change_callback.call(theTextView)
+    if self.textViewDidChange_callback
+      self.textViewDidChange_callback.call(theTextView)
     end
   end
 
