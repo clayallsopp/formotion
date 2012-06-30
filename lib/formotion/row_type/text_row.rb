@@ -17,6 +17,7 @@ module Formotion
         field.returnKeyType = row.return_key || UIReturnKeyDefault
         field.autocapitalizationType = row.auto_capitalization if row.auto_capitalization
         field.autocorrectionType = row.auto_correction if row.auto_correction
+        field.placeholder = row.placeholder
 
         field.on_begin do |text_field|
           row.on_begin_callback && row.on_begin_callback.call
