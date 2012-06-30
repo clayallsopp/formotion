@@ -9,6 +9,7 @@ module Formotion
       def build_cell(cell)
 
         @field = UITextView.alloc.initWithFrame(CGRectZero)
+        field.backgroundColor = UIColor.clearColor
         field.editable = true
         field.tag = TEXT_VIEW_TAG
 
