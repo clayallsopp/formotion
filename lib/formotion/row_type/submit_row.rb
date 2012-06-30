@@ -10,8 +10,7 @@ module Formotion
       # for just this one UITableViewCell object, in order to
       # center it's labels horizontally.
       def build_cell(cell)
-        cell.class.send(:alias_method, :old_layoutSubviews, :layoutSubviews)
-        cell.instance_eval do
+        cell.swizzle(:layoutSubviews) do
           def layoutSubviews
             old_layoutSubviews
 

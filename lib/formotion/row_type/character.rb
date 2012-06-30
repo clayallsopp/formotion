@@ -74,8 +74,7 @@ module Formotion
           row.value = text_field.text
         end
 
-        cell.class.send(:alias_method, :old_layoutSubviews, :layoutSubviews)
-        cell.instance_eval do
+        cell.swizzle(:layoutSubviews) do
           def layoutSubviews
             old_layoutSubviews
 

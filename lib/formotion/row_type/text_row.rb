@@ -34,8 +34,7 @@ module Formotion
         tap = UITapGestureRecognizer.alloc.initWithTarget self, action:'dismissKeyboard'
         cell.addGestureRecognizer tap
 
-        cell.class.send(:alias_method, :old_layoutSubviews, :layoutSubviews)
-        cell.instance_eval do
+        cell.swizzle(:layoutSubviews) do
           def layoutSubviews
             old_layoutSubviews
 
