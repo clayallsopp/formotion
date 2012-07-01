@@ -34,12 +34,10 @@ module Formotion
       super
 
       # via https://gist.github.com/330916, could be wrong.
-      tabBarHeight = self.tabBarController && self.tabBarController.tabBar.bounds.size.height
-      tabBarHeight ||= 0
       navBarHeight = self.navigationController && (self.navigationController.isNavigationBarHidden ? 0.0 : self.navigationController.navigationBar.bounds.size.height)
       navBarHeight ||= 0
       frame = self.view.frame
-      frame.size.height = frame.size.height - navBarHeight - tabBarHeight
+      frame.size.height = frame.size.height - navBarHeight - tab_bar_height
       self.view.frame = frame
 
       self.title = self.form.title
@@ -79,12 +77,13 @@ module Formotion
       curve = userInfo[UIKeyboardAnimationCurveUserInfoKey].intValue
       keyboardFrame = userInfo[UIKeyboardFrameEndUserInfoKey].CGRectValue
 
-      view_frame = @table_view.frame;
+      view_frame = self.view.frame;
 
       if @keyboard_state == UIKeyboardWillHideNotification
         view_frame.size.height = self.view.bounds.size.height
       else
         view_frame.size.height -= keyboardFrame.size.height
+        view_frame.size.height += tab_bar_height
       end
 
       UIView.beginAnimations(nil, context: nil)
@@ -97,6 +96,12 @@ module Formotion
       @form.active_row = @form.active_row
 
       UIView.commitAnimations
+    end
+
+    private
+    def tab_bar_height
+      tabBarHeight = self.tabBarController && self.tabBarController.tabBar.bounds.size.height
+      tabBarHeight ||= 0
     end
   end
 end
