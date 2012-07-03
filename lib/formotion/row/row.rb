@@ -173,6 +173,7 @@ module Formotion
     def make_cell
       cell, text_field = Formotion::RowCellBuilder.make_cell(self)
       @text_field = text_field
+      self.object.after_build(cell)
       cell
     end
 

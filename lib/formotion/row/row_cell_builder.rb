@@ -13,7 +13,7 @@ module Formotion
     def self.make_cell(row)
       cell, text_field = nil
 
-      cell = UITableViewCell.alloc.initWithStyle(UITableViewCellStyleSubtitle, reuseIdentifier:row.reuse_identifier)
+      cell = UITableViewCell.alloc.initWithStyle(row.object.cell_style, reuseIdentifier:row.reuse_identifier)
 
       cell.accessoryType = UITableViewCellAccessoryNone
       cell.textLabel.text = row.title
