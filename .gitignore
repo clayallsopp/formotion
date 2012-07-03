@@ -8,3 +8,4 @@ resources/*.storyboardc
 .bundle
 Gemfile.lock
 pkg/*
+.rvmrc

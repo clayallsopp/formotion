@@ -29,6 +29,12 @@ class AppDelegate
           title: "Switch",
           key: :switch,
           type: :switch,
+        }, {
+          title: "Bio",
+          key: :bio,
+          type: :text,
+          placeholder: "Enter your Bio here...",
+          rowHeight: 100
         }]
       }, {
         title: "Account Type",

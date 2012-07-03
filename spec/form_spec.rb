@@ -56,8 +56,9 @@ describe "Forms" do
   it "render works correctly" do
     @form = Formotion::Form.new(sections: [{
      rows: [{
-       key: :email, 
-       editable: true, 
+       key: :email,
+       type: :email,
+       editable: true,
        title: 'Email'
      }]}])
 
@@ -74,13 +75,13 @@ describe "Forms" do
         rows: [{
           title: "Email",
           placeholder: "me@mail.com",
-          type: Formotion::RowType::EMAIL,
+          type: :email,
           auto_correction:  UITextAutocorrectionTypeNo,
           auto_capitalization: UITextAutocapitalizationTypeNone
         }, {
           title: "Password",
           placeholder: "required",
-          type: Formotion::RowType::STRING,
+          type: :string,
           secure: true
         }, {
           title: "Remember me?",
