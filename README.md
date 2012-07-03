@@ -126,7 +126,7 @@ class PeopleController < Formotion::FormController
 end
 ```
 
-Why would you use `form#on_submit`? In case you want to use `Formotion::RowType::SUBMIT`. Ex:
+Why would you use `form#on_submit`? In case you want to use `type: :submit`. Ex:
 
 ```ruby
 @form = Formotion::Form.new({
@@ -135,7 +135,7 @@ Why would you use `form#on_submit`? In case you want to use `Formotion::RowType:
   }, {
     rows: [{
       title: "Save",
-      type: Formotion::RowType::SUBMIT
+      type: :submit
     }]
   }]
 })
