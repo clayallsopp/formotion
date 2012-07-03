@@ -13,6 +13,9 @@ module Formotion
       # either Formotion::RowType or a string/symbol representation of one
       # see row_type.rb
       :type,
+      # Stores possible formatting information (used by date pickers, etc)
+      #   if :type == :date, accepts values in [:short, :medium, :long, :full]
+      :format,
 
       # The following apply only to text-input fields
 
@@ -202,7 +205,8 @@ module Formotion
         UIReturnKeyNext, UIReturnKeyRoute, UIReturnKeySearch, UIReturnKeySend,
         UIReturnKeyYahoo, UIReturnKeyDone, UIReturnKeyEmergencyCall,
         UITextFieldViewModeNever, UITextFieldViewModeAlways, UITextFieldViewModeWhileEditing,
-        UITextFieldViewModeUnlessEditing
+        UITextFieldViewModeUnlessEditing, NSDateFormatterShortStyle, NSDateFormatterMediumStyle,
+        NSDateFormatterLongStyle, NSDateFormatterFullStyle
       ]
     end
   end

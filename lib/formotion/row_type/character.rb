@@ -22,7 +22,7 @@ module Formotion
         field.tag = TEXT_FIELD_TAG
 
         field.placeholder = row.placeholder
-        field.text = row.value
+        field.text = row.value.to_s
 
         field.clearButtonMode = UITextFieldViewModeWhileEditing
         field.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter
