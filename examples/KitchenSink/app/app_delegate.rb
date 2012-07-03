@@ -64,6 +64,27 @@ class AppDelegate
           title: "Remember?",
           key: :remember,
           type: :switch,
+        }, {
+          title: "Date Full",
+          subtitle: "w/ :value",
+          value: 326937600,
+          key: :date_long,
+          type: :date,
+          format: :full
+        }, {
+          title: "Date Medium",
+          subtitle: "w/ :value",
+          value: 1341273600,
+          key: :date_medium,
+          type: :date,
+          format: :medium
+        }, {
+          title: "Date Short",
+          subtitle: "w/ :placeholder",
+          placeholder: "DOB",
+          key: :date_short,
+          type: :date,
+          format: :short
         }]
       }, {
         title: "Select One",

@@ -35,6 +35,18 @@ class AppDelegate
           type: :text,
           placeholder: "Enter your Bio here...",
           rowHeight: 100
+        }, {
+          title: "Date Full",
+          value: 326937600,
+          key: :date,
+          type: :date,
+          format: :full
+        }, {
+          title: "Date Short",
+          placeholder: "03/26/1992",
+          key: :date,
+          type: :date,
+          format: :short
         }]
       }, {
         title: "Account Type",
