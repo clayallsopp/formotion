@@ -44,6 +44,23 @@ class AppDelegate
           type: :string,
           secure: true
         }, {
+          title: "Row Height",
+          key: :row_height,
+          placeholder: "60px",
+          type: :string,
+          rowHeight: 60
+        }, {
+          title: "Text",
+          key: :text,
+          type: :text,
+          placeholder: "Enter your text here",
+          rowHeight: 100
+        }, {
+          title: "Check",
+          key: :check,
+          type: :check,
+          value: true
+        }, {
           title: "Remember?",
           key: :remember,
           type: :switch,
