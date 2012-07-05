@@ -6,6 +6,11 @@ class AppDelegate
       sections: [{
         title: "Register",
         rows: [{
+          title: "Photo",
+          key: :photo,
+          type: :image,
+          rowHeight: 200,
+        },{
           title: "Email",
           key: :email,
           placeholder: "me@mail.com",
