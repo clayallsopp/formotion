@@ -17,6 +17,11 @@ class AppDelegate
           auto_correction: :no,
           auto_capitalization: :none
         }, {
+          title: "Gender",
+          key: :gender,
+          type: :control,
+          items: ['Female', 'Male']
+        }, {
           title: "Password",
           key: :password,
           placeholder: "required",

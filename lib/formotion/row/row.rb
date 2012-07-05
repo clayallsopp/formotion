@@ -40,6 +40,10 @@ module Formotion
       # EX 200
       # DEFAULT is nil, which is used as the tableView.rowHeight
       :rowHeight,
+      # Array used for control row items
+      # EX ['free', 'pro']
+      # DEFAULT is []
+      :items,
     ]
     PROPERTIES.each {|prop|
       attr_accessor prop
