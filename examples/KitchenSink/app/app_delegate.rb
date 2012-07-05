@@ -85,6 +85,12 @@ class AppDelegate
           key: :date_short,
           type: :date,
           format: :short
+        }, {
+          title: "Slider",
+          key: :slider,
+          type: :slider,
+          range: (1..100),
+          value: 25
         }]
       }, {
         title: "Select One",
