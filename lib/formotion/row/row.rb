@@ -44,6 +44,10 @@ module Formotion
       # EX (1..100)
       # DEFAULT is (1..10)
       :range,
+      # Array used for control row items
+      # EX ['free', 'pro']
+      # DEFAULT is []
+      :items,
     ]
     PROPERTIES.each {|prop|
       attr_accessor prop
