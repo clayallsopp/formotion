@@ -6,6 +6,7 @@ class AppDelegate
       title: "Kitchen Sink",
       sections: [{
         title: "Section Title",
+        footer: "This is the footer for the section. It's good for displaying detailed data about the section.",
         rows: [{
           title: "Static",
           type: :static,

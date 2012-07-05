@@ -3,6 +3,9 @@ module Formotion
     PROPERTIES = [
       # Displayed in the section header row
       :title,
+      # Displayed below the entire section; good for giving
+      # detailed information regarding the section.
+      :footer,
       # Arranges the section as a 'radio' section,
       # such that only one row can be checked at a time.
       :select_one,
