@@ -1,5 +1,6 @@
 require "formotion/version"
 require 'bubble-wrap/core'
+require 'bubble-wrap/camera'
 
 BW.require File.expand_path('../formotion/**/*.rb', __FILE__) do
   ['form/form.rb', 'row/row.rb', 'section/section.rb'].each {|file|
