@@ -49,7 +49,11 @@ module Formotion
         if row.value
           action_sheet.destructiveButtonIndex = (action_sheet.addButtonWithTitle "Delete")
         end
-        action_sheet.addButtonWithTitle "Take"
+
+        if BW::Device.camera.front? or BW::Device.camera.rear?
+          action_sheet.addButtonWithTitle "Take"
+        end
+
         action_sheet.addButtonWithTitle "Choose"
 
         action_sheet.cancelButtonIndex = (action_sheet.addButtonWithTitle "Cancel")
