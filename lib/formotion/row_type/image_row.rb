@@ -12,7 +12,6 @@ module Formotion
         @image_view.tag = IMAGE_VIEW_TAG
         @image_view.contentMode = UIViewContentModeScaleAspectFit
         cell.accessoryView = @image_view
-        @action_sheet = UIActionSheet.alloc.initWithTitle nil, delegate: self, cancelButtonTitle: 'Cancel', destructiveButtonTitle: 'Delete', otherButtonTitles: 'Take', 'Choose'
 
         cell.swizzle(:layoutSubviews) do
           def layoutSubviews
@@ -32,18 +31,29 @@ module Formotion
       end
 
       def on_select(tableView, tableViewDelegate)
-        @action_sheet.showInView @image_view
+        action_sheet = UIActionSheet.alloc.init
+        if row.value
+          action_sheet.destructiveButtonIndex = (action_sheet.addButtonWithTitle "Delete")
+        end
+        action_sheet.addButtonWithTitle "Take"
+        action_sheet.addButtonWithTitle "Choose"
+
+        action_sheet.cancelButtonIndex = (action_sheet.addButtonWithTitle "Cancel")
+
+        action_sheet.delegate = self
+
+        action_sheet.showInView @image_view
       end
 
       def actionSheet actionSheet, clickedButtonAtIndex: index
         source = nil
 
         case index
-        when @action_sheet.destructiveButtonIndex
+        when actionSheet.destructiveButtonIndex
           row.value = nil
           @image_view.image = nil
-        when @action_sheet.cancelButtonIndex
-        when @action_sheet.firstOtherButtonIndex
+        when actionSheet.cancelButtonIndex
+        when actionSheet.firstOtherButtonIndex
           source = :camera
         else
           source = :photo_library
