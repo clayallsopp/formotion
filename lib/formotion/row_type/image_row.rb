@@ -50,7 +50,7 @@ module Formotion
         end
 
         if source
-          BW::Camera.picture(source_type: source, media_types: [:image]) do |result|
+          BW::Device.camera.any.picture(source_type: source, media_types: [:image]) do |result|
             if result[:original_image]
               row.value = result[:original_image]
               @image_view.image = result[:original_image]
