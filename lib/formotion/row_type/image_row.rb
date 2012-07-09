@@ -46,19 +46,12 @@ module Formotion
 
       def on_select(tableView, tableViewDelegate)
         action_sheet = UIActionSheet.alloc.init
-        if row.value
-          action_sheet.destructiveButtonIndex = (action_sheet.addButtonWithTitle "Delete")
-        end
-
-        if BW::Device.camera.front? or BW::Device.camera.rear?
-          action_sheet.addButtonWithTitle "Take"
-        end
-
-        action_sheet.addButtonWithTitle "Choose"
-
-        action_sheet.cancelButtonIndex = (action_sheet.addButtonWithTitle "Cancel")
-
         action_sheet.delegate = self
+
+        action_sheet.destructiveButtonIndex = (action_sheet.addButtonWithTitle "Delete") if row.value
+        action_sheet.addButtonWithTitle "Take" if BW::Device.camera.front? or BW::Device.camera.rear?
+        action_sheet.addButtonWithTitle "Choose"
+        action_sheet.cancelButtonIndex = (action_sheet.addButtonWithTitle "Cancel")
 
         action_sheet.showInView @image_view
       end
