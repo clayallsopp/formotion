@@ -8,8 +8,7 @@ class AppDelegate
         rows: [{
           title: "Photo",
           key: :photo,
-          type: :image,
-          rowHeight: 200,
+          type: :image
         },{
           title: "Email",
           key: :email,

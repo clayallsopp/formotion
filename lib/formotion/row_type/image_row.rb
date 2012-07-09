@@ -1,17 +1,31 @@
 module Formotion
   module RowType
     class ImageRow < Base
+      include BW::KVO
 
       IMAGE_VIEW_TAG=1100
 
       def build_cell(cell)
-        cell.selectionStyle = UITableViewCellSelectionStyleNone
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator
+        add_plus_accessory(cell)
+
+        observe(self.row, "value") do |old_value, new_value|
+          @image_view.image = new_value
+          if new_value
+            self.row.rowHeight = 200
+            cell.accessoryView = nil
+          else
+            self.row.rowHeight = 44
+            add_plus_accessory(cell)
+          end
+          row.form.reload_data
+        end
+
         @image_view = UIImageView.alloc.init
         @image_view.image = row.value if row.value
         @image_view.tag = IMAGE_VIEW_TAG
         @image_view.contentMode = UIViewContentModeScaleAspectFit
-        cell.accessoryView = @image_view
+        @image_view.backgroundColor = UIColor.clearColor
+        cell.addSubview(@image_view)
 
         cell.swizzle(:layoutSubviews) do
           def layoutSubviews
@@ -51,7 +65,6 @@ module Formotion
         case index
         when actionSheet.destructiveButtonIndex
           row.value = nil
-          @image_view.image = nil
         when actionSheet.cancelButtonIndex
         when actionSheet.firstOtherButtonIndex
           source = :camera
@@ -63,12 +76,21 @@ module Formotion
           BW::Device.camera.any.picture(source_type: source, media_types: [:image]) do |result|
             if result[:original_image]
               row.value = result[:original_image]
-              @image_view.image = result[:original_image]
             end
           end
         end
       end
 
+      def add_plus_accessory(cell)
+        @add_button ||= begin
+          button = UIButton.buttonWithType(UIButtonTypeContactAdd)
+          button.when(UIControlEventTouchUpInside) do
+            self.on_select(nil, nil)
+          end
+          button
+        end
+        cell.accessoryView = @add_button
+      end
     end
   end
 end
