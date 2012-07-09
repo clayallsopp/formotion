@@ -62,14 +62,17 @@ module Formotion
       def actionSheet actionSheet, clickedButtonAtIndex: index
         source = nil
 
-        case index
-        when actionSheet.destructiveButtonIndex
+        if index == actionSheet.destructiveButtonIndex
           row.value = nil
-        when actionSheet.cancelButtonIndex
-        when actionSheet.firstOtherButtonIndex
+        end
+
+        case actionSheet.buttonTitleAtIndex(index)
+        when "Take"
           source = :camera
-        else
+        when "Choose"
           source = :photo_library
+        else
+          p "Unrecognized button title #{actionSheet.buttonTitleAtIndex(index)}"
         end
 
         if source
