@@ -68,6 +68,7 @@ module Formotion
           source = :camera
         when "Choose"
           source = :photo_library
+        when "Cancel"
         else
           p "Unrecognized button title #{actionSheet.buttonTitleAtIndex(index)}"
         end
