@@ -3,6 +3,10 @@ module Formotion
     class DateRow < Character
       attr_accessor :edited
 
+      # overwrite Character on_change method
+      def on_change(text_field)
+      end
+
       def update
         self.row.text_field && self.row.text_field.text = self.formatted_value
       end
