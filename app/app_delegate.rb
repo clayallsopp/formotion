@@ -10,6 +10,12 @@ class AppDelegate
           key: :photo,
           type: :image
         },{
+          title: "UI Picker",
+          key: :uipick,
+          type: :ui_picker,
+          items: ["Ruby", "Motion", "Rocks"],
+          value: "Motion"
+        },{
           title: "Email",
           key: :email,
           placeholder: "me@mail.com",
