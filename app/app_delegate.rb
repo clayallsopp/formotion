@@ -42,13 +42,13 @@ class AppDelegate
         }, {
           title: "Date Full",
           value: 326937600,
-          key: :date,
+          key: :date_full,
           type: :date,
           format: :full
         }, {
           title: "Date Short",
-          placeholder: "03/26/1992",
-          key: :date,
+          placeholder: "03/26/92",
+          key: :date_short,
           type: :date,
           format: :short
         }]
