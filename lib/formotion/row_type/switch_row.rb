@@ -2,10 +2,6 @@ module Formotion
   module RowType
     class SwitchRow < Base
 
-      def switchable
-        true
-      end
-
       def build_cell(cell)
         cell.selectionStyle = UITableViewCellSelectionStyleNone
         switchView = UISwitch.alloc.initWithFrame(CGRectZero)
