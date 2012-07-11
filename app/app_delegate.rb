@@ -8,7 +8,8 @@ class AppDelegate
         rows: [{
           title: "Photo",
           key: :photo,
-          type: :image
+          type: :image,
+          swipe_delete: true
         },{
           title: "Email",
           key: :email,

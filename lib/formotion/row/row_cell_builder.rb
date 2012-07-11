@@ -19,6 +19,8 @@ module Formotion
       cell.textLabel.text = row.title
       cell.detailTextLabel.text = row.subtitle
 
+      cell.editingStyle = !!row.swipe_delete ? UITableViewCellEditingStyleDelete : UITableViewCellEditingStyleNone
+
       edit_field = row.object.build_cell(cell)
 
       [cell, edit_field]

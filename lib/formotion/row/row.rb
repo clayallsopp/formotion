@@ -40,6 +40,10 @@ module Formotion
       # EX 200
       # DEFAULT is nil, which is used as the tableView.rowHeight
       :rowHeight,
+      # whether or not you can swipe to delete the row's value
+      # EX true/false
+      # DEFAULT is nil
+      :swipe_delete,
       # range used for slider min and max value
       # EX (1..100)
       # DEFAULT is (1..10)

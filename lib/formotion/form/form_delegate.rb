@@ -72,11 +72,33 @@ module Formotion
       row.rowHeight || tableView.rowHeight
     end
 
+    def tableView(tableView, canEditRowAtIndexPath: indexPath)
+      row = row_for_index_path(indexPath)
+      !!row.swipe_delete
+    end
+
+    def tableView(tableView, commitEditingStyle:editingStyle, forRowAtIndexPath:indexPath)
+      row = row_for_index_path(indexPath)
+      if editingStyle == UITableViewCellEditingStyleDelete
+        row.value = nil
+      end
+    end
+
+    def tableView(tableView, editingStyleForRowAtIndexPath:indexPath)
+      row = row_for_index_path(indexPath)
+      return UITableViewCellEditingStyleDelete if row.swipe_delete
+      UITableViewCellEditingStyleNone
+    end
+
     # UITableViewDelegate Methods
     def tableView(tableView, didSelectRowAtIndexPath:indexPath)
       tableView.deselectRowAtIndexPath(indexPath, animated:true)
       row = row_for_index_path(indexPath)
       row.object.on_select(tableView, self)
+    end
+
+    def tableView(tableView, shouldIndentWhileEditingRowAtIndexPath:indexPath)
+      false
     end
   end
 end
