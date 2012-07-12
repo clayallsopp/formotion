@@ -45,7 +45,7 @@ class UITextView
   # block takes argument textView
   def on_end(&block)
     add_delegate_method do
-      @delegate.textViewDidBeginEditing_callback = block
+      @delegate.textViewDidEndEditing_callback = block
     end
   end
 
