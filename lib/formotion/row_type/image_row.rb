@@ -45,15 +45,15 @@ module Formotion
       end
 
       def on_select(tableView, tableViewDelegate)
-        action_sheet = UIActionSheet.alloc.init
-        action_sheet.delegate = self
+        @action_sheet = UIActionSheet.alloc.init
+        @action_sheet.delegate = self
 
-        action_sheet.destructiveButtonIndex = (action_sheet.addButtonWithTitle "Delete") if row.value
-        action_sheet.addButtonWithTitle "Take" if BW::Device.camera.front? or BW::Device.camera.rear?
-        action_sheet.addButtonWithTitle "Choose"
-        action_sheet.cancelButtonIndex = (action_sheet.addButtonWithTitle "Cancel")
+        @action_sheet.destructiveButtonIndex = (@action_sheet.addButtonWithTitle "Delete") if row.value
+        @action_sheet.addButtonWithTitle "Take" if BW::Device.camera.front? or BW::Device.camera.rear?
+        @action_sheet.addButtonWithTitle "Choose"
+        @action_sheet.cancelButtonIndex = (@action_sheet.addButtonWithTitle "Cancel")
 
-        action_sheet.showInView @image_view
+        @action_sheet.showInView @image_view
       end
 
       def actionSheet actionSheet, clickedButtonAtIndex: index
@@ -74,7 +74,8 @@ module Formotion
         end
 
         if source
-          BW::Device.camera.any.picture(source_type: source, media_types: [:image]) do |result|
+          @camera = BW::Device.camera.any
+          @camera.picture(source_type: source, media_types: [:image]) do |result|
             if result[:original_image]
               row.value = result[:original_image]
             end
