@@ -4,12 +4,6 @@ describe "FormController/CheckRow" do
   # By default, `tests` uses @controller.init
   # this isn't ideal for our case, so override.
   def controller
-    row_settings = {
-      title: "Date",
-      key: :date,
-      type: :date,
-      value: 1341273600
-    }
     @form ||= Formotion::Form.new(
       sections: [{
         title: "Select One",
