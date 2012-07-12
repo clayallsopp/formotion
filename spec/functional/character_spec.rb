@@ -31,14 +31,14 @@ describe "FormController/StringRow" do
   end
 
   it "should pop open the keyboard when tapped" do
-    notif = App.notification_center.observe UIKeyboardDidShowNotification do |notification|
+    @notif = App.notification_center.observe UIKeyboardDidShowNotification do |notification|
       @did_show = true
     end
     tap("String")
     # wait for keyboard to actually pop up
     wait 1 do
       @did_show.should == true
-      App.notification_center.unobserve notif
+      App.notification_center.unobserve @notif
     end
   end
 
@@ -50,7 +50,7 @@ describe "FormController/StringRow" do
   end
 
   it "should scroll to correct offset when tapping" do
-    notif = App.notification_center.observe UIKeyboardDidShowNotification do |notification|
+    @notif = App.notification_center.observe UIKeyboardDidShowNotification do |notification|
       @key_rect = notification.userInfo[UIKeyboardFrameBeginUserInfoKey].CGRectValue
     end
 
@@ -62,7 +62,7 @@ describe "FormController/StringRow" do
 
       bottom_y = row_rect.origin.y + row_rect.size.height
       bottom_y.should == @key_rect.origin.y - @key_rect.size.height
-      App.notification_center.unobserve notif
+      App.notification_center.unobserve @notif
       @key_rect = nil
       @active_row = @form.sections.first.rows[9]
     end

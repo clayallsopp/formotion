@@ -13,6 +13,7 @@ module Formotion
         slideView.maximumValue = row.range.last
         slideView.tag = SLIDER_VIEW_TAG
         slideView.setValue(row.value, animated:true) if row.value
+        slideView.accessibilityLabel = row.title + " Slider"
 
         slideView.when(UIControlEventValueChanged) do
           row.value = slideView.value
