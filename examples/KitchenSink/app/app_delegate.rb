@@ -124,8 +124,6 @@ class AppDelegate
       }]
     })
 
-    @navigation_controller = UINavigationController.alloc.init
-
     @view_controller = Formotion::FormController.alloc.initWithForm(@form)
     @view_controller.form.on_submit do |form|
       form.active_row && form.active_row.text_field.resignFirstResponder
