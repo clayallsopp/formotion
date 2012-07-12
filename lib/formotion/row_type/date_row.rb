@@ -1,8 +1,6 @@
 module Formotion
   module RowType
     class DateRow < Character
-      attr_accessor :edited
-
       def update
         self.row.text_field && self.row.text_field.text = self.formatted_value
       end
