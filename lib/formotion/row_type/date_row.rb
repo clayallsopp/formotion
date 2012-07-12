@@ -1,8 +1,6 @@
 module Formotion
   module RowType
     class DateRow < Character
-      attr_accessor :edited
-
       # overwrite Character on_change method
       def on_change(text_field)
       end
@@ -51,7 +49,7 @@ module Formotion
           picker.date = self.date_value || NSDate.date
 
           picker.when(UIControlEventValueChanged) do
-            self.row.value = @picker.date.timeIntervalSince1970
+            self.row.value = @picker.date.timeIntervalSince1970.to_i
             update
           end
 
