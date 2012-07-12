@@ -22,6 +22,7 @@ module Formotion
 
         field.on_begin do |text_field|
           row.on_begin_callback && row.on_begin_callback.call
+          @tap_gesture.enabled = true
         end
 
         field.should_begin? do |text_field|
@@ -33,8 +34,13 @@ module Formotion
           row.value = text_field.text
         end
 
-        tap = UITapGestureRecognizer.alloc.initWithTarget self, action:'dismissKeyboard'
-        cell.addGestureRecognizer tap
+        field.on_end do |text_field|
+          @tap_gesture.enabled = false
+        end
+
+        @tap_gesture = UITapGestureRecognizer.alloc.initWithTarget self, action:'dismissKeyboard'
+        @tap_gesture.enabled = false
+        cell.addGestureRecognizer @tap_gesture
 
         cell.swizzle(:layoutSubviews) do
           def layoutSubviews
@@ -58,7 +64,7 @@ module Formotion
       end
 
       def on_select(tableView, tableViewDelegate)
-        row.text_field.becomeFirstResponder
+        field.becomeFirstResponder
       end
 
       def dismissKeyboard
