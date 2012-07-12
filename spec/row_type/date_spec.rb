@@ -23,6 +23,8 @@ describe "Date Row" do
   it "should use custom value" do
     @row.value = 946684672
     cell = @row.make_cell
+    @row.object.formatter.timeZone = NSTimeZone.timeZoneWithName "Europe/Paris"
+
 
     @row.text_field.text.should == '1/1/00'
   end
@@ -34,6 +36,7 @@ describe "Date Row" do
 
   it "should update value when date is picked" do
     cell = @row.make_cell
+    @row.object.formatter.timeZone = NSTimeZone.timeZoneWithName "Europe/Paris"
 
     @row.object.picker.date = NSDate.dateWithTimeIntervalSince1970(946684672)
     @row.object.picker.trigger UIControlEventValueChanged
@@ -54,6 +57,7 @@ describe "Date Row" do
       @row.value = 946684672
       @row.format = format
       cell = @row.make_cell
+      @row.object.formatter.timeZone = NSTimeZone.timeZoneWithName "Europe/Paris"
 
       @row.text_field.text.should == expected_output
     end

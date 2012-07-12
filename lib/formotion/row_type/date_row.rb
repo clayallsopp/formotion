@@ -20,7 +20,7 @@ module Formotion
         end
       end
 
-      def formatted_value
+      def formatter
         @formatter ||= begin
           formatter = NSDateFormatter.new
 
@@ -31,8 +31,10 @@ module Formotion
           formatter.dateStyle = self.row.send(:const_int_get, "NSDateFormatter", date_style || NSDateFormatterShortStyle)
           formatter
         end
+      end
 
-        return @formatter.stringFromDate(self.date_value) if self.date_value
+      def formatted_value
+        return formatter.stringFromDate(self.date_value) if self.date_value
         self.row.value
       end
 
