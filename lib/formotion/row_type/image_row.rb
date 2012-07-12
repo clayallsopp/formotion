@@ -61,6 +61,7 @@ module Formotion
 
         if index == actionSheet.destructiveButtonIndex
           row.value = nil
+          return
         end
 
         case actionSheet.buttonTitleAtIndex(index)
