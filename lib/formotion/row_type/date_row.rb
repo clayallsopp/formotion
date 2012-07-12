@@ -1,6 +1,6 @@
 module Formotion
   module RowType
-    class DateRow < Character
+    class DateRow < StringRow
       # overwrite Character on_change method
       def on_change(text_field)
       end

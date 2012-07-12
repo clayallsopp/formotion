@@ -1,6 +1,6 @@
 module Formotion
   module RowType
-    class NumberRow < Character
+    class NumberRow < StringRow
 
       def keyboardType
         UIKeyboardTypeDecimalPad

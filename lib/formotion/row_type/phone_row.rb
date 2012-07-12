@@ -1,6 +1,6 @@
 module Formotion
   module RowType
-    class PhoneRow < Character
+    class PhoneRow < StringRow
 
       def keyboardType
         UIKeyboardTypePhonePad

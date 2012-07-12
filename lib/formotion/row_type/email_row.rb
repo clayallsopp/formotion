@@ -1,6 +1,6 @@
 module Formotion
   module RowType
-    class EmailRow < Character
+    class EmailRow < StringRow
 
       def keyboardType
         UIKeyboardTypeEmailAddress
