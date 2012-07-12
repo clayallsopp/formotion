@@ -36,6 +36,30 @@ module Formotion
         field.autocorrectionType = row.auto_correction if row.auto_correction
         field.clearButtonMode = row.clear_button || UITextFieldViewModeWhileEditing
 
+        add_callbacks(field)
+
+        cell.swizzle(:layoutSubviews) do
+          def layoutSubviews
+            old_layoutSubviews
+
+            # viewWithTag is terrible, but I think it's ok to use here...
+            formotion_field = self.viewWithTag(TEXT_FIELD_TAG)
+            formotion_field.sizeToFit
+
+            field_frame = formotion_field.frame
+            field_frame.origin.x = self.textLabel.frame.origin.x + self.textLabel.frame.size.width + 20
+            field_frame.origin.y = ((self.frame.size.height - field_frame.size.height) / 2.0).round
+            field_frame.size.width = self.frame.size.width - field_frame.origin.x - 20
+            formotion_field.frame = field_frame
+          end
+        end
+
+        cell.addSubview(field)
+        field
+
+      end
+
+      def add_callbacks(field)
         if row.on_enter_callback
           field.should_return? do |text_field|
             if row.on_enter_callback.arity == 0
@@ -71,28 +95,12 @@ module Formotion
         end
 
         field.on_change do |text_field|
-          row.value = text_field.text
+          on_change(text_field)
         end
+      end
 
-        cell.swizzle(:layoutSubviews) do
-          def layoutSubviews
-            old_layoutSubviews
-
-            # viewWithTag is terrible, but I think it's ok to use here...
-            formotion_field = self.viewWithTag(TEXT_FIELD_TAG)
-            formotion_field.sizeToFit
-
-            field_frame = formotion_field.frame
-            field_frame.origin.x = self.textLabel.frame.origin.x + self.textLabel.frame.size.width + 20
-            field_frame.origin.y = ((self.frame.size.height - field_frame.size.height) / 2.0).round
-            field_frame.size.width = self.frame.size.width - field_frame.origin.x - 20
-            formotion_field.frame = field_frame
-          end
-        end
-
-        cell.addSubview(field)
-        field
-
+      def on_change(text_field)
+        row.value = text_field.text
       end
 
       def on_select(tableView, tableViewDelegate)
