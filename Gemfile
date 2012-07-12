@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'bubble-wrap', :git => 'https://github.com/rubymotion/BubbleWrap.git'
+gem 'bubble-wrap', ">=1.1.0"
 
 # Specify your gem's dependencies in motion-settings.gemspec
 gemspec
