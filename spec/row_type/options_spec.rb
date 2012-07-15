@@ -1,9 +1,9 @@
-describe "Slider Row" do
+describe "Options Row" do
   before do
     row_settings = {
-      title: "Control",
-      key: :control,
-      type: :control,
+      title: "Options",
+      key: :options,
+      type: :options,
       items: ['First', 'Second']
     }
     @row = Formotion::Row.new(row_settings)
@@ -11,7 +11,7 @@ describe "Slider Row" do
   end
 
   it "should initialize with correct settings" do
-    @row.object.class.should == Formotion::RowType::ControlRow
+    @row.object.class.should == Formotion::RowType::OptionsRow
   end
 
   it "should build cell with segmented control" do

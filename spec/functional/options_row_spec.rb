@@ -1,13 +1,13 @@
-describe "FormController/ControlRow" do
+describe "FormController/OptionsRow" do
   tests Formotion::FormController
 
   # By default, `tests` uses @controller.init
   # this isn't ideal for our case, so override.
   def controller
     row_settings = {
-      title: "Control",
-      key: :control,
-      type: :control,
+      title: "Options",
+      key: :options,
+      type: :options,
       items: ['One', 'Two']
     }
     @form ||= Formotion::Form.new(

@@ -1,6 +1,6 @@
 module Formotion
   module RowType
-    class ControlRow < Base
+    class OptionsRow < Base
 
       SLIDER_VIEW_TAG = 1200
 
