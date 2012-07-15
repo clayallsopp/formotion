@@ -1,3 +1,6 @@
+MILLENIUM = 946684672
+TIME_ZONE = NSTimeZone.timeZoneWithName "Europe/Paris"
+
 describe "Date Row" do
   before do
     row_settings = {
@@ -7,6 +10,8 @@ describe "Date Row" do
     }
     @row = Formotion::Row.new(row_settings)
     @row.reuse_identifier = 'test'
+    @row.object.formatter.timeZone = TIME_ZONE
+    @row.object.picker.timeZone = TIME_ZONE
   end
 
   it "should initialize with correct settings" do
@@ -21,9 +26,8 @@ describe "Date Row" do
   end
 
   it "should use custom value" do
-    @row.value = 946684672
+    @row.value = MILLENIUM
     cell = @row.make_cell
-    @row.object.formatter.timeZone = NSTimeZone.timeZoneWithName "Europe/Paris"
 
 
     @row.text_field.text.should == '1/1/00'
@@ -36,12 +40,11 @@ describe "Date Row" do
 
   it "should update value when date is picked" do
     cell = @row.make_cell
-    @row.object.formatter.timeZone = NSTimeZone.timeZoneWithName "Europe/Paris"
 
-    @row.object.picker.date = NSDate.dateWithTimeIntervalSince1970(946684672)
+    @row.object.picker.date = NSDate.dateWithTimeIntervalSince1970(MILLENIUM)
     @row.object.picker.trigger UIControlEventValueChanged
 
-    @row.value.should == 946684672
+    @row.value.should == MILLENIUM
     @row.text_field.text.should == '1/1/00'
   end
 
@@ -54,16 +57,13 @@ describe "Date Row" do
   }.each do |format, expected_output|
 
     it "should display date in full format" do
-      @row.value = 946684672
+      @row.value = MILLENIUM
       @row.format = format
+      @row.object.instance_variable_set("@formatter", nil)
+      @row.object.formatter.timeZone = TIME_ZONE
       cell = @row.make_cell
-      @row.object.formatter.timeZone = NSTimeZone.timeZoneWithName "Europe/Paris"
 
       @row.text_field.text.should == expected_output
     end
   end
-
-
-
-
 end
