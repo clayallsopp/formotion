@@ -137,6 +137,18 @@
 }
 ```
 
+### <a name="options"></a> Options row
+![Options row](https://github.com/clayallsopp/formotion/wiki/row-types/options.png)
+
+```ruby
+{
+  title: "options",
+  key: :options,
+  type: :options,
+  items: ['One', 'Two']
+}
+```
+
 ## Buttons
 
 ### <a name="submit"></a> Submit row

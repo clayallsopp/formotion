@@ -20,7 +20,7 @@ class AppDelegate
         }, {
           title: "Gender",
           key: :gender,
-          type: :control,
+          type: :options,
           items: ['Female', 'Male']
         }, {
           title: "Password",
