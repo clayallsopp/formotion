@@ -107,6 +107,14 @@ Then attach it to a `Formotion::FormController` and you're ready to rock and rol
 self.navigationController.pushViewController(@controller, animated: true)
 ```
 
+### Data Types
+
+See [the visual list of support row types](https://github.com/clayallsopp/formotion/blob/master/LIST_OF_ROW_TYPES.md).
+
+To add your own, check [the guide to adding new row types](https://github.com/clayallsopp/formotion/blob/master/NEW_ROW_TYPES.md).
+
+`Formotion::Form`, `Formotion::Section`, and `Formotion::Row` all respond to a `::PROPERTIES` attribute. These are settable as an attribute (ie `section.title = 'title'`) or in the initialization hash (ie `{sections: [{title: 'title', ...}]}`). Check the comments in the 3 main files (`form.rb`, `section.rb`, and `row.rb` for details on what these do).
+
 ### Retreive
 
 You have `form#submit`, `form#on_submit`, and `form#render` at your disposal. Here's an example:
@@ -146,14 +154,6 @@ end
 ```
 
 `form#submit` just triggers `form#on_submit`.
-
-### Data Types
-
-See [the visual list of support row types](https://github.com/clayallsopp/formotion/blob/master/LIST_OF_ROW_TYPES.md).
-
-To add your own, check [the guide to adding new row types](https://github.com/clayallsopp/formotion/blob/master/NEW_ROW_TYPES.md).
-
-`Formotion::Form`, `Formotion::Section`, and `Formotion::Row` all respond to a `::PROPERTIES` attribute. These are settable as an attribute (ie `section.title = 'title'`) or in the initialization hash (ie `{sections: [{title: 'title', ...}]}`). Check the comments in the 3 main files (`form.rb`, `section.rb`, and `row.rb` for details on what these do).
 
 ## Forking
 
