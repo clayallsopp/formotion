@@ -162,7 +162,4 @@ Feel free to fork and submit pull requests! And if you end up using Formotion in
 ## Todo
 
 - Not very efficient right now (creates a unique reuse idenitifer for each cell)
-- More data entry types (dates, etc)
-- More tests
 - Styling/overriding the form for custom UITableViewDelegate/Data Source behaviors.
-- Custom cell text field alignments

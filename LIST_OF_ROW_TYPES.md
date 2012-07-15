@@ -18,7 +18,7 @@
 ## Character based
 
 ### <a name="string"></a> String row
-[[https://github.com/clayallsopp/formotion/wiki/row-types/string.png]]
+![String row](https://github.com/clayallsopp/formotion/wiki/row-types/string.png)
 ```ruby
 {
   title: "Name",
@@ -31,7 +31,7 @@
 ```
 
 ### <a name="text"></a> Text row
-[[https://github.com/clayallsopp/formotion/wiki/row-types/text.png]]
+![Text Row](https://github.com/clayallsopp/formotion/wiki/row-types/text.png)
 
 ```ruby
 {
@@ -44,7 +44,7 @@
 ```
 
 ### <a name="email"></a> Email row
-[[https://github.com/clayallsopp/formotion/wiki/row-types/email.png]]
+![Email row](https://github.com/clayallsopp/formotion/wiki/row-types/email.png)
 ```ruby
 {
   title: "Email",
@@ -55,7 +55,7 @@
 ```
 
 ### <a name="number"></a> Number row
-[[https://github.com/clayallsopp/formotion/wiki/row-types/number.png]]
+![Number row](https://github.com/clayallsopp/formotion/wiki/row-types/number.png)
 
 ```ruby
 {
@@ -67,7 +67,7 @@
 ```
 
 ### <a name="date"></a> Date row
-[[https://github.com/clayallsopp/formotion/wiki/row-types/date.png]]
+![Date row](https://github.com/clayallsopp/formotion/wiki/row-types/date.png)
 
 ```ruby
 {
@@ -82,7 +82,7 @@
 ## Other
 
 ### <a name="static"></a> Static row
-[[https://github.com/clayallsopp/formotion/wiki/row-types/static.png]]
+![Static row](https://github.com/clayallsopp/formotion/wiki/row-types/static.png)
 ```ruby
 {
   title: "Static",
@@ -91,7 +91,7 @@
 ```
 
 ### <a name="switch"></a> Switch row
-[[https://github.com/clayallsopp/formotion/wiki/row-types/switch.png]]
+![Switch row](https://github.com/clayallsopp/formotion/wiki/row-types/switch.png)
 
 ```ruby
 {
@@ -102,7 +102,7 @@
 ```
 
 ### <a name="check"></a> Check row
-[[https://github.com/clayallsopp/formotion/wiki/row-types/check.png]]
+![Check row](https://github.com/clayallsopp/formotion/wiki/row-types/check.png)
 
 ```ruby
 {
@@ -114,7 +114,7 @@
 ```
 
 ### <a name="slider"></a> Slider row
-[[https://github.com/clayallsopp/formotion/wiki/row-types/slider.png]]
+![Slider row](https://github.com/clayallsopp/formotion/wiki/row-types/slider.png)
 
 ```ruby
 {
@@ -127,7 +127,7 @@
 ```
 
 ### <a name="image"></a> Image row
-[[https://github.com/clayallsopp/formotion/wiki/row-types/image.png]]
+![Image row](https://github.com/clayallsopp/formotion/wiki/row-types/image.png)
 
 ```ruby
 {
@@ -140,7 +140,7 @@
 ## Buttons
 
 ### <a name="submit"></a> Submit row
-[[https://github.com/clayallsopp/formotion/wiki/row-types/submit.png]]
+![Submit row](https://github.com/clayallsopp/formotion/wiki/row-types/submit.png)
 
 ```ruby
 {
