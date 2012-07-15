@@ -11,6 +11,7 @@
 [Check](#check)<br/>
 [Slider](#slider)<br/>
 [Image](#image)
+[Options](#options)
 
 **Buttons**<br/>
 [Submit](#submit)
