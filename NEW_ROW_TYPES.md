@@ -68,6 +68,6 @@ end
 
 Your subclass can override these methods:
 
-**`#on_select(tableView, tableViewDelegate)`** - Called when the row is tapped by the user.
+`#on_select(tableView, tableViewDelegate)` - Called when the row is tapped by the user.
 
-**`#cell_style`** - The `UITableViewCellStyle` for the row type. By default is `UITableViewCellStyleSubtitle`
+`#cell_style` - The `UITableViewCellStyle` for the row type. By default is `UITableViewCellStyleSubtitle`
