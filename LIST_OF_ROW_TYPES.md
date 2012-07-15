@@ -10,7 +10,7 @@
 [Switch](#switch)<br/>
 [Check](#check)<br/>
 [Slider](#slider)<br/>
-[Image](#image)
+[Image](#image)<br/>
 [Options](#options)
 
 **Buttons**<br/>
