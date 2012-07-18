@@ -1,9 +1,9 @@
-describe "UI Picker Row" do
+describe "Picker Row" do
   before do
     row_settings = {
-      title: "UI Picker",
-      key: :uipicker,
-      type: :ui_picker,
+      title: "Picker",
+      key: :picker,
+      type: :picker,
       items: ["Ruby", "Motion"],
       value: "Motion"
     }
@@ -12,13 +12,13 @@ describe "UI Picker Row" do
   end
 
   it "should initialize with correct settings" do
-    @row.object.class.should == Formotion::RowType::UiPickerRow
+    @row.object.class.should == Formotion::RowType::PickerRow
   end
 
   it "should build cell with picker as input view of text_field" do
     cell = @row.make_cell
 
-    @row.text_field.inputView.class.should == UIPickerView    
+    @row.text_field.inputView.class.should == UIPickerView
   end
 
   it "should start ui picker at custom value" do
@@ -31,5 +31,5 @@ describe "UI Picker Row" do
     cell = @row.make_cell
 
     @row.text_field.text.should == "Motion"
-  end  
+  end
 end

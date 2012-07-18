@@ -10,9 +10,9 @@ class AppDelegate
           key: :photo,
           type: :image
         },{
-          title: "UI Picker",
-          key: :uipick,
-          type: :ui_picker,
+          title: "Picker",
+          key: :pick,
+          type: :picker,
           items: ["Ruby", "Motion", "Rocks"],
           value: "Motion"
         },{
