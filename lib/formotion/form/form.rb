@@ -103,6 +103,11 @@ module Formotion
     # Handles either zero or one arguments,
     # as shown above.
     def submit
+      if @on_submit_callback.nil?
+        p "`Form#submit` invoked without a callback, doing nothing."
+        return
+      end
+
       if @on_submit_callback.arity == 0
         @on_submit_callback.call
       elsif @on_submit_callback.arity == 1
