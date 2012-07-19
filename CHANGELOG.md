@@ -1,3 +1,9 @@
+## 0.5.2 - ???
+
+### Bug Fixes
+
+- Fixed crash when `form.submit` called without a `on_submit` callback set.
+
 ## 0.5.1 - July 19, 2012
 
 ### Improvements
