@@ -3,7 +3,7 @@ module Formotion
     def initialize(params = {})
       params.each { |key, value|
         if  self.class.const_get(:PROPERTIES).member? key.to_sym
-          self.send((key.to_s + "=:").to_sym, value)
+          self.send("#{key}=".to_sym, value)
         end
       }
     end
@@ -28,7 +28,7 @@ module Formotion
       self.init
       self.class.const_get(:SERIALIZE_PROPERTIES).each {|prop|
         value = decoder.decodeObjectForKey(prop.to_s)
-        self.send((prop.to_s + "=:").to_sym, value) if not value.nil?
+        self.send("#{prop}=".to_sym, value) if not value.nil?
       }
       self
     end
@@ -36,7 +36,7 @@ module Formotion
     def copyWithZone(zone)
       copy = self.class.allocWithZone(zone).init
       self.class.const_get(:SERIALIZE_PROPERTIES).each {|prop|
-        copy.send((prop.to_s + "=:").to_sym, self.send(prop))
+        copy.send("#{prop}=".to_sym, self.send(prop))
       }
       copy
     end
