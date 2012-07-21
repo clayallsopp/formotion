@@ -1,5 +1,9 @@
 ## 0.5.2 - ???
 
+### Improvements
+
+- `reuseIdentifier` is now based on `#object_id`, so dynamically adding rows at runtime should work.
+
 ### Bug Fixes
 
 - Fixed crash when `form.submit` called without a `on_submit` callback set.
