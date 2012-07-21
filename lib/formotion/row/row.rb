@@ -117,7 +117,7 @@ module Formotion
     end
 
     def reuse_identifier
-      @reuse_identifier || "SECTION_#{self.section.index}_ROW_#{self.index}"
+      @reuse_identifier || "Formotion_#{self.object_id}"
     end
 
     def next_row
