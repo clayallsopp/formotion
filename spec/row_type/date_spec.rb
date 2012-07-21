@@ -2,16 +2,9 @@ MILLENIUM = 946684672
 TIME_ZONE = NSTimeZone.timeZoneWithName "Europe/Paris"
 
 describe "Date Row" do
-  before do
-    row_settings = {
-      title: "Date",
-      key: :date,
-      type: :date,
-    }
-    @row = Formotion::Row.new(row_settings)
-    @row.reuse_identifier = 'test'
-    @row.object.formatter.timeZone = TIME_ZONE
-    @row.object.picker.timeZone = TIME_ZONE
+  tests_row :date do |row|
+    row.object.formatter.timeZone = TIME_ZONE
+    row.object.picker.timeZone = TIME_ZONE
   end
 
   it "should initialize with correct settings" do

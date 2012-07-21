@@ -1,13 +1,5 @@
 describe "Submit Row" do
-  before do
-    row_settings = {
-      title: "Submit",
-      key: :submit,
-      type: :submit,
-    }
-    @row = Formotion::Row.new(row_settings)
-    @row.reuse_identifier = 'test'
-  end
+  tests_row :submit
 
   it "should initialize with correct settings" do
     @row.object.class.should == Formotion::RowType::SubmitRow

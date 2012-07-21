@@ -1,14 +1,6 @@
 # Tests character row behavior on a string type
 describe "String Row Type" do
-  before do
-    row_settings = {
-      title: "String",
-      key: :string,
-      type: :string,
-    }
-    @row = Formotion::Row.new(row_settings)
-    @row.reuse_identifier = 'test'
-  end
+  tests_row :string
 
   it "should initialize with correct settings" do
     @row.object.class.should == Formotion::RowType::StringRow

@@ -1,14 +1,6 @@
 describe "Options Row" do
-  before do
-    row_settings = {
-      title: "Options",
-      key: :options,
-      type: :options,
-      items: ['First', 'Second']
-    }
-    @row = Formotion::Row.new(row_settings)
-    @row.reuse_identifier = 'test'
-  end
+  tests_row title: "Options", key: :options, type: :options,
+            items: ["First", "Second"]
 
   it "should initialize with correct settings" do
     @row.object.class.should == Formotion::RowType::OptionsRow
