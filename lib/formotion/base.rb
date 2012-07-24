@@ -23,7 +23,7 @@ module Formotion
         encoder.encodeObject(self.send(prop), forKey: prop.to_s)
       }
     end
-  
+
     def initWithCoder(decoder)
       self.init
       self.class.const_get(:SERIALIZE_PROPERTIES).each {|prop|
@@ -32,7 +32,7 @@ module Formotion
       }
       self
     end
-  
+
     def copyWithZone(zone)
       copy = self.class.allocWithZone(zone).init
       self.class.const_get(:SERIALIZE_PROPERTIES).each {|prop|

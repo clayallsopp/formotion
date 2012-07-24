@@ -1,4 +1,6 @@
 class AppDelegate
+
+  attr_accessor :view_controller
   def application(application, didFinishLaunchingWithOptions:launchOptions)
     @window = UIWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)
 
@@ -57,24 +59,35 @@ class AppDelegate
           key: :date_short,
           type: :date,
           format: :short
-        }]
-      }, {
-        title: "Account Type",
-        key: :account_type,
-        select_one: true,
-        rows: [{
-          title: "Free",
-          key: :free,
-          type: :check,
         }, {
-          title: "Basic",
-          value: true,
-          key: :basic,
-          type: :check,
-        }, {
-          title: "Pro",
-          key: :pro,
-          type: :check,
+          title: "Account type",
+          type: :subform,
+          subform: {
+            title: "Account Type",
+            sections: [{
+              key: :account_type,
+              select_one: true,
+              rows: [{
+                title: "Free",
+                key: :free,
+                type: :check,
+              }, {
+                title: "Basic",
+                value: true,
+                key: :basic,
+                type: :check,
+              }, {
+                title: "Pro",
+                key: :pro,
+                type: :check,
+              }]
+            }, {
+              rows: [{
+                title: 'Back',
+                type: :back
+              }]
+            }]
+          }
         }]
       }, {
         rows: [{

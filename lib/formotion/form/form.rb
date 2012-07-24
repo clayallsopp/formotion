@@ -3,7 +3,7 @@ module Formotion
     PROPERTIES = [
       # By default, Formotion::Controller will set it's title to this
       # (so navigation bars will reflect it).
-      :title, 
+      :title,
       # If you want to have some internal id to track the form.
       :id
     ]
@@ -87,7 +87,7 @@ module Formotion
 
     # Stores the callback block when you do #submit.
     # EX
-    # @form.on_submit do 
+    # @form.on_submit do
     #   do_something(@form.render)
     # end
     #
@@ -114,7 +114,7 @@ module Formotion
         @on_submit_callback.call(self)
       end
     end
-  
+
     #########################
     # Retreiving data
 
@@ -128,7 +128,7 @@ module Formotion
       # super handles all of the ::PROPERTIES
       h = super
       h[:sections] = self.sections.collect { |section|
-        section.to_hash 
+        section.to_hash
       }
       recursive_delete_nil(h)
       h
@@ -139,8 +139,8 @@ module Formotion
     # EX
     # @form = Formotion::Form.new(sections: [{
     #  rows: [{
-    #    key: 'Email', 
-    #    editable: true, 
+    #    key: 'Email',
+    #    editable: true,
     #    title: 'Email'
     #  }]}])
     # ...user plays with the Form...
@@ -157,12 +157,23 @@ module Formotion
           }
         else
           section.rows.each {|row|
-            next if row.submit_button?
+            next if row.button?
             kv[row.key] = row.value
           }
         end
       }
+      kv.merge! sub_render
       kv.delete_if {|k, v| k.nil? }
+      kv
+    end
+
+    def sub_render
+      kv = {}
+      rows = sections.map(&:rows).flatten
+      subforms = rows.map(&:subform).compact
+      subforms.each do |subform|
+        kv.merge! subform.render
+      end
       kv
     end
 

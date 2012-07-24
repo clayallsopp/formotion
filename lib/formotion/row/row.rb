@@ -48,6 +48,9 @@ module Formotion
       # EX ['free', 'pro']
       # DEFAULT is []
       :items,
+      # used for subforms
+      # DEFAULT is nil
+      :subform
     ]
     PROPERTIES.each {|prop|
       attr_accessor prop
@@ -139,8 +142,8 @@ module Formotion
       nil
     end
 
-    def submit_button?
-      object.submit_button?
+    def button?
+      object.button?
     end
 
     #########################
@@ -192,6 +195,15 @@ module Formotion
     # Retreiving data
     def to_hash
       super
+    end
+
+    def subform=(subform)
+      if subform.is_a? Hash
+        subform = Formotion::Form.new(subform)
+      elsif not subform.is_a? Formotion::Form
+        raise Formotion::InvalidClassError, "Attempted subform = #{subform.inspect} should be of type Formotion::Form or Hash"
+      end
+      @subform = subform
     end
 
     private

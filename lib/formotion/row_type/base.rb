@@ -11,7 +11,7 @@ module Formotion
         @row = row
       end
 
-      def submit_button?
+      def button?
         false
       end
 

@@ -1,9 +1,9 @@
 module Formotion
   module RowType
-    class SubmitRow < Button
+    class BackRow < Button
 
       def on_select(tableView, tableViewDelegate)
-        tableViewDelegate.submit
+        tableViewDelegate.pop_subform
       end
 
     end
