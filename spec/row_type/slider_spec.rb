@@ -20,6 +20,15 @@ describe "Slider Row" do
     @row.value.should == 50
   end
 
+  it "should bind to row value" do
+    @row.range = (50..100)
+    @row.value = 25
+    cell = @row.make_cell
+
+    @row.value = 75
+    cell.accessoryView.value.should == 75
+  end
+
   # Range
   it "should use default range" do
     @row.range = nil

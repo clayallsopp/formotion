@@ -1,6 +1,7 @@
 module Formotion
   module RowType
     class SliderRow < Base
+      include BW::KVO
 
       SLIDER_VIEW_TAG = 1200
 
@@ -16,7 +17,14 @@ module Formotion
         slideView.accessibilityLabel = row.title + " Slider"
 
         slideView.when(UIControlEventValueChanged) do
-          row.value = slideView.value
+          break_with_semaphore do
+            row.value = slideView.value
+          end
+        end
+        observe(self.row, "value") do |old_value, new_value|
+          break_with_semaphore do
+            slideView.setValue(row.value, animated:false)
+          end
         end
 
         cell.swizzle(:layoutSubviews) do
