@@ -24,6 +24,18 @@ describe "String Row Type" do
     @row.text_field.text.should == 'init value'
   end
 
+  it "should be bound to value of row" do
+    @row.value = "first value"
+    cell = @row.make_cell
+
+    @row.value = "new value"
+    @row.text_field.text.should == 'new value'
+
+    @row.text_field.setText("other value")
+    @row.text_field.delegate.on_change(@row.text_field)
+    @row.value.should == "other value"
+  end
+
   # Placeholder
   it "should have no placeholder by default" do
     cell = @row.make_cell
