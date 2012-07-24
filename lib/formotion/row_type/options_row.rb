@@ -1,6 +1,7 @@
 module Formotion
   module RowType
     class OptionsRow < Base
+      include BW::KVO
 
       SLIDER_VIEW_TAG = 1200
 
@@ -12,7 +13,14 @@ module Formotion
         cell.accessoryView = slideView
 
         slideView.when(UIControlEventValueChanged) do
-          row.value = row.items[slideView.selectedSegmentIndex]
+          break_with_semaphore do
+            row.value = row.items[slideView.selectedSegmentIndex]
+          end
+        end
+        observe(self.row, "value") do |old_value, new_value|
+          break_with_semaphore do
+            slideView.selectedSegmentIndex = row.items.index(row.value) if row.value
+          end
         end
 
         nil

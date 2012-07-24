@@ -26,4 +26,12 @@ describe "Options Row" do
     cell.accessoryView.selectedSegmentIndex.should == 1
     @row.value.should == 'Second'
   end
+
+  it "should bind value to control" do
+    @row.value = 'Second'
+    cell = @row.make_cell
+
+    @row.value = "First"
+    cell.accessoryView.selectedSegmentIndex.should == 0
+  end
 end
