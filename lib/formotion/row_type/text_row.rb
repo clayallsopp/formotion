@@ -1,6 +1,7 @@
 module Formotion
   module RowType
     class TextRow < Base
+      include BW::KVO
 
       TEXT_VIEW_TAG=1000
 
@@ -30,8 +31,15 @@ module Formotion
           true
         end
 
+        observe(self.row, "value") do |old_value, new_value|
+          break_with_semaphore do
+            field.text = row.value
+          end
+        end
         field.on_change do |text_field|
-          row.value = text_field.text
+          break_with_semaphore do
+            row.value = text_field.text
+          end
         end
 
         field.on_end do |text_field|

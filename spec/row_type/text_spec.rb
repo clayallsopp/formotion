@@ -18,6 +18,14 @@ describe "Text Row" do
     @row.text_field.text.should == 'init value'
   end
 
+  it "should bind row.value" do
+    @row.value = 'init value'
+    cell = @row.make_cell
+
+    @row.value = "new value"
+    @row.text_field.text.should == 'new value'
+  end
+
   # Placeholder
   it "should have no placeholder by default" do
     cell = @row.make_cell
