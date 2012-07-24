@@ -3,6 +3,7 @@
 ### Improvements
 
 - `reuseIdentifier` is now based on `#object_id`, so dynamically adding rows at runtime should work.
+- Every `RowType` now has an appropriate binding between `row.value` and it's display. So if you have a `StringRow` and change it's `row.value` programmatically, the view will update accordingly.
 
 ### Bug Fixes
 
