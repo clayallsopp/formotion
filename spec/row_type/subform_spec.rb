@@ -1,22 +1,13 @@
 describe "Subform Row" do
-  before do
-    @subform_settings = {
-      sections: [{
-        rows: [{
-          title: 'Hello',
-          type: :static
-        }]
-      }]
-    }
-
-    row_settings = {
-      title: "Subform",
-      type: :subform,
-      subform: @subform_settings
-    }
-    @row = Formotion::Row.new(row_settings)
-    @row.reuse_identifier = 'test'
-  end
+  tests_row title: "Subform", type: :subform,
+            subform: {
+              sections: [{
+                rows: [{
+                  title: 'Hello',
+                  type: :static
+                }]
+              }]
+            }
 
   it "should build cell with a label and an accessory" do
     cell = @row.make_cell
