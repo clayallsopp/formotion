@@ -19,7 +19,11 @@ module Formotion
         end
         observe(self.row, "value") do |old_value, new_value|
           break_with_semaphore do
-            slideView.selectedSegmentIndex = row.items.index(row.value) if row.value
+            if row.value
+              slideView.selectedSegmentIndex = row.items.index(row.value)
+            else
+              slideView.selectedSegmentIndex = UISegmentedControlNoSegment
+            end
           end
         end
 

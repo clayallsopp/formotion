@@ -34,4 +34,12 @@ describe "Options Row" do
     @row.value = "First"
     cell.accessoryView.selectedSegmentIndex.should == 0
   end
+
+  it "should bind nil to no selected segment" do
+    @row.value = 'Second'
+    cell = @row.make_cell
+
+    @row.value = nil
+    cell.accessoryView.selectedSegmentIndex.should == UISegmentedControlNoSegment
+  end
 end
