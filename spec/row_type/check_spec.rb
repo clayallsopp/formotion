@@ -16,4 +16,12 @@ describe "Check Row" do
     cell = @row.make_cell
     cell.accessoryType.should == UITableViewCellAccessoryCheckmark
   end
+
+  it "should bind its accessory" do
+    @row.value = true
+    cell = @row.make_cell
+
+    @row.value = false
+    cell.accessoryType.should == UITableViewCellAccessoryNone
+  end
 end

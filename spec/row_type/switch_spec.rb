@@ -16,4 +16,12 @@ describe "Switch Row" do
     cell = @row.make_cell
     cell.accessoryView.on?.should == true
   end
+
+  it "should bind its switch" do
+    @row.value = true
+    cell = @row.make_cell
+
+    @row.value = false
+    cell.accessoryView.on?.should == false
+  end
 end
