@@ -10,16 +10,14 @@ module Formotion
         cell.accessoryView = switchView
         switchView.setOn(row.value || false, animated:false)
         switchView.when(UIControlEventValueChanged) do
-          break if @semaphore
-          @semaphore = true
-          row.value = switchView.isOn
-          @semaphore = false
+          break_with_semaphore do
+            row.value = switchView.isOn
+          end
         end
         observe(self.row, "value") do |old_value, new_value|
-          break if @semaphore
-          @semaphore = true
-          switchView.setOn(row.value || false, animated: false)
-          @semaphore = false
+          break_with_semaphore do
+            switchView.setOn(row.value || false, animated: false)
+          end
         end
         nil
       end

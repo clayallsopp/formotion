@@ -23,7 +23,7 @@ module Formotion
         field.tag = TEXT_FIELD_TAG
 
         observe(self.row, "value") do |old_value, new_value|
-          if !@semaphore
+          break_with_semaphore do
             update_text_field(new_value)
           end
         end
@@ -106,9 +106,9 @@ module Formotion
       end
 
       def on_change(text_field)
-        @semaphore = true
-        row.value = text_field.text
-        @semaphore = false
+        break_with_semaphore do
+          row.value = text_field.text
+        end
       end
 
       def on_select(tableView, tableViewDelegate)
