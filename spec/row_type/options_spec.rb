@@ -1,14 +1,6 @@
 describe "Options Row" do
-  before do
-    row_settings = {
-      title: "Options",
-      key: :options,
-      type: :options,
-      items: ['First', 'Second']
-    }
-    @row = Formotion::Row.new(row_settings)
-    @row.reuse_identifier = 'test'
-  end
+  tests_row title: "Options", key: :options, type: :options,
+            items: ["First", "Second"]
 
   it "should initialize with correct settings" do
     @row.object.class.should == Formotion::RowType::OptionsRow
@@ -33,5 +25,21 @@ describe "Options Row" do
 
     cell.accessoryView.selectedSegmentIndex.should == 1
     @row.value.should == 'Second'
+  end
+
+  it "should bind value to control" do
+    @row.value = 'Second'
+    cell = @row.make_cell
+
+    @row.value = "First"
+    cell.accessoryView.selectedSegmentIndex.should == 0
+  end
+
+  it "should bind nil to no selected segment" do
+    @row.value = 'Second'
+    cell = @row.make_cell
+
+    @row.value = nil
+    cell.accessoryView.selectedSegmentIndex.should == UISegmentedControlNoSegment
   end
 end

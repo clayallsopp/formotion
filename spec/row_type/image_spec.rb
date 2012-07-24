@@ -1,15 +1,6 @@
 describe "Image Row" do
-  before do
-    row_settings = {
-      title: "Photo",
-      key: :photo,
-      type: :image
-    }
-    @row = Formotion::Row.new(row_settings)
-    @row.reuse_identifier = 'test'
-
-
-    @row.instance_eval do
+  tests_row :image do |row|
+    row.instance_eval do
       def form
         @form ||= Object.new.tap do |o|
           def o.reload_data

@@ -1,14 +1,6 @@
 describe "Slider Row" do
-  before do
-    row_settings = {
-      title: "Slider",
-      key: :slider,
-      type: :slider,
-      range: (1..100)
-    }
-    @row = Formotion::Row.new(row_settings)
-    @row.reuse_identifier = 'test'
-  end
+  tests_row title: "Slider", key: :slider, type: :slider,
+            range: (1..100)
 
   it "should initialize with correct settings" do
     @row.object.class.should == Formotion::RowType::SliderRow
@@ -26,6 +18,15 @@ describe "Slider Row" do
 
     cell.accessoryView.value.should == 50
     @row.value.should == 50
+  end
+
+  it "should bind to row value" do
+    @row.range = (50..100)
+    @row.value = 25
+    cell = @row.make_cell
+
+    @row.value = 75
+    cell.accessoryView.value.should == 75
   end
 
   # Range

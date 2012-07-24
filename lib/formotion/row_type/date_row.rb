@@ -56,6 +56,11 @@ module Formotion
           picker
         end
       end
+
+      # Used when row.value changes
+      def update_text_field(new_value)
+        self.row.text_field.text = self.formatted_value
+      end
     end
   end
 end

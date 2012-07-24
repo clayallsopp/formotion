@@ -1,13 +1,5 @@
 describe "Text Row" do
-  before do
-    row_settings = {
-      title: "Text",
-      key: :text,
-      type: :text,
-    }
-    @row = Formotion::Row.new(row_settings)
-    @row.reuse_identifier = 'test'
-  end
+  tests_row :text
 
   it "should initialize with correct settings" do
     @row.object.class.should == Formotion::RowType::TextRow
@@ -24,6 +16,14 @@ describe "Text Row" do
     cell = @row.make_cell
 
     @row.text_field.text.should == 'init value'
+  end
+
+  it "should bind row.value" do
+    @row.value = 'init value'
+    cell = @row.make_cell
+
+    @row.value = "new value"
+    @row.text_field.text.should == 'new value'
   end
 
   # Placeholder

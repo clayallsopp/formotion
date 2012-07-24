@@ -1,6 +1,7 @@
 module Formotion
   module RowType
     class StringRow < Base
+      include BW::KVO
 
       # The new UITextField in a UITableViewCell
       # will be assigned this tag, if applicable.
@@ -21,8 +22,11 @@ module Formotion
         field = UITextField.alloc.initWithFrame(CGRectZero)
         field.tag = TEXT_FIELD_TAG
 
-        field.placeholder = row.placeholder
-        field.text = row.value.to_s
+        observe(self.row, "value") do |old_value, new_value|
+          break_with_semaphore do
+            update_text_field(new_value)
+          end
+        end
 
         field.clearButtonMode = UITextFieldViewModeWhileEditing
         field.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter
@@ -54,6 +58,8 @@ module Formotion
           end
         end
 
+        field.placeholder = row.placeholder
+        field.text = row.value.to_s
         cell.addSubview(field)
         field
 
@@ -100,13 +106,19 @@ module Formotion
       end
 
       def on_change(text_field)
-        row.value = text_field.text
+        break_with_semaphore do
+          row.value = text_field.text
+        end
       end
 
       def on_select(tableView, tableViewDelegate)
         row.text_field.becomeFirstResponder
       end
 
+      # Used when row.value changes
+      def update_text_field(new_value)
+        self.row.text_field.text = new_value
+      end
     end
   end
 end

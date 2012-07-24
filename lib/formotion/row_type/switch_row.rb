@@ -1,6 +1,7 @@
 module Formotion
   module RowType
     class SwitchRow < Base
+      include BW::KVO
 
       def build_cell(cell)
         cell.selectionStyle = UITableViewCellSelectionStyleNone
@@ -9,7 +10,14 @@ module Formotion
         cell.accessoryView = switchView
         switchView.setOn(row.value || false, animated:false)
         switchView.when(UIControlEventValueChanged) do
-          row.value = switchView.isOn
+          break_with_semaphore do
+            row.value = switchView.isOn
+          end
+        end
+        observe(self.row, "value") do |old_value, new_value|
+          break_with_semaphore do
+            switchView.setOn(row.value || false, animated: false)
+          end
         end
         nil
       end

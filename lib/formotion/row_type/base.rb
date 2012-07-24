@@ -36,6 +36,17 @@ module Formotion
       def on_select(tableView, tableViewDelegate)
         # implement in row class
       end
+
+      def break_with_semaphore(&block)
+        return if @semaphore
+        with_semaphore(&block)
+      end
+
+      def with_semaphore(&block)
+        @semaphore = true
+        block.call
+        @semaphore = false
+      end
     end
   end
 end

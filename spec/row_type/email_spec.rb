@@ -1,13 +1,5 @@
 describe "Email Row" do
-  before do
-    row_settings = {
-      title: "Email",
-      key: :email,
-      type: :email,
-    }
-    @row = Formotion::Row.new(row_settings)
-    @row.reuse_identifier = 'test'
-  end
+  tests_row :email
 
   it "should initialize with correct settings" do
     @row.object.class.should == Formotion::RowType::EmailRow
