@@ -198,12 +198,19 @@ module Formotion
     end
 
     def subform=(subform)
-      if subform.is_a? Hash
-        subform = Formotion::Form.new(subform)
-      elsif not subform.is_a? Formotion::Form
-        raise Formotion::InvalidClassError, "Attempted subform = #{subform.inspect} should be of type Formotion::Form or Hash"
-      end
       @subform = subform
+      # enables you do to row.subform.to_form
+      @subform.instance_eval do
+        def to_form
+          subform = nil
+          if self.is_a? Hash
+            subform = Formotion::Form.new(self)
+          elsif not self.is_a? Formotion::Form
+            raise Formotion::InvalidClassError, "Attempted subform = #{subform.inspect} should be of type Formotion::Form or Hash"
+          end
+          subform ||= self
+        end
+      end
     end
 
     private

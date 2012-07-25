@@ -7,7 +7,8 @@ module Formotion
       end
 
       def on_select(tableView, tableViewDelegate)
-        tableViewDelegate.push_subform(row.subform)
+        subform = row.subform.to_form
+        row.form.controller.push_subform(subform)
       end
 
     end
