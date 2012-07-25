@@ -89,7 +89,7 @@ describe "Forms" do
     row = subform.sections[0].rows[0]
     row.value = 'something@email.com'
 
-    @form.render[:email].should == 'something@email.com'
+    @form.render[:subform][:email].should == 'something@email.com'
   end
 
   it "hashifying should be same as input" do
