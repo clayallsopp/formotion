@@ -83,6 +83,37 @@ class AppDelegate
               }]
             }, {
               rows: [{
+                title: "Account type",
+                type: :subform,
+                subform: {
+                  title: "Account Type",
+                  sections: [{
+                    key: :account_type,
+                    select_one: true,
+                    rows: [{
+                      title: "Free",
+                      key: :free,
+                      type: :check,
+                    }, {
+                      title: "Basic",
+                      value: true,
+                      key: :basic,
+                      type: :check,
+                    }, {
+                      title: "Pro",
+                      key: :pro,
+                      type: :check,
+                    }]
+                  }, {
+                    rows: [{
+                      title: 'Back',
+                      type: :back
+                    }]
+                  }]
+                }
+              }]
+            }, {
+              rows: [{
                 title: 'Back',
                 type: :back
               }]
