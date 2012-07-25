@@ -16,17 +16,30 @@ describe "Subform Row" do
   end
 
   it "should build subform" do
-    @row.subform.class.should == Formotion::Form
+    @row.subform.to_form.class.should == Formotion::Form
   end
 
   it "should push subform on select" do
-    fake_delegate = FakeDelegateClass.new
-    @row.object.on_select(nil, fake_delegate)
-    fake_delegate.push_subform_called.should == true
+    form = FakeForm.new
+    @row.instance_variable_set("@section", form)
+
+    @row.object.on_select(nil, nil)
+    form.controller.push_subform_called.should == true
   end
 end
 
-class FakeDelegateClass
+
+class FakeForm
+  def form
+    self
+  end
+
+  def controller
+    @controller ||= FakeControllerClass.new
+  end
+end
+
+class FakeControllerClass
   attr_accessor :push_subform_called
   def push_subform(form)
     self.push_subform_called = true

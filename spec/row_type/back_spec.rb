@@ -6,13 +6,24 @@ describe "Back Row" do
   end
 
   it "should pop subform on select" do
-    fake_delegate = FakeDelegateClass.new
-    @row.object.on_select(nil, fake_delegate)
-    fake_delegate.pop_subform_called.should == true
+    form = FakeForm.new
+    @row.instance_variable_set("@section", form)
+    @row.object.on_select(nil, nil)
+    form.controller.pop_subform_called.should == true
   end
 end
 
-class FakeDelegateClass
+class FakeForm
+  def form
+    self
+  end
+
+  def controller
+    @controller ||= FakeControllerClass.new
+  end
+end
+
+class FakeControllerClass
   attr_accessor :pop_subform_called
   def pop_subform
     self.pop_subform_called = true
