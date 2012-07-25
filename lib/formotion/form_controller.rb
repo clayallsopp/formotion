@@ -48,5 +48,24 @@ module Formotion
       # and reloads the data.
       @form.controller = self
     end
+
+    # Subview Methods
+    def push_subform(form)
+      @subform_controller = self.class.alloc.initWithForm(form)
+
+      if self.navigationController
+        self.navigationController.pushViewController(@subform_controller, animated: true)
+      else
+        self.presentModalViewController(@subform_controller, animated: true)
+      end
+    end
+
+    def pop_subform
+      if self.navigationController
+        self.navigationController.popViewControllerAnimated true
+      else
+        self.dismissModalViewControllerAnimated true
+      end
+    end
   end
 end

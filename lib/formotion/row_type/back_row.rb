@@ -3,7 +3,7 @@ module Formotion
     class BackRow < Button
 
       def on_select(tableView, tableViewDelegate)
-        tableViewDelegate.pop_subform
+        row.form.controller.pop_subform
       end
 
     end

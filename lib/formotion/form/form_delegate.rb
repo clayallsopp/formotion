@@ -3,7 +3,6 @@ module Formotion
     attr_reader :table
     attr_reader :controller
     attr_reader :active_row
-    attr_reader :subform
 
     def active_row=(row)
       @active_row = row
@@ -78,25 +77,6 @@ module Formotion
       tableView.deselectRowAtIndexPath(indexPath, animated:true)
       row = row_for_index_path(indexPath)
       row.object.on_select(tableView, self)
-    end
-
-    # Subview Methods
-    def push_subform(form)
-      @subform = controller.class.alloc.initWithForm(form)
-
-      if controller.navigationController
-        controller.navigationController.pushViewController(@subform, animated: true)
-      else
-        controller.presentModalViewController(subform, animated: true)
-      end
-    end
-
-    def pop_subform
-      if controller.navigationController
-        controller.navigationController.popViewControllerAnimated true
-      else
-        controller.dismissModalViewControllerAnimated true
-      end
     end
   end
 end
