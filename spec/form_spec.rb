@@ -68,6 +68,30 @@ describe "Forms" do
     @form.render[:email].should == 'something@email.com'
   end
 
+  it "render with subforms works correctly" do
+    @form = Formotion::Form.new(sections: [{
+     rows: [{
+       type: :subform,
+       key: :subform,
+       subform: {
+          sections: [{
+            rows: [{
+              key: :email,
+              type: :email,
+              editable: true,
+              title: 'Email'
+            }]
+          }]
+       }
+     }]}])
+
+    subform = @form.sections[0].rows[0].subform.to_form
+    row = subform.sections[0].rows[0]
+    row.value = 'something@email.com'
+
+    @form.render[:email].should == 'something@email.com'
+  end
+
   it "hashifying should be same as input" do
     h = {
       sections: [{

@@ -62,10 +62,11 @@ class AppDelegate
         }, {
           title: "Account type",
           type: :subform,
+          key: :account,
           subform: {
             title: "Account Type",
             sections: [{
-              key: :account_type,
+              key: :type,
               select_one: true,
               rows: [{
                 title: "Free",
@@ -83,25 +84,26 @@ class AppDelegate
               }]
             }, {
               rows: [{
-                title: "Account type",
+                title: "Advanced",
                 type: :subform,
+                key: :advanced,
                 subform: {
-                  title: "Account Type",
+                  title: "Advanced",
                   sections: [{
-                    key: :account_type,
+                    key: :currency,
                     select_one: true,
                     rows: [{
-                      title: "Free",
-                      key: :free,
-                      type: :check,
-                    }, {
-                      title: "Basic",
+                      title: "USD",
                       value: true,
-                      key: :basic,
+                      key: :usd,
                       type: :check,
                     }, {
-                      title: "Pro",
-                      key: :pro,
+                      title: "EUR",
+                      key: :eur,
+                      type: :check,
+                    }, {
+                      title: "CHF",
+                      key: :chf,
                       type: :check,
                     }]
                   }, {

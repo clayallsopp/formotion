@@ -170,9 +170,9 @@ module Formotion
     def sub_render
       kv = {}
       rows = sections.map(&:rows).flatten
-      subforms = rows.map(&:subform).compact
-      subforms.each do |subform|
-        kv.merge! subform.render
+      subform_rows = rows.select{ |row| row.subform != nil }
+      subform_rows.each do |subform_row|
+        kv.merge! subform_row.subform.to_form.render
       end
       kv
     end
