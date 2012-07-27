@@ -1,5 +1,5 @@
 module Formotion
-  class Form
+  class Form < Formotion::Base
     attr_reader :table
     attr_reader :controller
     attr_reader :active_row
