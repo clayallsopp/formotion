@@ -72,11 +72,33 @@ module Formotion
       row.rowHeight || tableView.rowHeight
     end
 
+    def tableView(tableView, commitEditingStyle: editingStyle, forRowAtIndexPath: indexPath)
+      row = row_for_index_path(indexPath)
+      case editingStyle
+      when UITableViewCellEditingStyleInsert
+        row.object.on_insert(tableView, self)
+      when UITableViewCellEditingStyleDelete
+        row.object.on_delete(tableView, self)
+      end
+    end
+
+
     # UITableViewDelegate Methods
     def tableView(tableView, didSelectRowAtIndexPath:indexPath)
       tableView.deselectRowAtIndexPath(indexPath, animated:true)
       row = row_for_index_path(indexPath)
       row.object.on_select(tableView, self)
+    end
+
+    def tableView(tableView, editingStyleForRowAtIndexPath:indexPath)
+      row = row_for_index_path(indexPath)
+      row.object.cellEditingStyle
+    end
+
+
+    def tableView(tableView, shouldIndentWhileEditingRowAtIndexPath: indexPath)
+      row = row_for_index_path(indexPath)
+      row.object.indentWhileEditing?
     end
   end
 end

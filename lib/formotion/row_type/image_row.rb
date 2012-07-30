@@ -12,7 +12,7 @@ module Formotion
           @image_view.image = new_value
           if new_value
             self.row.rowHeight = 200
-            cell.accessoryView = nil
+            cell.editingAccessoryView = nil
           else
             self.row.rowHeight = 44
             add_plus_accessory(cell)
@@ -92,7 +92,7 @@ module Formotion
           end
           button
         end
-        cell.accessoryView = @add_button
+        cell.editingAccessoryView = @add_button
       end
     end
   end

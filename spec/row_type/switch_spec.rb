@@ -8,13 +8,13 @@ describe "Switch Row" do
   # Value
   it "should be off by default" do
     cell = @row.make_cell
-    cell.accessoryView.on?.should == false
+    cell.editingAccessoryView.on?.should == false
   end
 
   it "should be on when true" do
     @row.value = true
     cell = @row.make_cell
-    cell.accessoryView.on?.should == true
+    cell.editingAccessoryView.on?.should == true
   end
 
   it "should bind its switch" do
@@ -22,6 +22,6 @@ describe "Switch Row" do
     cell = @row.make_cell
 
     @row.value = false
-    cell.accessoryView.on?.should == false
+    cell.editingAccessoryView.on?.should == false
   end
 end

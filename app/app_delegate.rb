@@ -60,6 +60,10 @@ class AppDelegate
           type: :date,
           format: :short
         }, {
+          title: "Slider",
+          key: :slider,
+          type: :slider
+        }, {
           title: "Account type",
           type: :subform,
           key: :account,
@@ -120,6 +124,21 @@ class AppDelegate
                 type: :back
               }]
             }]
+          }
+        }]
+      },{
+        title: 'Your nicknames',
+        rows: [{
+          title: "Add nickname",
+          key: :nicknames,
+          type: :template,
+          value: ['Nici', 'Sam'],
+          template: {
+            title: 'Nickname',
+            type: :string,
+            placeholder: 'Enter here',
+            indented: true,
+            deletable: true
           }
         }]
       }, {

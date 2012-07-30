@@ -8,14 +8,14 @@ describe "Options Row" do
 
   it "should build cell with segmented control" do
     cell = @row.make_cell
-    cell.accessoryView.class.should == UISegmentedControl
+    cell.editingAccessoryView.class.should == UISegmentedControl
   end
 
   # Value
   it "should select default value" do
     cell = @row.make_cell
 
-    cell.accessoryView.selectedSegmentIndex.should == -1
+    cell.editingAccessoryView.selectedSegmentIndex.should == -1
     @row.value.should == nil
   end
 
@@ -23,7 +23,7 @@ describe "Options Row" do
     @row.value = 'Second'
     cell = @row.make_cell
 
-    cell.accessoryView.selectedSegmentIndex.should == 1
+    cell.editingAccessoryView.selectedSegmentIndex.should == 1
     @row.value.should == 'Second'
   end
 
@@ -32,7 +32,7 @@ describe "Options Row" do
     cell = @row.make_cell
 
     @row.value = "First"
-    cell.accessoryView.selectedSegmentIndex.should == 0
+    cell.editingAccessoryView.selectedSegmentIndex.should == 0
   end
 
   it "should bind nil to no selected segment" do
@@ -40,6 +40,6 @@ describe "Options Row" do
     cell = @row.make_cell
 
     @row.value = nil
-    cell.accessoryView.selectedSegmentIndex.should == UISegmentedControlNoSegment
+    cell.editingAccessoryView.selectedSegmentIndex.should == UISegmentedControlNoSegment
   end
 end

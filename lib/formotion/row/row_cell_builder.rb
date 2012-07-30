@@ -15,7 +15,7 @@ module Formotion
 
       cell = UITableViewCell.alloc.initWithStyle(row.object.cell_style, reuseIdentifier:row.reuse_identifier)
 
-      cell.accessoryType = UITableViewCellAccessoryNone
+      cell.editingAccessoryType = UITableViewCellAccessoryNone
       cell.textLabel.text = row.title
       cell.detailTextLabel.text = row.subtitle
 

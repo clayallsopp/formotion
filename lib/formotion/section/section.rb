@@ -100,8 +100,14 @@ module Formotion
       nil
     end
 
+    def refresh_row_indexes
+      rows.each_with_index do |row, index|
+        row.index = index
+      end
+    end
+
     #########################
-    # Retreiving data    
+    # Retreiving data
     def to_hash
       h = super
       h[:rows] = self.rows.collect {|row| row.to_hash}

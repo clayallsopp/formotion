@@ -48,14 +48,23 @@ module Formotion
       # EX ['free', 'pro']
       # DEFAULT is []
       :items,
-      # used for subforms
+      # A hash for a Form used for subforms
       # DEFAULT is nil
-      :subform
+      :subform,
+      # A hash for a Row used for templates
+      # DEFAULT is nil
+      :template,
+      # Indents row when set to true
+      # DEFAULT is false
+      :indented,
+      # Shows a delete sign next to the row
+      # DEFAULT is false
+      :deletable
     ]
     PROPERTIES.each {|prop|
       attr_accessor prop
     }
-    BOOLEAN_PROPERTIES = [:secure]
+    BOOLEAN_PROPERTIES = [:secure, :indented, :deletable]
     SERIALIZE_PROPERTIES = PROPERTIES
 
     # Reference to the row's section

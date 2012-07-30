@@ -8,7 +8,6 @@ module Formotion
       def build_cell(cell)
         cell.selectionStyle = UITableViewCellSelectionStyleNone
         slideView = UISlider.alloc.initWithFrame(CGRectZero)
-        cell.accessoryView = slideView
         row.range ||= (1..10)
         slideView.minimumValue = row.range.first
         slideView.maximumValue = row.range.last
@@ -26,6 +25,9 @@ module Formotion
             slideView.setValue(row.value, animated:false)
           end
         end
+
+        cell.addSubview(slideView)
+
 
         cell.swizzle(:layoutSubviews) do
           def layoutSubviews

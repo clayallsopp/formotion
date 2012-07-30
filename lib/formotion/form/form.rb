@@ -158,7 +158,12 @@ module Formotion
         else
           section.rows.each {|row|
             next if row.button?
-            kv[row.key] = row.value
+            if match = /^(.*)\[(\d+)\]$/.match(row.key.to_s)
+              kv[match[1].to_sym] ||= []
+              kv[match[1].to_sym] << row.value
+            else
+              kv[row.key] ||= row.value
+            end
           }
         end
       }

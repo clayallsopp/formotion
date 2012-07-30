@@ -17,7 +17,7 @@ describe "Image Row" do
     image_view.nil?.should == false
     image_view.class.should == UIImageView
     image_view.image.nil?.should == true
-    cell.accessoryView.class.should == UIButton
+    cell.editingAccessoryView.class.should == UIButton
   end
 
   # Value
@@ -29,6 +29,6 @@ describe "Image Row" do
     @row.rowHeight.should > 44
     image_view = cell.viewWithTag(Formotion::RowType::ImageRow::IMAGE_VIEW_TAG)
     image_view.image.nil?.should == false
-    cell.accessoryView.nil?.should == true
+    cell.editingAccessoryView.nil?.should == true
   end
 end
