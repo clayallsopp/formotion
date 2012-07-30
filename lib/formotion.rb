@@ -3,9 +3,17 @@ require 'bubble-wrap/core'
 require 'bubble-wrap/camera'
 
 BW.require File.expand_path('../formotion/**/*.rb', __FILE__) do
-  ['string_row', 'button'].each {|file|
-    file("lib/formotion/row_type/#{file}.rb").depends_on 'lib/formotion/row_type/base.rb'
+  base_row_type = 'lib/formotion/row_type/base.rb'
+
+  # hack to make sure base row type is compiled early
+  file('lib/formotion/base.rb').depends_on base_row_type
+
+  row_types = Dir.glob('lib/formotion/row_type/**/*.rb')
+  row_types.each {|file|
+    next if file == base_row_type
+    file(file).depends_on base_row_type
   }
+
   ['date_row', 'email_row', 'number_row', 'phone_row'].each {|file|
     file("lib/formotion/row_type/#{file}.rb").depends_on 'lib/formotion/row_type/string_row.rb'
   }
