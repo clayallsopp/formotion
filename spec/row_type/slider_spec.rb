@@ -8,7 +8,7 @@ describe "Slider Row" do
 
   it "should build cell with slider" do
     cell = @row.make_cell
-    cell.subviews.last.class.should == UISlider
+    cell.accessoryView.class.should == UISlider
   end
 
   # Value
@@ -16,7 +16,7 @@ describe "Slider Row" do
     @row.value = 50
     cell = @row.make_cell
 
-    cell.subviews.last.value.should == 50
+    cell.accessoryView.value.should == 50
     @row.value.should == 50
   end
 
@@ -26,7 +26,7 @@ describe "Slider Row" do
     cell = @row.make_cell
 
     @row.value = 75
-    cell.subviews.last.value.should == 75
+    cell.accessoryView.value.should == 75
   end
 
   # Range
@@ -34,15 +34,15 @@ describe "Slider Row" do
     @row.range = nil
     cell = @row.make_cell
 
-    cell.subviews.last.minimumValue.should == 1
-    cell.subviews.last.maximumValue.should == 10
+    cell.accessoryView.minimumValue.should == 1
+    cell.accessoryView.maximumValue.should == 10
   end
 
   it "should use custom range values" do
     @row.range = (50..100)
     cell = @row.make_cell
 
-    cell.subviews.last.minimumValue.should == 50
-    cell.subviews.last.maximumValue.should == 100
+    cell.accessoryView.minimumValue.should == 50
+    cell.accessoryView.maximumValue.should == 100
   end
 end

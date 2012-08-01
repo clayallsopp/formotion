@@ -7,7 +7,7 @@ module Formotion
         cell.selectionStyle = UITableViewCellSelectionStyleNone
         switchView = UISwitch.alloc.initWithFrame(CGRectZero)
         switchView.accessibilityLabel = row.title + " Switch"
-        cell.editingAccessoryView = switchView
+        cell.accessoryView = cell.editingAccessoryView = switchView
         switchView.setOn(row.value || false, animated:false)
         switchView.when(UIControlEventValueChanged) do
           break_with_semaphore do
