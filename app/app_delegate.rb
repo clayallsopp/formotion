@@ -144,6 +144,12 @@ class AppDelegate
         }]
       }, {
         rows: [{
+          title: "Edit",
+          alt_title: "Done",
+          type: :edit,
+        }]
+      }, {
+        rows: [{
           title: "Sign Up",
           type: :submit,
         }]

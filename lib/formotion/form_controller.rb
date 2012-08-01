@@ -15,8 +15,8 @@ module Formotion
     def initWithForm(form)
       self.initWithStyle(UITableViewStyleGrouped)
       self.form = form
-      self.view.setEditing true, animated: true
-      self.view.allowsSelectionDuringEditing = true
+      #self.view.setEditing true, animated: true
+      self.tableView.allowsSelectionDuringEditing = true
       self
     end
 

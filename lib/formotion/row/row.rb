@@ -16,6 +16,8 @@ module Formotion
       # Stores possible formatting information (used by date pickers, etc)
       #   if :type == :date, accepts values in [:short, :medium, :long, :full]
       :format,
+      # alternative title for row (only used in EditRow for now)
+      :alt_title,
 
       # The following apply only to text-input fields
 
