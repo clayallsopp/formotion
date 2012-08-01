@@ -3,6 +3,8 @@ module Formotion
     class Base
       attr_accessor :row, :tableView
 
+      FIELD_BUFFER = Device.iphone? ? 20 : 64
+
       def tableView
         @tableView ||= self.row.form.table
       end

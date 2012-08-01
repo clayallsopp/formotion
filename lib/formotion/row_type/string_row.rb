@@ -51,9 +51,9 @@ module Formotion
             formotion_field.sizeToFit
 
             field_frame = formotion_field.frame
-            field_frame.origin.x = self.textLabel.frame.origin.x + self.textLabel.frame.size.width + 20
+            field_frame.origin.x = self.textLabel.frame.origin.x + self.textLabel.frame.size.width + FIELD_BUFFER
             field_frame.origin.y = ((self.frame.size.height - field_frame.size.height) / 2.0).round
-            field_frame.size.width = self.frame.size.width - field_frame.origin.x - 20
+            field_frame.size.width = self.frame.size.width - field_frame.origin.x - FIELD_BUFFER
             formotion_field.frame = field_frame
           end
         end

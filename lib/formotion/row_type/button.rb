@@ -18,8 +18,8 @@ module Formotion
               ((self.frame.size.send(dimen) - frame.size.send(dimen)) / 2.0)
             }
 
-            self.textLabel.center = CGPointMake(self.frame.size.width / 2 - 10, self.textLabel.center.y)
-            self.detailTextLabel.center = CGPointMake(self.frame.size.width / 2 - 10, self.detailTextLabel.center.y)
+            self.textLabel.center = CGPointMake(self.frame.size.width / 2 - (FIELD_BUFFER / 2), self.textLabel.center.y)
+            self.detailTextLabel.center = CGPointMake(self.frame.size.width / 2 - (FIELD_BUFFER / 2), self.detailTextLabel.center.y)
           end
         end
         nil
