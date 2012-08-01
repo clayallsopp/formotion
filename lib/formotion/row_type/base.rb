@@ -49,9 +49,14 @@ module Formotion
 
       # called when the delete editing style was triggered tableView:commitEditingStyle:forRowAtIndexPath:
       def on_delete(tableView, tableViewDelegate)
-        row.section.rows.delete_at(row.index)
-        row.section.refresh_row_indexes
-        delete_row
+        if row.remove_on_delete?
+          row.section.rows.delete_at(row.index)
+          row.section.refresh_row_indexes
+          delete_row
+        else
+          row.value = nil
+          tableView.reloadData
+        end
       end
 
       def delete_row

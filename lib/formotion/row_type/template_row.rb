@@ -51,6 +51,7 @@ module Formotion
       def build_new_row(options = {})
         # build row
         new_row = row.section.create_row(row.template.merge(options))
+        row.remove_on_delete = true
         new_row.template_parent = self.row
         new_row
       end

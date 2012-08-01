@@ -10,7 +10,8 @@ class AppDelegate
         rows: [{
           title: "Photo",
           key: :photo,
-          type: :image
+          type: :image,
+          deletable: true
         },{
           title: "Picker",
           key: :pick,

@@ -59,12 +59,16 @@ module Formotion
       :indented,
       # Shows a delete sign next to the row
       # DEFAULT is false
-      :deletable
+      :deletable,
+      # When a row is deleted, actually remove the row from UI
+      # instead of just nil'ing the value.
+      # DEFAULT is false EXCEPT for template-generated rows
+      :remove_on_delete
     ]
     PROPERTIES.each {|prop|
       attr_accessor prop
     }
-    BOOLEAN_PROPERTIES = [:secure, :indented, :deletable]
+    BOOLEAN_PROPERTIES = [:secure, :indented, :deletable, :remove_on_delete]
     BOOLEAN_PROPERTIES.each { |prop|
       alias_method "#{prop}?", prop
     }
