@@ -4,7 +4,7 @@ module Formotion
       include BW::KVO
 
       def update_cell_value(cell)
-        cell.editingAccessoryType = row.value ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone
+        cell.accessoryType = cell.editingAccessoryType = row.value ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone
       end
 
       # This is actually called whenever again cell is checked/unchecked

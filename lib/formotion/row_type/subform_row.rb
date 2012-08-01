@@ -3,7 +3,7 @@ module Formotion
     class SubformRow < Base
 
       def build_cell(cell)
-        cell.editingAccessoryType = UITableViewCellAccessoryDisclosureIndicator
+        cell.accessoryType = cell.editingAccessoryType = UITableViewCellAccessoryDisclosureIndicator
       end
 
       def on_select(tableView, tableViewDelegate)
