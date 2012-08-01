@@ -111,8 +111,7 @@ module Formotion
     def after_create
       if self.type == :template and (self.value && self.value.any?)
         self.value.each do |value|
-          new_row = self.section.create_row(self.template.merge({:value => value}))
-          new_row.template_parent = self
+          new_row = self.object.build_new_row({:value => value})
         end
       end
     end

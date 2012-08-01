@@ -41,7 +41,7 @@ module Formotion
       def build_new_row(options = {})
         # build row
         new_row = row.section.create_row(row.template.merge(options))
-        new_row.key = "#{row.key}[#{@template_index}]"
+        new_row.template_parent = self.row
         new_row
       end
 
