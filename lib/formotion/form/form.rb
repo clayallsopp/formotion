@@ -158,9 +158,11 @@ module Formotion
         else
           section.rows.each {|row|
             next if row.button?
-            if match = /^(.*)\[(\d+)\]$/.match(row.key.to_s)
-              kv[match[1].to_sym] ||= []
-              kv[match[1].to_sym] << row.value
+            if row.template_parent
+              # If this row is part of a template
+              # use the parent's key
+              kv[row.template_parent.key] ||= []
+              kv[row.template_parent.key] << row.value
             else
               kv[row.key] ||= row.value
             end

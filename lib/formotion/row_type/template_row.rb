@@ -24,14 +24,7 @@ module Formotion
       end
 
       def build_cell(cell)
-        if row.value && row.value.any?
-          row.value.each do |value|
-            @template_index = row.section.rows.count
-            new_row = build_new_row({:value => value})
-            move_row_in_list(new_row)
-            row.form.reload_data
-          end
-        end
+        # empty
       end
 
       def on_select(tableView, tableViewDelegate)

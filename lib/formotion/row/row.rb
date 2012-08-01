@@ -96,12 +96,25 @@ module Formotion
     # row type object
     attr_accessor :object
 
+    # Owning template row, if applicable
+    attr_accessor :template_parent
+
     def initialize(params = {})
       super
 
       BOOLEAN_PROPERTIES.each {|prop|
         Formotion::Conditions.assert_nil_or_boolean(self.send(prop))
       }
+    end
+
+    # called after section and index have been assigned
+    def after_create
+      if self.type == :template and (self.value && self.value.any?)
+        self.value.each do |value|
+          new_row = self.section.create_row(self.template.merge({:value => value}))
+          new_row.template_parent = self
+        end
+      end
     end
 
     #########################
