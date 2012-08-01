@@ -65,6 +65,9 @@ module Formotion
       attr_accessor prop
     }
     BOOLEAN_PROPERTIES = [:secure, :indented, :deletable]
+    BOOLEAN_PROPERTIES.each { |prop|
+      alias_method "#{prop}?", prop
+    }
     SERIALIZE_PROPERTIES = PROPERTIES
 
     # Reference to the row's section
@@ -99,22 +102,6 @@ module Formotion
       BOOLEAN_PROPERTIES.each {|prop|
         Formotion::Conditions.assert_nil_or_boolean(self.send(prop))
       }
-    end
-
-    # Makes all ::BOOLEAN_PROPERTIES queriable with an appended ?
-    # these should be done with alias_method but there's currently a bug
-    # in RM which messes up attr_accessors with alias_method
-    # EX
-    # row.secure?
-    # => true
-    # row.checkable?
-    # => nil
-    def method_missing(method, *args, &block)
-      boolean_method = (method.to_s[0..-2]).to_sym
-      if BOOLEAN_PROPERTIES.member? boolean_method
-        return self.send(boolean_method)
-      end
-      super
     end
 
     #########################
