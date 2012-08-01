@@ -55,7 +55,7 @@ module Formotion
           delete_row
         else
           row.value = nil
-          tableView.reloadData
+          self.tableView.reloadData
         end
       end
 
