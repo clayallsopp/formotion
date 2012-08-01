@@ -11,7 +11,7 @@ describe "Subform Row" do
 
   it "should build cell with a label and an accessory" do
     cell = @row.make_cell
-    cell.cell.accessoryType.should == UITableViewCellAccessoryDisclosureIndicator
+    cell.accessoryType.should == UITableViewCellAccessoryDisclosureIndicator
     cell.textLabel.text.should == 'Subform'
   end
 
