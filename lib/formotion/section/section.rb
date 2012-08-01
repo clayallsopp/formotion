@@ -51,6 +51,7 @@ module Formotion
       end
       row.section = self
       row.index = self.rows.count
+      # dont move to after the appending.
       row.after_create
       self.rows << row
       row

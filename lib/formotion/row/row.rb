@@ -93,7 +93,7 @@ module Formotion
     # starts editing #text_field.
     attr_accessor :on_begin_callback
 
-    # row type object
+    # RowType object
     attr_accessor :object
 
     # Owning template row, if applicable
@@ -102,7 +102,7 @@ module Formotion
     def initialize(params = {})
       super
 
-      BOOLEAN_PROPERTIES.each {|prop|
+      BOOLEAN_PROPERTIES.each { |prop|
         Formotion::Conditions.assert_nil_or_boolean(self.send(prop))
       }
     end
