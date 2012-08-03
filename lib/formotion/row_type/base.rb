@@ -22,6 +22,16 @@ module Formotion
         UITableViewCellStyleSubtitle
       end
 
+      # Sets the UITableViewCellEditingStyle
+      def cellEditingStyle
+        row.deletable? ? UITableViewCellEditingStyleDelete : UITableViewCellEditingStyleNone
+      end
+
+      # Indents row while editing
+      def indentWhileEditing?
+        row.indented?
+      end
+
       # builder method for row cell specific implementation
       def build_cell(cell)
         # implement in row class
@@ -37,6 +47,24 @@ module Formotion
       # in UITableViewDelegate is executed
       def on_select(tableView, tableViewDelegate)
         # implement in row class
+      end
+
+      # called when the delete editing style was triggered tableView:commitEditingStyle:forRowAtIndexPath:
+      def on_delete(tableView, tableViewDelegate)
+        if row.remove_on_delete?
+          row.section.rows.delete_at(row.index)
+          row.section.refresh_row_indexes
+          delete_row
+        else
+          row.value = nil
+          self.tableView.reloadData
+        end
+      end
+
+      def delete_row
+        tableView.beginUpdates
+        tableView.deleteRowsAtIndexPaths [row.index_path], withRowAnimation:UITableViewRowAnimationBottom
+        tableView.endUpdates
       end
 
       def break_with_semaphore(&block)

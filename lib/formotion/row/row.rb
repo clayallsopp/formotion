@@ -16,6 +16,8 @@ module Formotion
       # Stores possible formatting information (used by date pickers, etc)
       #   if :type == :date, accepts values in [:short, :medium, :long, :full]
       :format,
+      # alternative title for row (only used in EditRow for now)
+      :alt_title,
 
       # The following apply only to text-input fields
 
@@ -48,14 +50,30 @@ module Formotion
       # EX ['free', 'pro']
       # DEFAULT is []
       :items,
-      # used for subforms
+      # A hash for a Form used for subforms
       # DEFAULT is nil
-      :subform
+      :subform,
+      # A hash for a Row used for templates
+      # DEFAULT is nil
+      :template,
+      # Indents row when set to true
+      # DEFAULT is false
+      :indented,
+      # Shows a delete sign next to the row
+      # DEFAULT is false
+      :deletable,
+      # When a row is deleted, actually remove the row from UI
+      # instead of just nil'ing the value.
+      # DEFAULT is false EXCEPT for template-generated rows
+      :remove_on_delete
     ]
     PROPERTIES.each {|prop|
       attr_accessor prop
     }
-    BOOLEAN_PROPERTIES = [:secure]
+    BOOLEAN_PROPERTIES = [:secure, :indented, :deletable, :remove_on_delete]
+    BOOLEAN_PROPERTIES.each { |prop|
+      alias_method "#{prop}?", prop
+    }
     SERIALIZE_PROPERTIES = PROPERTIES
 
     # Reference to the row's section
@@ -81,31 +99,27 @@ module Formotion
     # starts editing #text_field.
     attr_accessor :on_begin_callback
 
-    # row type object
+    # RowType object
     attr_accessor :object
+
+    # Owning template row, if applicable
+    attr_accessor :template_parent
 
     def initialize(params = {})
       super
 
-      BOOLEAN_PROPERTIES.each {|prop|
+      BOOLEAN_PROPERTIES.each { |prop|
         Formotion::Conditions.assert_nil_or_boolean(self.send(prop))
       }
     end
 
-    # Makes all ::BOOLEAN_PROPERTIES queriable with an appended ?
-    # these should be done with alias_method but there's currently a bug
-    # in RM which messes up attr_accessors with alias_method
-    # EX
-    # row.secure?
-    # => true
-    # row.checkable?
-    # => nil
-    def method_missing(method, *args, &block)
-      boolean_method = (method.to_s[0..-2]).to_sym
-      if BOOLEAN_PROPERTIES.member? boolean_method
-        return self.send(boolean_method)
+    # called after section and index have been assigned
+    def after_create
+      if self.type == :template and (self.value && self.value.any?)
+        self.value.each do |value|
+          new_row = self.object.build_new_row({:value => value})
+        end
       end
-      super
     end
 
     #########################

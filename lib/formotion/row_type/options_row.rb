@@ -8,7 +8,7 @@ module Formotion
         segmentedControl = UISegmentedControl.alloc.initWithItems(row.items || [])
         segmentedControl.selectedSegmentIndex = row.items.index(row.value) if row.value
         segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar
-        cell.accessoryView = segmentedControl
+        cell.accessoryView = cell.editingAccessoryView = segmentedControl
 
         segmentedControl.when(UIControlEventValueChanged) do
           break_with_semaphore do

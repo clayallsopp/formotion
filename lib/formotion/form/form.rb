@@ -158,7 +158,14 @@ module Formotion
         else
           section.rows.each {|row|
             next if row.button?
-            kv[row.key] = row.value
+            if row.template_parent
+              # If this row is part of a template
+              # use the parent's key
+              kv[row.template_parent.key] ||= []
+              kv[row.template_parent.key] << row.value
+            else
+              kv[row.key] ||= row.value
+            end
           }
         end
       }

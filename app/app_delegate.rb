@@ -10,7 +10,8 @@ class AppDelegate
         rows: [{
           title: "Photo",
           key: :photo,
-          type: :image
+          type: :image,
+          deletable: true
         },{
           title: "Picker",
           key: :pick,
@@ -59,6 +60,10 @@ class AppDelegate
           key: :date_short,
           type: :date,
           format: :short
+        }, {
+          title: "Slider",
+          key: :slider,
+          type: :slider
         }, {
           title: "Account type",
           type: :subform,
@@ -121,6 +126,27 @@ class AppDelegate
               }]
             }]
           }
+        }]
+      },{
+        title: 'Your nicknames',
+        rows: [{
+          title: "Add nickname",
+          key: :nicknames,
+          type: :template,
+          value: ['Nici', 'Sam'],
+          template: {
+            title: 'Nickname',
+            type: :string,
+            placeholder: 'Enter here',
+            indented: true,
+            deletable: true
+          }
+        }]
+      }, {
+        rows: [{
+          title: "Edit",
+          alt_title: "Done",
+          type: :edit,
         }]
       }, {
         rows: [{
