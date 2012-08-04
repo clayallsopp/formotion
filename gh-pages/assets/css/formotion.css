@@ -1,0 +1,51 @@
+.container {
+    padding-top:20px;
+    padding-bottom: 20px;
+}
+
+.codehilite {
+  margin: 1rem 0;
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
+  white-space: pre;
+  word-wrap: normal;
+  max-height: 340px;
+}
+
+p {
+    line-height: 1.8rem;
+}
+
+#syncmodels {
+    max-height: 200px;
+}
+
+hr.hidden-desktop {
+    border:0;
+}
+@media (max-width: 767px) {
+    img {
+        display: block;
+        margin: 0 auto;
+    }
+    .row h2 {
+        text-align: center
+    }
+
+    hr.hidden-desktop {
+        border-top:1px solid #EEE;
+        border-bottom: 1px solid white;
+    }
+}
+
+#andwaymore {
+    margin-bottom: 20px;
+}
+
+#more-container h2, #more-container h3 {
+    text-align: center;
+}
+
+#more-container img {
+    height: 209px;
+}
