@@ -34,8 +34,6 @@ module Formotion
     def viewDidLoad
       super
 
-      self.title = self.form.title
-
       # Triggers this block when the enter key is pressed
       # while editing the last text field.
       @form.sections[-1] && @form.sections[-1].rows && @form.sections[-1].rows[-1] && @form.sections[-1].rows[-1].on_enter do |row|
