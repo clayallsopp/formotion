@@ -38,7 +38,7 @@ module Formotion
 
       # Triggers this block when the enter key is pressed
       # while editing the last text field.
-      @form.sections[-1] && @form.sections[-1].rows[-1].on_enter do |row|
+      @form.sections[-1] && @form.sections[-1].rows && @form.sections[-1].rows[-1] && @form.sections[-1].rows[-1].on_enter do |row|
         if row.text_field
           @form.submit
           row.text_field.resignFirstResponder

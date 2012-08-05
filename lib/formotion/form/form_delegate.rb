@@ -31,7 +31,7 @@ module Formotion
     def reload_data
       previous_row, next_row = nil
 
-      last_row = self.sections[-1].rows[-1]
+      last_row = self.sections[-1] && self.sections[-1].rows[-1]
       if last_row
         last_row.return_key ||= UIReturnKeyDone
       end
