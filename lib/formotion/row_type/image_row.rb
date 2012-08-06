@@ -11,10 +11,10 @@ module Formotion
         observe(self.row, "value") do |old_value, new_value|
           @image_view.image = new_value
           if new_value
-            self.row.rowHeight = 200
+            self.row.row_height = 200
             cell.accessoryView = cell.editingAccessoryView = nil
           else
-            self.row.rowHeight = 44
+            self.row.row_height = 44
             add_plus_accessory(cell)
           end
           row.form.reload_data

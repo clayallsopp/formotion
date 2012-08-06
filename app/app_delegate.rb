@@ -47,7 +47,7 @@ class AppDelegate
           key: :bio,
           type: :text,
           placeholder: "Enter your Bio here...",
-          rowHeight: 100
+          row_height: 100
         }, {
           title: "Date Full",
           value: 326937600,

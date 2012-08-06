@@ -40,7 +40,7 @@
   key: :text,
   type: :text,
   placeholder: "Enter your text here",
-  rowHeight: 100
+  row_height: 100
 }
 ```
 

@@ -40,8 +40,8 @@ module Formotion
       :clear_button,
       # row height as integer; used for heightForRowAtIndexPath
       # EX 200
-      # DEFAULT is nil, which is used as the tableView.rowHeight
-      :rowHeight,
+      # DEFAULT is nil, which is used as the tableView.row_height
+      :row_height,
       # range used for slider min and max value
       # EX (1..100)
       # DEFAULT is (1..10)

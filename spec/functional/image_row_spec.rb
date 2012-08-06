@@ -70,13 +70,13 @@ describe "FormController/ImageRow" do
   it "should be able to delete value" do
     image = UIImage.alloc.init
     image_row.value = image
-    image_row.rowHeight.should > 44
+    image_row.row_height.should > 44
 
     tap("Photo")
 
     # Looks like view(label) doesn't scan the UIActionSheet properly, so we override it.
     tap_action_sheet("Delete")
-    image_row.rowHeight.should == 44
+    image_row.row_height.should == 44
     image_row.value.should == nil
   end
 end

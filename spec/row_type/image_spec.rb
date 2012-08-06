@@ -26,7 +26,7 @@ describe "Image Row" do
 
     @row.value = UIImage.alloc.init
 
-    @row.rowHeight.should > 44
+    @row.row_height.should > 44
     image_view = cell.viewWithTag(Formotion::RowType::ImageRow::IMAGE_VIEW_TAG)
     image_view.image.nil?.should == false
     cell.accessoryView.nil?.should == true
