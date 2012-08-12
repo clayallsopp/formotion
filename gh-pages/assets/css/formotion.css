@@ -38,8 +38,11 @@ p {
   white-space: nowrap;
 }
 
-a#formotion:hover {
+a.no-decoration, a.no-decoration:hover {
     text-decoration: none;
+}
+
+a#formotion:hover {
     -o-transition: color .5s;
     -ms-transition: color .5s;
     -moz-transition: color .5s;
