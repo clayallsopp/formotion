@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Formotion</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+    <link href="assets/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="assets/css/pygments.css" rel="stylesheet">
+    <link href="assets/css/formotion.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+  </head>
+
+  <body>
+    <a id="fork-me" href="https://github.com/clayallsopp/formotion" target="_blank">Fork me on GitHub</a>
+
+    <div class="container">
+
+      <div class="hero-unit">
+        <h1><span><a href="http://github.com/clayallsopp/formotion" id="formotion">Formotion</a> </span><small>for RubyMotion</small></h1>
+        <p>Painless, productive views on iOS.</p>
+        <iframe src="http://ghbtns.com/github-btn.html?user=clayallsopp&repo=formotion&type=watch&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="150px" height="30px"></iframe>
+    <iframe src="http://ghbtns.com/github-btn.html?user=clayallsopp&repo=formotion&type=fork&count=true&&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="170px" height="30px"></iframe>
+      </div>
+
+      <div class="row">
+        <div class="span4">
+          <h2>Construct UI...</h2>
+          <img src="http://i.imgur.com/TMwXI.png" alt="Complex data form">
+        </div>
+
+        <div class="span8">
+          <h2>...With A Hash</h2>
+            <div class="highlight"><pre class='codehilite'><code class="ruby syntax"><span class="vi">@form</span> <span class="o">=</span> <span class="no">Formotion</span><span class="o">::</span><span class="no">Form</span><span class="o">.</span><span class="n">new</span><span class="p">({</span>
+  <span class="n">sections</span><span class="p">:</span> <span class="o">[</span><span class="p">{</span>
+    <span class="n">title</span><span class="p">:</span> <span class="s2">&quot;Register&quot;</span><span class="p">,</span>
+    <span class="n">rows</span><span class="p">:</span> <span class="o">[</span><span class="p">{</span>
+      <span class="n">title</span><span class="p">:</span> <span class="s2">&quot;Email&quot;</span><span class="p">,</span>
+      <span class="n">key</span><span class="p">:</span> <span class="ss">:email</span><span class="p">,</span>
+      <span class="n">placeholder</span><span class="p">:</span> <span class="s2">&quot;me@mail.com&quot;</span><span class="p">,</span>
+      <span class="n">type</span><span class="p">:</span> <span class="ss">:email</span><span class="p">,</span>
+      <span class="n">auto_correction</span><span class="p">:</span> <span class="ss">:no</span><span class="p">,</span>
+      <span class="n">auto_capitalization</span><span class="p">:</span> <span class="ss">:none</span>
+    <span class="p">},</span> <span class="p">{</span>
+      <span class="n">title</span><span class="p">:</span> <span class="s2">&quot;Password&quot;</span><span class="p">,</span>
+      <span class="n">key</span><span class="p">:</span> <span class="ss">:password</span><span class="p">,</span>
+      <span class="n">placeholder</span><span class="p">:</span> <span class="s2">&quot;required&quot;</span><span class="p">,</span>
+      <span class="n">type</span><span class="p">:</span> <span class="ss">:string</span><span class="p">,</span>
+      <span class="n">secure</span><span class="p">:</span> <span class="kp">true</span>
+    <span class="p">},</span> <span class="p">{</span>
+      <span class="n">title</span><span class="p">:</span> <span class="s2">&quot;Password&quot;</span><span class="p">,</span>
+      <span class="n">subtitle</span><span class="p">:</span> <span class="s2">&quot;Confirmation&quot;</span><span class="p">,</span>
+      <span class="n">key</span><span class="p">:</span> <span class="ss">:confirm</span><span class="p">,</span>
+      <span class="n">placeholder</span><span class="p">:</span> <span class="s2">&quot;required&quot;</span><span class="p">,</span>
+      <span class="n">type</span><span class="p">:</span> <span class="ss">:string</span><span class="p">,</span>
+      <span class="n">secure</span><span class="p">:</span> <span class="kp">true</span>
+    <span class="p">},</span> <span class="p">{</span>
+      <span class="n">title</span><span class="p">:</span> <span class="s2">&quot;Remember?&quot;</span><span class="p">,</span>
+      <span class="n">key</span><span class="p">:</span> <span class="ss">:remember</span><span class="p">,</span>
+      <span class="n">type</span><span class="p">:</span> <span class="ss">:switch</span><span class="p">,</span>
+    <span class="p">}</span><span class="o">]</span>
+  <span class="p">},</span> <span class="p">{</span>
+    <span class="n">title</span><span class="p">:</span> <span class="s2">&quot;Account Type&quot;</span><span class="p">,</span>
+    <span class="n">key</span><span class="p">:</span> <span class="ss">:account_type</span><span class="p">,</span>
+    <span class="n">select_one</span><span class="p">:</span> <span class="kp">true</span><span class="p">,</span>
+    <span class="n">rows</span><span class="p">:</span> <span class="o">[</span><span class="p">{</span>
+      <span class="n">title</span><span class="p">:</span> <span class="s2">&quot;Free&quot;</span><span class="p">,</span>
+      <span class="n">key</span><span class="p">:</span> <span class="ss">:free</span><span class="p">,</span>
+      <span class="n">type</span><span class="p">:</span> <span class="ss">:check</span><span class="p">,</span>
+    <span class="p">},</span> <span class="p">{</span>
+      <span class="n">title</span><span class="p">:</span> <span class="s2">&quot;Basic&quot;</span><span class="p">,</span>
+      <span class="n">value</span><span class="p">:</span> <span class="kp">true</span><span class="p">,</span>
+      <span class="n">key</span><span class="p">:</span> <span class="ss">:basic</span><span class="p">,</span>
+      <span class="n">type</span><span class="p">:</span> <span class="ss">:check</span><span class="p">,</span>
+    <span class="p">},</span> <span class="p">{</span>
+      <span class="n">title</span><span class="p">:</span> <span class="s2">&quot;Pro&quot;</span><span class="p">,</span>
+      <span class="n">key</span><span class="p">:</span> <span class="ss">:pro</span><span class="p">,</span>
+      <span class="n">type</span><span class="p">:</span> <span class="ss">:check</span><span class="p">,</span>
+    <span class="p">}</span><span class="o">]</span>
+  <span class="p">},</span> <span class="p">{</span>
+    <span class="n">rows</span><span class="p">:</span> <span class="o">[</span><span class="p">{</span>
+      <span class="n">title</span><span class="p">:</span> <span class="s2">&quot;Sign Up&quot;</span><span class="p">,</span>
+      <span class="n">type</span><span class="p">:</span> <span class="ss">:submit</span><span class="p">,</span>
+    <span class="p">}</span><span class="o">]</span>
+  <span class="p">}</span><span class="o">]</span>
+<span class="p">})</span>
+
+<span class="o">.</span><span class="n">.</span><span class="o">.</span>
+
+<span class="vi">@form_controller</span> <span class="o">=</span> <span class="no">Formotion<span class="o">::</span>FormController</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithForm</span><span class="p">(</span><span class="vi">@form</span><span class="p">)</span>
+<span class="vi">@window</span><span class="o">.</span><span class="n">rootViewController</span> <span class="o">=</span> <span class="vi">@form_controller</span></code></pre>
+          </div>
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="row">
+        <div class="span8">
+          <h2>Sync Models...</h2>
+          <div class="highlight"><pre id="syncmodels" class='codehilite'><code class="ruby syntax"><span class="k">class</span> <span class="nc">User</span>
+  <span class="kp">attr_accessor</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:score</span><span class="p">,</span> <span class="ss">:team</span>
+
+  <span class="kp">include</span> <span class="no">Formotion</span><span class="o">::</span><span class="no">Formable</span>
+
+  <span class="n">form_property</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:string</span>
+  <span class="n">form_property</span> <span class="ss">:score</span><span class="p">,</span> <span class="ss">:number</span><span class="p">,</span> <span class="n">transform</span><span class="p">:</span> <span class="nb">lambda</span> <span class="p">{</span> <span class="o">|</span><span class="n">value</span><span class="o">|</span> <span class="n">value</span><span class="o">.</span><span class="n">to_i</span> <span class="p">}</span>
+
+  <span class="n">form_property</span> <span class="ss">:team</span><span class="p">,</span> <span class="ss">:picker</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="o">[</span><span class="s2">&quot;Red&quot;</span><span class="p">,</span> <span class="s2">&quot;Blue&quot;</span><span class="p">,</span> <span class="s2">&quot;Green&quot;</span><span class="o">]</span>
+
+  <span class="n">form_title</span> <span class="s2">&quot;Edit User&quot;</span>
+<span class="k">end</span>
+
+<span class="o">.</span><span class="n">.</span><span class="o">.</span>
+
+<span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;Harry&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="s2">&quot;Green&quot;</span><span class="p">)</span>
+<span class="n">controller</span> <span class="o">=</span> <span class="no">Formotion</span><span class="o">::</span><span class="no">FormableController</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithModel</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+<span class="nb">self</span><span class="o">.</span><span class="n">navigationController</span><span class="o">.</span><span class="n">pushViewController</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="n">animated</span><span class="ss">:true</span><span class="p">)</span>
+</code></pre>
+</div>
+        </div>
+
+        <div class="span4">
+          <h2>...To A View <small>(KVO)</small></h2>
+          <img src="https://a248.e.akamai.net/camo.github.com/18a55fe6aa9a33235867169a0a98d47ba5d02fe0/687474703a2f2f692e696d6775722e636f6d2f534b5133522e706e67" alt="Complex data form" id="sync-models">
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="row" id="more-container">
+        <div class="span12">
+          <h2 id="andwaymore">And way more:</h2>
+        </div>
+        <div class="span4">
+          <h3>UI Elements</h3>
+          <img src="http://i.imgur.com/BKFIh.png">
+          <hr class="hidden-desktop" />
+        </div>
+        <div class="span4">
+          <h3>Subforms</h3>
+          <img src="http://i.imgur.com/Sfiq1.png" alt="Complex data form">
+          <hr class="hidden-desktop" />
+        </div>
+        <div class="span4">
+          <h3>Templates</h3>
+          <img src="http://i.imgur.com/kwG08.png" alt="Complex data form">
+          <hr class="hidden-desktop" />
+        </div>
+      </div>
+
+      <hr class="hidden-phone" />
+
+      <div class="row">
+        <div class="span12">
+          <div class="well">
+            <h1>Instructions</h1>
+            <hr />
+            <div class="row lead">
+              <div class="span3 install-instruct">
+                <h3>1. Install</h3>
+                <code>
+                  gem install formotion
+                </code>
+              </div>
+              <div class="span3 install-instruct">
+                <h3>2. Rakefile</h3>
+                <code>
+                  require 'formotion'
+                </code>
+              </div>
+              <div class="span5 install-instruct">
+                <h3>2. Use</h3>
+                <div class="highlight"><pre class='codehilite'><code class="ruby syntax"><span class="vi">@form</span> <span class="o">=</span> <span class="no">Formotion</span><span class="o">::</span><span class="no">Form</span><span class="o">.</span><span class="n">new</span><span class="p">({...})</span>
+
+<span class="vi">@form_controller</span> <span class="o">=</span><br />  <span class="no">Formotion<span class="o">::</span>FormController</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithForm</span><span class="p">(</span><span class="vi">@form</span><span class="p">)</span>
+<span class="vi">@window</span><span class="o">.</span><span class="n">rootViewController</span> <span class="o">=</span> <span class="vi">@form_controller</span></code></pre>
+          </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr />
+
+
+    </div> <!-- /container -->
+  </body>
+</html>

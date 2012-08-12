@@ -1,0 +1,114 @@
+#fork-me {
+    position: fixed; /* options: fixed, absolute */
+    top: 0;
+    right: 0;
+    z-index: 9999;
+    width: 140px;
+    height: 140px;
+    text-indent: -9999px;
+    background-image: url("https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png");
+}
+
+@media (-webkit-min-device-pixel-ratio: 2) {
+    #fork-me {
+        background-image: url("https://github.com/philwareham/github-ribbons-retina/raw/master/fork-me@2x.png") !important;
+        -webkit-background-size: 140px 140px;
+    }
+}
+
+.container {
+    padding-top:20px;
+    padding-bottom: 20px;
+}
+
+.codehilite {
+  margin: 1rem 0;
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
+  white-space: pre;
+  word-wrap: normal;
+  max-height: 340px;
+}
+
+p {
+    line-height: 1.8rem;
+}
+
+.hero-unit small {
+  white-space: nowrap;
+}
+
+a#formotion:hover {
+    text-decoration: none;
+    -o-transition: color .5s;
+    -ms-transition: color .5s;
+    -moz-transition: color .5s;
+    -webkit-transition: color .5s;
+    transition: color .5s;
+}
+
+#syncmodels {
+    max-height: 200px;
+}
+
+hr.hidden-desktop {
+    border:0;
+}
+
+@media (max-width: 480px) {
+  .hero-unit {
+    padding: 40px;
+  }
+  .hero-unit h1 {
+    line-height: 0.4;
+    margin-bottom: 25px;
+  }
+}
+
+@media (max-width: 767px) {
+    .hero-unit h1 {
+      line-height: 0.4;
+      margin-bottom: 25px;
+    }
+    img {
+        display: block;
+        margin: 0 auto;
+    }
+    .row h2 {
+        text-align: center
+    }
+
+    hr.hidden-desktop {
+        border-top:1px solid #EEE;
+        border-bottom: 1px solid white;
+    }
+    #more-container h3 {
+      font-size: 2rem;
+      margin-bottom: 15px;
+    }
+}
+
+@media(min-width: 767px) {
+  #sync-models {
+    max-height: 230px;
+  }
+  #more-container img {
+      height: 209px;
+  }
+}
+
+#andwaymore {
+    margin-bottom: 20px;
+}
+
+#more-container  {
+    text-align: center;
+}
+
+#install {
+  font-size: 2rem;
+}
+
+.install-instruct {
+  margin-bottom: 20px;
+}
