@@ -19,7 +19,13 @@ class UITextView
   def setup
     @foreground_observer = NSNotificationCenter.defaultCenter.observe UITextViewTextDidChangeNotification do |notification|
       updateShouldDrawPlaceholder
-    end  
+    end
+  end
+
+  alias_method :old_dealloc, :dealloc
+  def dealloc
+    NSNotificationCenter.defaultCenter.unobserve @foreground_observer
+    old_dealloc
   end
 
   alias_method :old_drawRect, :drawRect
