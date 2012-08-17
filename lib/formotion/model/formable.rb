@@ -20,15 +20,15 @@ module Formotion
       end
 
       def form_properties
-        @form_properties ||= []
+        @@form_properties ||= []
       end
 
       # Sets the top bar title for this model
       # EX
       # form_title "Some Settings"
       def form_title(title = -1)
-        @form_title = title if title != -1
-        @form_title
+        @@form_title = title if title != -1
+        @@form_title
       end
     end
 
