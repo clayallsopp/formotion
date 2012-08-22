@@ -18,7 +18,11 @@ module Formotion
 
           if self.row.value
             picker_row = self.row.items.index(row.value)
-            picker.selectRow(picker_row, inComponent:0, animated:false)
+            if picker_row
+              picker.selectRow(picker_row, inComponent:0, animated:false)
+            else
+              warn "Picker item '#{row.value}' not found in #{row.items.inspect} for '#{row.key}'"
+            end
           end
 
           picker
