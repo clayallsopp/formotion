@@ -7,6 +7,15 @@ class TestModel
   form_property :my_number, :number, title: "My Number", :transform => lambda { |value| value.to_i + 10 }
 end
 
+class AdditionalTestModel
+  include Formotion::Formable
+
+  attr_accessor :my_other_name, :my_other_number
+
+  form_property :my_other_name, :string
+  form_property :my_other_number, :number
+end
+
 describe "FormableController" do
   tests Formotion::FormableController
 

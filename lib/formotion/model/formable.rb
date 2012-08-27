@@ -2,9 +2,14 @@ module Formotion
   module Formable
     def self.included(base)
       base.extend(ClassMethods)
+      base.form_properties = []
     end
 
     module ClassMethods
+      include ClassLevelInheritableAttributes
+      inheritable_attributes :form_properties
+      inheritable_attributes :form_title
+
       # Relates a property to a RowType.
       # @param property is the name of the attribute to KVO
       # @param row_type is the Formotion::RowType to use for that attribute
@@ -19,16 +24,12 @@ module Formotion
         self.form_properties << { property: property, row_type: row_type}.merge(options)
       end
 
-      def form_properties
-        @@form_properties ||= []
-      end
-
       # Sets the top bar title for this model
       # EX
       # form_title "Some Settings"
       def form_title(title = -1)
-        @@form_title = title if title != -1
-        @@form_title
+        self.class.form_title = title if title != -1
+        self.class.form_title
       end
     end
 
