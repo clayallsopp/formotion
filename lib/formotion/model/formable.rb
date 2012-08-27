@@ -2,13 +2,23 @@ module Formotion
   module Formable
     def self.included(base)
       base.extend(ClassMethods)
-      base.form_properties = []
     end
 
     module ClassMethods
-      include ClassLevelInheritableAttributes
-      inheritable_attributes :form_properties
-      inheritable_attributes :form_title
+      INHERITABLE_ATTRIBUTES = [:form_properties, :form_title].each do |prop|
+        attr_accessor prop
+      end
+
+      def inherited(subclass)
+        INHERITABLE_ATTRIBUTES.each do |inheritable_attribute|
+          instance_var = "@#{inheritable_attribute}"
+          subclass.instance_variable_set(instance_var, instance_variable_get(instance_var))
+        end
+      end
+
+      def form_properties
+        @form_properties ||= []
+      end
 
       # Relates a property to a RowType.
       # @param property is the name of the attribute to KVO
@@ -28,8 +38,8 @@ module Formotion
       # EX
       # form_title "Some Settings"
       def form_title(title = -1)
-        self.class.form_title = title if title != -1
-        self.class.form_title
+        @form_title = title if title != -1
+        @form_title
       end
     end
 
