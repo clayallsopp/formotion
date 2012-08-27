@@ -25,5 +25,4 @@ BW.require File.expand_path('../formotion/**/*.rb', __FILE__) do
     file("lib/formotion/#{file}").depends_on 'lib/formotion/base.rb'
   }
   file("lib/formotion/controller/form_controller.rb").depends_on 'lib/formotion/patch/ui_text_field.rb'
-  file("lib/formotion/model/formable.rb").depends_on 'lib/formotion/patch/class_level_inheritable_attributes.rb'
 end
