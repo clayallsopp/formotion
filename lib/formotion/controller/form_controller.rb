@@ -49,6 +49,12 @@ module Formotion
       @form.controller = self
     end
 
+    def viewWillAppear(animated)
+      super
+
+      self.tableView.reloadData
+    end
+
     # Subview Methods
     def push_subform(form)
       @subform_controller = self.class.alloc.initWithForm(form)
