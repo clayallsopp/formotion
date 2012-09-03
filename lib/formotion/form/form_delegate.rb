@@ -65,6 +65,8 @@ module Formotion
         row.make_cell
       end
 
+      row.update_cell(cell)
+
       cell
     end
 

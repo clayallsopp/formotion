@@ -68,6 +68,7 @@ class AppDelegate
           title: "Account type",
           type: :subform,
           key: :account,
+          display_key: :type,
           subform: {
             title: "Account Type",
             sections: [{
@@ -75,16 +76,16 @@ class AppDelegate
               select_one: true,
               rows: [{
                 title: "Free",
-                key: :free,
+                key: :Free,
                 type: :check,
               }, {
                 title: "Basic",
                 value: true,
-                key: :basic,
+                key: :Basic,
                 type: :check,
               }, {
                 title: "Pro",
-                key: :pro,
+                key: :Pro,
                 type: :check,
               }]
             }, {
