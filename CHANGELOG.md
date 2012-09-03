@@ -1,6 +1,12 @@
 ## 1.1 - ???
 
+### Features
+
+-:display_key for subform row; when given, the value for that key in the subform's `#render` will be displayed alongside the chevron.
+
 ### Bug Fixes
+
+- Fix problems with inheriting Formable models.
 
 ## 1.0 - August 11, 2012
 
