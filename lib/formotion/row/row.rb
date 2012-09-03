@@ -53,6 +53,11 @@ module Formotion
       # A hash for a Form used for subforms
       # DEFAULT is nil
       :subform,
+      # Used in a subform row; when given,
+      # will display the value of the matching key
+      # of the subform's rendering.
+      # DEFAULT is nil
+      :display_key,
       # A hash for a Row used for templates
       # DEFAULT is nil
       :template,
@@ -202,6 +207,13 @@ module Formotion
       cell, text_field = Formotion::RowCellBuilder.make_cell(self)
       @text_field = text_field
       self.object.after_build(cell)
+      cell
+    end
+
+    # Called on every tableView:cellForRowAtIndexPath:
+    # so keep implementation details minimal
+    def update_cell(cell)
+      self.object.update_cell(cell)
       cell
     end
 

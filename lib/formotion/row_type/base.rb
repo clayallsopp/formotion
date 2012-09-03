@@ -43,6 +43,11 @@ module Formotion
       def after_build(cell)
       end
 
+      # Called on every tableView:cellForRowAtIndexPath:
+      # so keep implementation details minimal
+      def update_cell(cell)
+      end
+
       # method gets triggered when tableView(tableView, didSelectRowAtIndexPath:indexPath)
       # in UITableViewDelegate is executed
       def on_select(tableView, tableViewDelegate)
