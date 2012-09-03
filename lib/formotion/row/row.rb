@@ -161,6 +161,15 @@ module Formotion
     end
 
     #########################
+    #  getter overrides
+    def items
+      if @items.respond_to?(:call)
+        @items = @items.call
+      end
+      @items
+    end
+
+    #########################
     #  setter overrides
     def type=(type)
       @object = Formotion::RowType.for(type).new(self)

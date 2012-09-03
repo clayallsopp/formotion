@@ -22,4 +22,13 @@ describe "Rows" do
       r.title?.should == true
     }
   end
+
+  it "should allow arrays and blocks for items" do
+    r = Formotion::Row.new()
+    r.items = [1, 2, 3]
+    r.items.should == [1, 2, 3]
+
+    r.items = lambda { [1, 2, 3].reverse }
+    r.items.should == [3, 2, 1]
+  end
 end
