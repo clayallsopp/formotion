@@ -158,9 +158,10 @@ end
 ### Persistence
 
 By setting the `Formotion::Form`'s `persist` property to true, your form values are automatically persisted across application loads, making it ideal for application settings configurable by your user.  No save buttons needed.
-*** This currently does not work for subforms ***
 
-Calling the `Formotion::Form`'s clear_settings method will clear out your stored form values, and return you to your defaults.
+*** CAVEAT: This works for most Formotion rows, but subforms currently do not persist ***
+
+Calling the `Formotion::Form`'s `clear_settings` method will clear out your stored form values, and return your application defaults, like on the very first run.
 
 View the [Persistence Example](./formotion/tree/master/examples/Persistence) to see it in action.
      
