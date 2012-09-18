@@ -155,6 +155,15 @@ end
 
 `form#submit` just triggers `form#on_submit`.
 
+### Persistence
+
+By setting the `Formotion::Form`'s `persist` property to true, your form values are automatically persisted across application loads, making it ideal for application settings configurable by your user.  No save buttons needed.
+*** This currently does not work for subforms ***
+
+Calling the `Formotion::Form`'s clear_settings method will clear out your stored form values, and return you to your defaults.
+
+View the [Persistence Example](./examples/Persistence) to see it in action.
+     
 ## Forking
 
 Feel free to fork and submit pull requests! And if you end up using Formotion in your app, I'd love to hear about your experience.
