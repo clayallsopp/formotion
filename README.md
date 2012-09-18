@@ -162,7 +162,7 @@ By setting the `Formotion::Form`'s `persist` property to true, your form values 
 
 Calling the `Formotion::Form`'s clear_settings method will clear out your stored form values, and return you to your defaults.
 
-View the [Persistence Example](./formotion/tree/examples/Persistence) to see it in action.
+View the [Persistence Example](./formotion/tree/master/examples/Persistence) to see it in action.
      
 ## Forking
 
