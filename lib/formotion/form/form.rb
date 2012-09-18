@@ -1,11 +1,16 @@
 module Formotion
   class Form < Formotion::Base
+    extend BW::KVO
+    include BW::KVO
+
     PROPERTIES = [
       # By default, Formotion::Controller will set it's title to this
       # (so navigation bars will reflect it).
       :title,
       # If you want to have some internal id to track the form.
-      :id
+      :id,
+      # If you want your form to persist
+      :persist
     ]
     PROPERTIES.each {|prop|
       attr_accessor prop
@@ -172,6 +177,44 @@ module Formotion
       kv.merge! sub_render
       kv.delete_if {|k, v| k.nil? }
       kv
+    end
+
+    # loads the given settings into the the form, and
+    # places observers to save on changes
+    def load_and_listen
+      settings = self.load_settings
+      self.sections.each do |section|
+        section.rows.each do |row|
+          row.value = settings[row.key] unless settings[row.key].nil?
+          observe(row, "value") do |old_value, new_value|
+            p "Saving"
+            self.save
+          end
+        end
+      end
+    end
+
+    # places hash of values into application persistance
+    def save
+      current_form = NSKeyedArchiver.archivedDataWithRootObject(self.render)
+      App::Persistence['formotion_persistence_settings'] = current_form
+    end
+
+    def load_settings
+      settings = App::Persistence['formotion_persistence_settings']
+
+      begin
+        settings = NSKeyedUnarchiver.unarchiveObjectWithData(settings)
+      rescue
+        self.save
+        settings = self.render
+      end
+      
+      settings
+    end
+
+    def clear_settings
+      App::Persistence['formotion_persistence_settings'] =  nil
     end
 
     def sub_render
