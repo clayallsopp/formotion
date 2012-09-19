@@ -187,7 +187,6 @@ module Formotion
         section.rows.each do |row|
           row.value = settings[row.key] unless settings[row.key].nil?
           observe(row, "value") do |old_value, new_value|
-            p "Saving"
             self.save
           end
         end
