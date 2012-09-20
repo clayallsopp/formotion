@@ -2,9 +2,9 @@ class AppDelegate
   def application(application, didFinishLaunchingWithOptions:launchOptions)
     @window = UIWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)
 
-    @form = Formotion::Form.new({
+    @form = Formotion::Form.persist({
       title: "Persist Example",
-      persist: true,
+      persist_as: "example",
       sections: [{
         title: "Section Title",
         footer: "This is the footer for the section. It's good for displaying detailed data about the section.",
@@ -112,6 +112,8 @@ class AppDelegate
       alert.show
     end
 
+    @view_controller.navigationItem.leftBarButtonItem = UIBarButtonItem.alloc.initWithTitle("Reset", style: UIBarButtonItemStyleBordered, target:self, action:'reset_form')
+
     @navigation_controller = UINavigationController.alloc.initWithRootViewController(@view_controller)
 
     @window.rootViewController = @navigation_controller
@@ -122,5 +124,9 @@ class AppDelegate
 
   def submit
     @form.submit
+  end
+
+  def reset_form
+    @form.reset
   end
 end

@@ -44,11 +44,6 @@ module Formotion
         end
       end
 
-      # check if data persisted
-      persist ||= @form.persist
-      if persist
-        @form.load_and_listen
-      end
       # Setting @form.controller assigns
       # @form as the datasource and delegate
       # and reloads the data.

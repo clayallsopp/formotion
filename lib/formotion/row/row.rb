@@ -181,6 +181,20 @@ module Formotion
       @type = type
     end
 
+    def range=(range)
+      if range
+        case range
+        when Range
+          # all good
+        when Array
+          range = Range.new(range[0], range[1])
+        else
+          raise Formotion::InvalidClassError, "Attempted Row.range = #{range.inspect} should be of type Range or Array"
+        end
+      end
+      @range = range
+    end
+
     def return_key=(value)
       @return_key = const_int_get("UIReturnKey", value)
     end
@@ -229,7 +243,11 @@ module Formotion
     #########################
     # Retreiving data
     def to_hash
-      super
+      h = super
+      if h[:range] && h[:range].is_a?(Range)
+        h[:range] = [self.range.begin, self.range.end]
+      end
+      h
     end
 
     def subform=(subform)

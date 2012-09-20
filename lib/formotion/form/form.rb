@@ -9,8 +9,8 @@ module Formotion
       :title,
       # If you want to have some internal id to track the form.
       :id,
-      # If you want your form to persist
-      :persist
+      # [STRING/SYMBOL] used to store your form's state on disk
+      :persist_as
     ]
     PROPERTIES.each {|prop|
       attr_accessor prop
@@ -19,6 +19,12 @@ module Formotion
     # Sections are create specially using #create_section, so we don't allow
     # them to be pased in the hash
     SERIALIZE_PROPERTIES = PROPERTIES + [:sections]
+
+    def self.persist(params = {})
+      form = new(params)
+      form.open && form.save
+      form
+    end
 
     def initialize(params = {})
       # super takes care of initializing the ::PROPERTIES in params
@@ -179,43 +185,6 @@ module Formotion
       kv
     end
 
-    # loads the given settings into the the form, and
-    # places observers to save on changes
-    def load_and_listen
-      settings = self.load_settings
-      self.sections.each do |section|
-        section.rows.each do |row|
-          row.value = settings[row.key] unless settings[row.key].nil?
-          observe(row, "value") do |old_value, new_value|
-            self.save
-          end
-        end
-      end
-    end
-
-    # places hash of values into application persistance
-    def save
-      current_form = NSKeyedArchiver.archivedDataWithRootObject(self.render)
-      App::Persistence['formotion_persistence_settings'] = current_form
-    end
-
-    def load_settings
-      settings = App::Persistence['formotion_persistence_settings']
-
-      begin
-        settings = NSKeyedUnarchiver.unarchiveObjectWithData(settings)
-      rescue
-        self.save
-        settings = self.render
-      end
-      
-      settings
-    end
-
-    def clear_settings
-      App::Persistence['formotion_persistence_settings'] =  nil
-    end
-
     def sub_render
       kv = {}
       rows = sections.map(&:rows).flatten
@@ -226,7 +195,77 @@ module Formotion
       kv
     end
 
+    #########################
+    # Persisting Forms
+
+    # loads the given settings into the the form, and
+    # places observers to save on changes
+    def open
+      saved_hash = load_state
+      p "SAVED #{saved_hash}"
+      saved_form = Formotion::Form.new(saved_hash)
+
+      each_row do |row, index|
+        s_index = row.section.index
+        temp_row = saved_form.sections[s_index].rows[index]
+        row.value = temp_row.value
+
+        observe(row, "value") do |old_value, new_value|
+          self.save
+        end
+      end
+    end
+
+    # places hash of values into application persistance
+    def save
+      App::Persistence[persist_key] = to_hash
+      App::Persistence[original_persist_key] ||= self.to_hash
+    end
+
+    def reset
+      App::Persistence[persist_key] = nil
+      temp_form = Formotion::Form.new(App::Persistence[original_persist_key])
+
+      each_row do |row, index|
+        s_index = row.section.index
+        row.value = temp_form.sections[s_index].rows[index].value
+      end
+
+      self.save
+    end
+
     private
+    def persist_key
+      "FORMOTION_#{self.persist_as}"
+    end
+
+    def original_persist_key
+      "#{persist_key}_ORIGINAL"
+    end
+
+    def load_state
+      begin
+        state = App::Persistence[persist_key]
+      rescue
+        self.save
+      end
+      
+      state ||= self.to_hash
+    end
+
+    def each_row(&block)
+      self.sections.each_with_index do |section, s_index|
+        section.rows.each_with_index do |row, index|
+          case block.arity
+          when 1
+            block.call(row)
+          when 2
+            block.call(row, index)
+          end
+        end
+      end
+    end
+
     def recursive_delete_nil(h)
       delete_empty = Proc.new { |k, v|
         v.delete_if(&delete_empty) if v.kind_of?(Hash)

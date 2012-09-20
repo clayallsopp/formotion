@@ -157,11 +157,20 @@ end
 
 ### Persistence
 
-By setting the `Formotion::Form`'s `persist` property to true, your form values are automatically persisted across application loads, making it ideal for application settings configurable by your user.  No save buttons needed.
+You can easily synchronize a `Form`'s state to disk using the `persist_as` key in conjunction with the `persist` method. When your user edits the form, any changes will be immediately saved. For example:
 
-*** CAVEAT: This works for most Formotion rows, but subforms currently do not persist ***
+```ruby
+@form = Formotion::Form.persist({
+  persist_as: :settings,
+  sections: ...
+})
+```
 
-Calling the `Formotion::Form`'s `clear_settings` method will clear out your stored form values, and return your application defaults, like on the very first run.
+This will load the form if it exists, or create it if necessary. If you use `Formotion::Form.new`, then the form will not be loaded and any changes you make will override existing saved forms.
+
+Your form values and state are automatically persisted across application loads, no save buttons needed.
+
+To reset the form, `persist` it and call `reset`, which restores it to the original state.
 
 View the [Persistence Example](./formotion/tree/master/examples/Persistence) to see it in action.
      
