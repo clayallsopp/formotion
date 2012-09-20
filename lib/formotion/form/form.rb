@@ -115,7 +115,6 @@ module Formotion
     # as shown above.
     def submit
       if @on_submit_callback.nil?
-        p "`Form#submit` invoked without a callback, doing nothing."
         return
       end
 
@@ -201,35 +200,53 @@ module Formotion
     # loads the given settings into the the form, and
     # places observers to save on changes
     def open
-      saved_hash = load_state
-      p "SAVED #{saved_hash}"
-      saved_form = Formotion::Form.new(saved_hash)
+      @form_observer ||= lambda { |form, saved_form|
+        form.send(:each_row) do |row, index|
+          s_index = row.section.index
+          temp_row = saved_form.sections[s_index].rows[index]
 
-      each_row do |row, index|
-        s_index = row.section.index
-        temp_row = saved_form.sections[s_index].rows[index]
-        row.value = temp_row.value
+          if row.subform?
+            saved_subform = temp_row.subform.to_form
+            @form_observer.call(row.subform.to_form, saved_subform)
+          else
+            row.value = temp_row.value
 
-        observe(row, "value") do |old_value, new_value|
-          self.save
+            observe(row, "value") do |old_value, new_value|
+              self.save
+            end
+          end
         end
-      end
+      }
+
+      saved_hash = load_state
+      @form_observer.call(self, Formotion::Form.new(saved_hash))
     end
 
     # places hash of values into application persistance
     def save
-      App::Persistence[persist_key] = to_hash
-      App::Persistence[original_persist_key] ||= self.to_hash
+      App::Persistence[persist_key] = to_hash.to_archived_data
+      App::Persistence[original_persist_key] ||= self.to_hash.to_archived_data
     end
 
     def reset
       App::Persistence[persist_key] = nil
-      temp_form = Formotion::Form.new(App::Persistence[original_persist_key])
 
-      each_row do |row, index|
-        s_index = row.section.index
-        row.value = temp_form.sections[s_index].rows[index].value
-      end
+      @form_resetter ||= lambda { |form, original_form|
+        form.send(:each_row) do |row, index|
+          s_index = row.section.index
+          temp_row = original_form.sections[s_index].rows[index]
+
+          if row.subform?
+            original_subform = temp_row.subform.to_form
+            @form_resetter.call(row.subform.to_form, original_subform)
+          else
+            row.value = temp_row.value
+          end
+        end
+      }
+
+      temp_form = Formotion::Form.new(App::Persistence[original_persist_key].unarchive)
+      @form_resetter.call(self, temp_form)
 
       self.save
     end
@@ -245,7 +262,7 @@ module Formotion
 
     def load_state
       begin
-        state = App::Persistence[persist_key]
+        state = App::Persistence[persist_key] && App::Persistence[persist_key].unarchive
       rescue
         self.save
       end

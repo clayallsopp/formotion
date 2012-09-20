@@ -99,6 +99,73 @@ class AppDelegate
           range: (1..100),
           value: 25
         }]
+      }, {
+        title: "Subforms",
+        rows: [{
+          title: "Subform",
+          subtitle: "With display_key",
+          type: :subform,
+          key: :subform,
+          display_key: :type,
+          subform: {
+            title: "Account Type",
+            sections: [{
+              key: :type,
+              select_one: true,
+              rows: [{
+                title: "Free",
+                key: :Free,
+                type: :check,
+              }, {
+                title: "Basic",
+                value: true,
+                key: :Basic,
+                type: :check,
+              }, {
+                title: "Pro",
+                key: :Pro,
+                type: :check,
+              }]
+            }, {
+              rows: [{
+                title: "Advanced",
+                type: :subform,
+                key: :advanced,
+                subform: {
+                  title: "Advanced",
+                  sections: [{
+                    key: :currency,
+                    select_one: true,
+                    rows: [{
+                      title: "USD",
+                      value: true,
+                      key: :usd,
+                      type: :check,
+                    }, {
+                      title: "EUR",
+                      key: :eur,
+                      type: :check,
+                    }, {
+                      title: "CHF",
+                      key: :chf,
+                      type: :check,
+                    }]
+                  }, {
+                    rows: [{
+                      title: 'Back',
+                      type: :back
+                    }]
+                  }]
+                }
+              }]
+            }, {
+              rows: [{
+                title: 'Back',
+                type: :back
+              }]
+            }]
+          }
+        }]
       }]
     })
 

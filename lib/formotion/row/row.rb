@@ -165,6 +165,10 @@ module Formotion
       object.button?
     end
 
+    def subform?
+      self.type == :subform
+    end
+
     #########################
     #  getter overrides
     def items
@@ -247,6 +251,9 @@ module Formotion
       if h[:range] && h[:range].is_a?(Range)
         h[:range] = [self.range.begin, self.range.end]
       end
+      if subform?
+        h[:subform] = self.subform.to_form.to_hash
+      end
       h
     end
 
@@ -264,6 +271,7 @@ module Formotion
           @hash_subform ||= self
         end
       end
+      @subform
     end
 
     private

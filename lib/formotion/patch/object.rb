@@ -6,4 +6,14 @@ class Object
     self.class.send(:alias_method, "old_#{method.to_s}".to_sym, method)
     self.instance_eval &block
   end
+
+  def to_archived_data
+    NSKeyedArchiver.archivedDataWithRootObject(self)
+  end
+end
+
+class NSData
+  def unarchive
+    NSKeyedUnarchiver.unarchiveObjectWithData(self)
+  end
 end
