@@ -1,8 +1,10 @@
-## 1.1 - ???
+## 1.1 - September 20, 2012
 
 ### Features
 
 -:display_key for subform row; when given, the value for that key in the subform's `#render` will be displayed alongside the chevron.
+
+-`Formotion::Form.persist` and `:persist_as` to automatically synchronize your form to the disk.
 
 ### Bug Fixes
 
