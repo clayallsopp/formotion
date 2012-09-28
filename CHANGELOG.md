@@ -1,3 +1,9 @@
+## 1.1.1 - September 28, 2012
+
+### Bug Fixes
+
+- Updated to require BubbleWrap 1.1.4 for RM 1.24 compatibility
+
 ## 1.1 - September 20, 2012
 
 ### Features
