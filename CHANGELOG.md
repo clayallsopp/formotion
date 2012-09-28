@@ -2,9 +2,18 @@
 
 ### Features
 
--:display_key for subform row; when given, the value for that key in the subform's `#render` will be displayed alongside the chevron.
+- `:display_key` for a `:subform` row; when given, the value for that key in the subform's `#render` will be displayed alongside the chevron:
 
--`Formotion::Form.persist` and `:persist_as` to automatically synchronize your form to the disk.
+![Subform row with display](http://i.imgur.com/FoDo1.png)
+
+- `Formotion::Form.persist` and `:persist_as` to automatically synchronize your form to the disk:
+
+```ruby
+@form = Formotion::Form.persist({
+  persist_as: :settings,
+  sections: [....]
+})
+```
 
 ### Bug Fixes
 
