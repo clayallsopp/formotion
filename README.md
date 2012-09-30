@@ -96,6 +96,7 @@ form.build_section do |section|
   section.build_row do |row|
     row.title = "Label"
     row.subtitle = "Placeholder"
+    row.type = :string
   end
 end
 ```
