@@ -231,6 +231,9 @@ module Formotion
     # Called in UITableViewDataSource methods
     # in form_delegate.rb
     def make_cell
+      if self.object.nil?
+        raise Formotion::NoRowTypeError, "No row type specified for row #{self.index_path.row} in section #{self.index_path.section}; specify a :type"
+      end
       cell, text_field = Formotion::RowCellBuilder.make_cell(self)
       @text_field = text_field
       self.object.after_build(cell)

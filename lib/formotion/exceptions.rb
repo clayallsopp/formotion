@@ -1,6 +1,7 @@
 module Formotion
   class InvalidClassError < StandardError; end
   class InvalidSectionError < StandardError; end
+  class NoRowTypeError < StandardError; end
 
   class Conditions
     class << self
