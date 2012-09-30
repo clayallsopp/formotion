@@ -1,3 +1,9 @@
+## 1.2
+
+### Bug Fixes
+
+- Raise `Formotion::NoRowTypeError` if no `RowType` (`:type`) is specified.
+
 ## 1.1.1 - September 28, 2012
 
 ### Bug Fixes
