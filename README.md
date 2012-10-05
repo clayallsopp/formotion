@@ -123,6 +123,8 @@ You have `form#submit`, `form#on_submit`, and `form#render` at your disposal. He
 ```ruby
 class PeopleController < Formotion::FormController
   def viewDidLoad
+    super
+
     self.navigationItem.rightBarButtonItem = UIBarButtonItem.alloc.initWithBarButtonSystemItem(UIBarButtonSystemItemSave, target:self, action:'submit')
   end
 
