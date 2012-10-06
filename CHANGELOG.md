@@ -1,8 +1,10 @@
-## 1.2
+## 1.1.2 - October 6, 2012
 
 ### Bug Fixes
 
 - Raise `Formotion::NoRowTypeError` if no `RowType` (`:type`) is specified.
+
+- Fix bug for iOS6 where some fields weren't getting their value set.
 
 ## 1.1.1 - September 28, 2012
 
