@@ -58,11 +58,13 @@ module Formotion
           end
         end
 
-        field.swizzle(:setText) do
-          def setText(text)
-            r = old_setText(text)
-            self.sendActionsForControlEvents(UIControlEventEditingChanged)
-            r
+        if UIDevice.currentDevice.systemVersion >= "6.0"
+          field.swizzle(:setText) do
+            def setText(text)
+              r = old_setText(text)
+              self.sendActionsForControlEvents(UIControlEventEditingChanged)
+              r
+            end
           end
         end
 
