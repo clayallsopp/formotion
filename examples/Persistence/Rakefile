@@ -5,5 +5,5 @@ require '../../lib/formotion'
 
 Motion::Project::App.setup do |app|
   # Use `rake config' to see complete project settings.
-  app.name = 'KitchenSink'
+  app.name = 'Persistence'
 end
