@@ -58,6 +58,14 @@ module Formotion
           end
         end
 
+        field.swizzle(:setText) do
+          def setText(text)
+            r = old_setText(text)
+            self.sendActionsForControlEvents(UIControlEventEditingChanged)
+            r
+          end
+        end
+
         field.placeholder = row.placeholder
         field.text = row.value.to_s
         cell.addSubview(field)
