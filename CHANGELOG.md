@@ -1,3 +1,9 @@
+## 1.x - ??
+
+### Bug Fixes
+
+- Fixed crash when a Slider or Switch row type had an empty :title
+
 ## 1.1.2 - October 6, 2012
 
 ### Bug Fixes
