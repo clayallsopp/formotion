@@ -6,7 +6,7 @@ module Formotion
       def build_cell(cell)
         cell.selectionStyle = UITableViewCellSelectionStyleNone
         switchView = UISwitch.alloc.initWithFrame(CGRectZero)
-        switchView.accessibilityLabel = row.title + " Switch"
+        switchView.accessibilityLabel = (row.title || "") + " Switch"
         cell.accessoryView = cell.editingAccessoryView = switchView
         switchView.setOn(row.value || false, animated:false)
         switchView.when(UIControlEventValueChanged) do
