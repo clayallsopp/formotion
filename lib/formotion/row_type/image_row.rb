@@ -75,7 +75,7 @@ module Formotion
         end
 
         if source
-          @camera = BW::Device.camera.any
+          @camera = BW::Device.camera.send((source == :camera) ? :rear : :any)
           @camera.picture(source_type: source, media_types: [:image]) do |result|
             if result[:original_image]
               row.value = result[:original_image]
