@@ -9,6 +9,8 @@ module Formotion
         attr_accessor prop
       end
 
+      # Does NOT get called when KVO occurs.
+      # (KVO uses isa swizzling and not proper subclassing)
       def inherited(subclass)
         INHERITABLE_ATTRIBUTES.each do |inheritable_attribute|
           instance_var = "@#{inheritable_attribute}"
@@ -17,6 +19,7 @@ module Formotion
       end
 
       def form_properties
+        @form_properties ||= self.superclass.form_properties if is_kvo_subclass?
         @form_properties ||= []
       end
 
@@ -38,8 +41,15 @@ module Formotion
       # EX
       # form_title "Some Settings"
       def form_title(title = -1)
+        @form_title ||= self.superclass.form_title if is_kvo_subclass?
         @form_title = title if title != -1
         @form_title
+      end
+
+      private
+      # Terrible, terrible hack.
+      def is_kvo_subclass?
+        self.to_s =~ /^NSKVONotifying_/
       end
     end
 

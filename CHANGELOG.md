@@ -12,6 +12,8 @@
 
 - Fixed device crash when taking photo
 
+- Fixed problems related to KVO-ing `Formable` objects.
+
 ## 1.1.2 - October 6, 2012
 
 ### Bug Fixes
