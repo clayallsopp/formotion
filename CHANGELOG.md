@@ -1,4 +1,4 @@
-## 1.1.3 - ??
+## 1.1.4 - October 27, 2012
 
 ### Features
 
@@ -13,6 +13,8 @@
 - Fixed device crash when taking photo
 
 - Fixed problems related to KVO-ing `Formable` objects.
+
+- Use `UIKeyboardTypeNumberPad` for iPads; `UIKeyboardTypeDecimalPad` doesn't exist for those.
 
 ## 1.1.2 - October 6, 2012
 
