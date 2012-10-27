@@ -1,8 +1,16 @@
-## 1.x - ??
+## 1.1.3 - ??
+
+### Features
+
+- Support a generic `:button` `RowType` which can be used in conjunction with a `Row`'s `on_tap` method.
 
 ### Bug Fixes
 
+- Fixed bug where pushing a subform inherited from current controller class, which could cause expected behavior.
+
 - Fixed crash when a Slider or Switch row type had an empty :title
+
+- Fixed device crash when taking photo
 
 ## 1.1.2 - October 6, 2012
 

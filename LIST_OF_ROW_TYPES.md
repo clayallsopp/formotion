@@ -18,6 +18,7 @@
 [Template](#template)
 
 **Buttons**<br/>
+[Button](#button)<br/>
 [Submit](#submit)<br/>
 [Back](#back)<br/>
 [Edit](#edit)<br/>
@@ -342,6 +343,22 @@ Use a `:display_key` to show the value of the subform in the row:
 ```
 
 ## Buttons
+
+### <a name="button"></a> Button row
+
+```ruby
+{
+  title: "Any Button",
+  type: :button,
+}
+
+# later...
+form.sections[0].rows[0].on_tap do |row|
+  # do something when tapped
+end
+```
+
+The `SubmitRow` triggers the `form.submit` which triggers the defined `on_submit` callback.
 
 ### <a name="submit"></a> Submit row
 ![Submit row](https://github.com/clayallsopp/formotion/wiki/row-types/submit.png)
