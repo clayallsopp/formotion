@@ -1,7 +1,7 @@
 module Formotion
   class Form < Formotion::Base
-    extend BW::KVO
-    include BW::KVO
+    extend BubbleWrap::KVO
+    include BubbleWrap::KVO
 
     PROPERTIES = [
       # By default, Formotion::Controller will set it's title to this
