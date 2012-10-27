@@ -103,6 +103,9 @@ module Formotion
     # callback for what happens when the user
     # starts editing #text_field.
     attr_accessor :on_begin_callback
+    # callback for what happens when the user
+    # taps a ButtonRow
+    attr_accessor :on_tap_callback
 
     # RowType object
     attr_accessor :object
@@ -224,6 +227,11 @@ module Formotion
 
     def on_begin(&block)
       self.on_begin_callback = block
+    end
+
+    # Used in :button type rows
+    def on_tap(&block)
+      self.on_tap_callback = block
     end
 
     #########################

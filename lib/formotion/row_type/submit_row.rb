@@ -1,6 +1,6 @@
 module Formotion
   module RowType
-    class SubmitRow < Button
+    class SubmitRow < ButtonRow
 
       def on_select(tableView, tableViewDelegate)
         tableViewDelegate.submit

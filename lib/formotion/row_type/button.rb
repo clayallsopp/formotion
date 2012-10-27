@@ -1,7 +1,6 @@
 module Formotion
   module RowType
-    class Button < Base
-
+    class ButtonRow < Base
       def button?
         true
       end
@@ -25,6 +24,12 @@ module Formotion
         nil
       end
 
+      def on_select(tableView, tableViewDelegate)
+        # Override in subclasses
+        if self.row.on_tap_callback
+          self.row.on_tap_callback.call(self.row)
+        end
+      end
     end
   end
 end

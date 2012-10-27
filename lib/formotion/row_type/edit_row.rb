@@ -1,6 +1,6 @@
 module Formotion
   module RowType
-    class EditRow < Button
+    class EditRow < ButtonRow
       def on_select(tableView, tableViewDelegate)
         was_editing = tableView.isEditing
         if row.alt_title
