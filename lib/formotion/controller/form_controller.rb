@@ -50,7 +50,6 @@ module Formotion
       @form.controller = self
     end
 
-
     def viewWillAppear(animated)
       super
 
@@ -59,7 +58,7 @@ module Formotion
 
     # Subview Methods
     def push_subform(form)
-      @subform_controller = self.class.alloc.initWithForm(form)
+      @subform_controller = Formotion::FormController.alloc.initWithForm(form)
 
       if self.navigationController
         self.navigationController.pushViewController(@subform_controller, animated: true)
