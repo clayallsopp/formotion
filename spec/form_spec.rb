@@ -68,6 +68,75 @@ describe "Forms" do
     @form.render[:email].should == 'something@email.com'
   end
 
+  it "fills out form values correctly" do
+    @form = Formotion::Form.new(sections: [{
+     rows: [{
+       key: :email,
+       type: :email,
+       editable: true,
+       title: 'Email'
+     }]}])
+
+    @form.fill_out :email => 'something@email.com'
+
+    row = @form.sections[0].rows[0]
+    row.value.should == 'something@email.com'
+  end
+
+  it "fills out form values correctly with a select one" do
+    @form = Formotion::Form.new(sections: [{
+      select_one: true,
+      rows: [{
+        title: "A",
+        key: :a,
+        type: :check,
+        value: true
+      }, {
+        title: "B",
+        key: :b,
+        type: :check,
+      }, {
+        title: "C",
+        key: :c,
+        type: :check,
+      }]
+     }])
+
+    @form.fill_out :b => true
+
+    row = @form.sections[0].rows[0]
+    row.value.should == nil
+    row = @form.sections[0].rows[1]
+    row.value.should == true
+    row = @form.sections[0].rows[2]
+    row.value.should == nil
+  end
+
+  it "fills out form values correctly with a template" do
+    @form = Formotion::Form.new(sections: [
+    {
+      title: 'Your nicknames',
+      rows: [{
+        title: "Add nickname",
+        key: :nicknames,
+        type: :template,
+        template: {
+          title: 'Nickname',
+          type: :string,
+          placeholder: 'Enter here',
+          indented: true,
+          deletable: true
+        }
+      }]
+    }])
+
+
+    @form.fill_out :nicknames => ["Nici", "Sam"]
+
+    row = @form.sections[0].rows[0]
+    row.value.should == ["Nici", "Sam"]
+  end
+
   it "render with subforms works correctly" do
     @form = Formotion::Form.new(sections: [{
      rows: [{
@@ -91,6 +160,32 @@ describe "Forms" do
 
     @form.render[:subform][:email].should == 'something@email.com'
   end
+
+=begin
+  it "fills out subform values correctly" do
+   @form = Formotion::Form.new(sections: [{
+     rows: [{
+       type: :subform,
+       key: :subform,
+       subform: {
+          sections: [{
+            rows: [{
+              key: :email,
+              type: :email,
+              editable: true,
+              title: 'Email'
+            }]
+          }]
+       }
+     }]}])
+
+    @form.fill_out :email => 'something@email.com'
+
+    subform = @form.sections[0].rows[0].subform.to_form
+    row = subform.sections[0].rows[0]
+    row.value.should == 'something@email.com'
+  end
+=end
 
   it "hashifying should be same as input" do
     h = {

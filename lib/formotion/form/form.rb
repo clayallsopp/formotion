@@ -194,6 +194,32 @@ module Formotion
       kv
     end
 
+    def fill_out(data)
+      self.sections.each {|section|
+        if section.select_one?
+          # see if one of the select one value is used
+          unless (section.rows.map{|r| r.key} & data.keys).empty?
+            section.rows.each {|row|
+              row.value = data.has_key?(row.key) ? true : nil 
+            }
+          end
+        else
+          section.rows.each {|row|
+            next if row.button?
+            if row.template_parent
+              # If this row is part of a template
+              # use the parent's key
+              row.value = data[row.template_parent_key] if data.has_key?(row.template_parent_key)
+            #elsif row.subform
+            #  self.class.new(row.subform).fill_out(data)
+            else
+              row.value = data[row.key] if data.has_key?(row.key)
+            end
+          }
+        end
+      }
+    end
+  
     #########################
     # Persisting Forms
 
