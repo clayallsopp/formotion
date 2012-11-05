@@ -198,8 +198,8 @@ module Formotion
       self.sections.each {|section|
         if section.select_one?
           # see if one of the select one value is used
-          unless (section.rows.map{|r| r.key} & data.keys).empty?
-            section.rows.each {|row|
+          unless (section.rows.map{ |r| r.key } & data.keys).empty?
+            section.rows.each { |row|
               row.value = data.has_key?(row.key) ? true : nil 
             }
           end
