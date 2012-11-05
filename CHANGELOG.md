@@ -4,6 +4,8 @@
 
 - Added `form.values = { key: "value" }`, which will set all of the form's `value`s for each specified `key` en-masse.
 
+- `:options` and `:picker` rows support a mapping between the displayed value and the row's value. Ex: `row.items = [["User 1", user1_id], ["User 2", user2_id]]
+
 ## 1.1.4 - October 27, 2012
 
 ### Features

@@ -20,8 +20,9 @@ class AppDelegate
         }, {
           title: "Gender",
           key: :gender,
-          type: :options,
-          items: ['Female', 'Male']
+          type: :picker,
+          items: [['Female', 'f'], ['Male', 'm']],
+          value: 'm'
         }, {
           title: "Password",
           key: :password,
