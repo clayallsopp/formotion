@@ -77,7 +77,7 @@ describe "Forms" do
        title: 'Email'
      }]}])
 
-    @form.fill_out :email => 'something@email.com'
+    @form.values = { :email => 'something@email.com' }
 
     row = @form.sections[0].rows[0]
     row.value.should == 'something@email.com'
@@ -102,7 +102,7 @@ describe "Forms" do
       }]
      }])
 
-    @form.fill_out :b => true
+    @form.values = { :b => true }
 
     row = @form.sections[0].rows[0]
     row.value.should == nil
@@ -131,7 +131,7 @@ describe "Forms" do
     }])
 
 
-    @form.fill_out :nicknames => ["Nici", "Sam"]
+    @form.values = { :nicknames => ["Nici", "Sam"] }
 
     row = @form.sections[0].rows[0]
     row.value.should == ["Nici", "Sam"]
@@ -161,7 +161,6 @@ describe "Forms" do
     @form.render[:subform][:email].should == 'something@email.com'
   end
 
-=begin
   it "fills out subform values correctly" do
    @form = Formotion::Form.new(sections: [{
      rows: [{
@@ -179,13 +178,12 @@ describe "Forms" do
        }
      }]}])
 
-    @form.fill_out :email => 'something@email.com'
+    @form.values = { :email => 'something@email.com' }
 
     subform = @form.sections[0].rows[0].subform.to_form
     row = subform.sections[0].rows[0]
     row.value.should == 'something@email.com'
   end
-=end
 
   it "hashifying should be same as input" do
     h = {
