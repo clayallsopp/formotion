@@ -42,4 +42,16 @@ describe "Options Row" do
     @row.value = nil
     cell.accessoryView.selectedSegmentIndex.should == UISegmentedControlNoSegment
   end
+
+  it "should work with name-value items" do
+    @row = Formotion::Row.new(title: "Options", key: :options, type: :options,
+            items: [["First", 1], ["Second", 2]], value: 1)
+    @row.reuse_identifier = 'test'
+    cell = @row.make_cell
+
+    cell.accessoryView.selectedSegmentIndex.should == 0
+
+    @row.value = 2
+    cell.accessoryView.selectedSegmentIndex.should == 1
+  end
 end

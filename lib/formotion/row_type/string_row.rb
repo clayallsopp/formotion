@@ -69,10 +69,15 @@ module Formotion
         end
 
         field.placeholder = row.placeholder
-        field.text = row.value.to_s
+        field.text = row_value
         cell.addSubview(field)
         field
 
+      end
+
+      # overriden in subclasses
+      def row_value
+        row.value.to_s
       end
 
       def add_callbacks(field)

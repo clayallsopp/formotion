@@ -23,4 +23,16 @@ describe "Picker Row" do
 
     @row.text_field.text.should == "Motion"
   end
+
+  it "should work with name-value items" do
+    @row = Formotion::Row.new(title: "Picker", key: :picker, type: :picker,
+            items: [["Ruby", 1], ["Motion", 2]], value: 1)
+    @row.reuse_identifier = 'test'
+    cell = @row.make_cell
+
+    @row.text_field.text.should == "Ruby"
+
+    @row.value = 2
+    @row.text_field.text.should == "Motion"
+  end
 end
