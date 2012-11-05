@@ -1,3 +1,9 @@
+## 1.1.5 - ??
+
+### Features
+
+- Added `form.values = { key: "value" }`, which will set all of the form's `value`s for each specified `key` en-masse.
+
 ## 1.1.4 - October 27, 2012
 
 ### Features
