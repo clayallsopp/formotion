@@ -1,10 +1,12 @@
-## 1.1.5 - ??
+## 1.1.5 - November 9, 2012
 
 ### Features
 
 - Added `form.values = { key: "value" }`, which will set all of the form's `value`s for each specified `key` en-masse.
 
 - `:options` and `:picker` rows support a mapping between the displayed value and the row's value. Ex: `row.items = [["User 1", user1_id], ["User 2", user2_id]]
+
+- `:static` rows are now able to use `:placeholder` and `:value` attributes to display text along the right-hand side.
 
 ## 1.1.4 - October 27, 2012
 
