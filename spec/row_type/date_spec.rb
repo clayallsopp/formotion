@@ -59,4 +59,24 @@ describe "Date Row" do
       @row.text_field.text.should == expected_output
     end
   end
+
+  # Modes
+  {
+    :date => '1/1/00',
+    :time => '12:57 AM',
+    :datetime => '1/1/00',
+    :countdown => '00:57'
+  }.each do |mode, expected_output|
+
+    it "should display chosen mode date/time format" do
+      @row.format = :short
+      @row.picker_mode = mode
+      cell = @row.make_cell
+      @row.object.picker.date = NSDate.dateWithTimeIntervalSince1970(MILLENIUM)
+      @row.object.picker.trigger UIControlEventValueChanged
+
+      @row.text_field.text.should == expected_output
+    end
+  end
+
 end
