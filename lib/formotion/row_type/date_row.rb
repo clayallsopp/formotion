@@ -26,6 +26,7 @@ module Formotion
           if date_style && date_style.to_s[-5..-1] != "style"
             date_style = (date_style.to_s + "_style").to_sym
           end
+
           formatter.dateStyle = self.row.send(:const_int_get, "NSDateFormatter", date_style || NSDateFormatterShortStyle)
           formatter
         end
@@ -44,16 +45,34 @@ module Formotion
       def picker
         @picker ||= begin
           picker = UIDatePicker.alloc.initWithFrame(CGRectZero)
-          picker.datePickerMode = UIDatePickerModeDate
+          picker.datePickerMode = self.picker_mode
           picker.hidden = false
           picker.date = self.date_value || NSDate.date
 
           picker.when(UIControlEventValueChanged) do
-            self.row.value = @picker.date.timeIntervalSince1970.to_i
+            self.row.value = format_picker_value(@picker)
             update
           end
 
           picker
+        end
+      end
+
+      def picker_mode
+        case self.row.picker_mode
+          when :time then UIDatePickerModeTime
+          when :date then UIDatePickerModeDate
+          when :datetime then UIDatePickerModeDateAndTime
+          when :countdown then UIDatePickerModeCountDownTimer
+          else UIDatePickerModeDate
+        end
+      end
+
+      def format_picker_value(picker)
+        case self.row.picker_mode
+          when :time then picker.date.strftime("%I:%M %p")
+          when :countdown then picker.date.strftime("%R")
+          else picker.date.timeIntervalSince1970.to_i
         end
       end
 
