@@ -64,11 +64,11 @@ describe "Date Row" do
   {
     :date => '1/1/00',
     :time => '12:57 AM',
-    :datetime => '1/1/00',
+    :date_time => '1/1/00, 12:57 AM',
     :countdown => '00:57'
   }.each do |mode, expected_output|
 
-    it "should display chosen mode date/time format" do
+    it "should display chosen mode #{mode} date/time format #{expected_output}" do
       @row.format = :short
       @row.picker_mode = mode
       cell = @row.make_cell

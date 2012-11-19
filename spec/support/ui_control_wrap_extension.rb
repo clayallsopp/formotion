@@ -3,7 +3,6 @@ module UIControlWrap
   # that was previously defined by #when
   def trigger(events)
     @callback ||= {}
-    p "Callback #{@callback}"
     @callback[events].map(&:call) if @callback.has_key? events
   end
 end

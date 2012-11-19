@@ -28,13 +28,9 @@ module Formotion
           end
 
           formatter.dateStyle = self.row.send(:const_int_get, "NSDateFormatter", date_style || NSDateFormatterShortStyle)
+          formatter.timeStyle = NSDateFormatterNoStyle
           formatter
         end
-      end
-
-      def formatted_value
-        return formatter.stringFromDate(self.date_value) if self.date_value
-        self.row.value
       end
 
       def after_build(cell)
@@ -50,7 +46,11 @@ module Formotion
           picker.date = self.date_value || NSDate.date
 
           picker.when(UIControlEventValueChanged) do
-            self.row.value = format_picker_value(@picker)
+            if self.row.picker_mode == :countdown
+              self.row.value = @picker.countDownDuration
+            else
+              self.row.value = @picker.date.timeIntervalSince1970.to_i
+            end
             update
           end
 
@@ -60,20 +60,55 @@ module Formotion
 
       def picker_mode
         case self.row.picker_mode
-          when :time then UIDatePickerModeTime
-          when :date then UIDatePickerModeDate
-          when :datetime then UIDatePickerModeDateAndTime
-          when :countdown then UIDatePickerModeCountDownTimer
-          else UIDatePickerModeDate
+        when :time
+          UIDatePickerModeTime
+        when :date_time
+          UIDatePickerModeDateAndTime
+        when :countdown
+          UIDatePickerModeCountDownTimer
+        else
+          UIDatePickerModeDate
         end
       end
 
-      def format_picker_value(picker)
-        case self.row.picker_mode
-          when :time then picker.date.strftime("%I:%M %p")
-          when :countdown then picker.date.strftime("%R")
-          else picker.date.timeIntervalSince1970.to_i
+      def formatted_value
+        if self.date_value
+          return case self.row.picker_mode
+            when :time
+              old_date_style = formatter.dateStyle
+              formatter.dateStyle = NSDateFormatterNoStyle
+              formatter.timeStyle = NSDateFormatterShortStyle
+              formatted = formatter.stringFromDate(self.date_value)
+              formatter.dateStyle = old_date_style
+              formatter.timeStyle = NSDateFormatterNoStyle
+              formatted
+            when :date_time
+              old_date_style = formatter.dateStyle
+              formatter.dateStyle = NSDateFormatterShortStyle
+              formatter.timeStyle = NSDateFormatterShortStyle
+              formatted = formatter.stringFromDate(self.date_value)
+              formatter.dateStyle = old_date_style
+              formatter.timeStyle = NSDateFormatterNoStyle
+              formatted
+            when :countdown
+              time = self.row.value
+              date = NSDate.dateWithTimeIntervalSinceReferenceDate(time)
+              old_date_style = formatter.dateStyle
+              old_time_zone = formatter.timeZone
+
+              formatter.dateFormat = "HH:mm"
+              formatter.timeZone = NSTimeZone.timeZoneForSecondsFromGMT(0)
+              formatted = formatter.stringFromDate(date)
+
+              formatter.dateStyle = old_date_style
+              formatter.timeZone = old_time_zone
+              formatter.dateFormat = nil
+              formatted
+            else
+              formatter.stringFromDate(self.date_value)
+            end
         end
+        self.row.value
       end
 
       # Used when row.value changes

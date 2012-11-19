@@ -13,9 +13,9 @@ module Formotion
       # either Formotion::RowType or a string/symbol representation of one
       # see row_type.rb
       :type,
-      # Stores possible date pickers mode
-      # Available modes [UIDatePickerModeTime, UIDatePickerModeDate, UIDatePickerModeDateAndTime, UIDatePickerModeCountDownTimer]
-      # http://developer.apple.com/library/ios/#documentation/uikit/reference/UIDatePicker_Class/Reference/UIDatePicker.html
+      # Stores possible date pickers mode; corresponds to UIDatePickerMode______
+      # OPTIONS: :time, :date, :date_time, :countdown
+      # DEFAULT is :date
       :picker_mode,
       # Stores possible formatting information (used by date pickers, etc)
       #   if :type == :date, accepts values in [:short, :medium, :long, :full]
