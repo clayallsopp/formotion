@@ -1,3 +1,11 @@
+## 1.2 - ??
+
+- Added `:picker_mode` row property which lets you choose what type of date picker you're using (i.e. `:date`, `:time`, `:date_time`, or `:countdown`)
+
+### Bug Fixes
+
+- Fixed size issue with iPhone apps running @2x on an iPad (see `row_type/base.rb#field_buffer`)
+
 ## 1.1.5 - November 9, 2012
 
 ### Features

@@ -3,7 +3,13 @@ module Formotion
     class Base
       attr_accessor :row, :tableView
 
-      FIELD_BUFFER = Device.iphone? ? 20 : 64
+      def self.field_buffer
+        if Device.iphone? or App.window.size.width <= 320
+          20
+        else
+          64
+        end
+      end
 
       def tableView
         @tableView ||= self.row.form.table

@@ -51,9 +51,9 @@ module Formotion
             formotion_field.sizeToFit
 
             field_frame = formotion_field.frame
-            field_frame.origin.x = self.textLabel.frame.origin.x + self.textLabel.frame.size.width + FIELD_BUFFER
+            field_frame.origin.x = self.textLabel.frame.origin.x + self.textLabel.frame.size.width + Formotion::RowType::Base.field_buffer
             field_frame.origin.y = ((self.frame.size.height - field_frame.size.height) / 2.0).round
-            field_frame.size.width = self.frame.size.width - field_frame.origin.x - FIELD_BUFFER
+            field_frame.size.width = self.frame.size.width - field_frame.origin.x - Formotion::RowType::Base.field_buffer
             formotion_field.frame = field_frame
           end
         end
