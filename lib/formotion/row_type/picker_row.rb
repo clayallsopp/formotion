@@ -18,17 +18,12 @@ module Formotion
           picker.dataSource = self
           picker.delegate = self
 
-          if self.row.value
-            picker_row = name_index_of_value(row.value)
-            if picker_row != nil
-              picker.selectRow(picker_row, inComponent:0, animated:false)
-            else
-              warn "Picker item '#{row.value}' not found in #{row.items.inspect} for '#{row.key}'"
-            end
-          end
-
           picker
         end
+
+        select_picker_value(row.value) if self.row.value
+
+        @picker
       end
 
       def numberOfComponentsInPickerView(pickerView)
@@ -55,6 +50,16 @@ module Formotion
 
       def update_text_field(new_value)
         self.row.text_field.text = name_for_value(new_value)
+        select_picker_value(new_value)
+      end
+
+      def select_picker_value(new_value)
+        picker_row = name_index_of_value(new_value)
+        if picker_row != nil
+          @picker.selectRow(picker_row, inComponent:0, animated:false)
+        else
+          warn "Picker item '#{row.value}' not found in #{row.items.inspect} for '#{row.key}'"
+        end
       end
 
       def row_value
