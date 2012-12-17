@@ -1,6 +1,10 @@
 ## 1.2 - ??
 
+### Features
+
 - Added `:picker_mode` row property which lets you choose what type of date picker you're using (i.e. `:date`, `:time`, `:date_time`, or `:countdown`)
+
+- Added `:text_alignment` row property which controls how a row's input field's text is aligned (i.e. `:right` (default), `:left`, or `:center`).
 
 ### Bug Fixes
 

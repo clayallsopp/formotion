@@ -30,7 +30,7 @@ module Formotion
 
         field.clearButtonMode = UITextFieldViewModeWhileEditing
         field.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter
-        field.textAlignment = UITextAlignmentRight
+        field.textAlignment = row.text_alignment || UITextAlignmentRight
 
         field.keyboardType = keyboardType
 

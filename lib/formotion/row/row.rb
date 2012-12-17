@@ -25,6 +25,10 @@ module Formotion
 
       # The following apply only to text-input fields
 
+      # text alignment of the input field
+      # OPTIONS: :left, :right, :center
+      # DEFAULT is :right
+      :text_alignment,
       # placeholder text
       :placeholder,
       # whether or not the entry field is secure (like a password)
@@ -222,6 +226,10 @@ module Formotion
       @clear_button = const_int_get("UITextFieldViewMode", value)
     end
 
+    def text_alignment=(alignment)
+      @text_alignment = const_int_get("UITextAlignment", alignment)
+    end
+
     #########################
     # setters for callbacks
 
@@ -309,7 +317,8 @@ module Formotion
         UIReturnKeyYahoo, UIReturnKeyDone, UIReturnKeyEmergencyCall,
         UITextFieldViewModeNever, UITextFieldViewModeAlways, UITextFieldViewModeWhileEditing,
         UITextFieldViewModeUnlessEditing, NSDateFormatterShortStyle, NSDateFormatterMediumStyle,
-        NSDateFormatterLongStyle, NSDateFormatterFullStyle
+        NSDateFormatterLongStyle, NSDateFormatterFullStyle,
+        UITextAlignmentRight, UITextAlignmentCenter, UITextAlignmentLeft
       ]
     end
   end

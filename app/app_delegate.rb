@@ -140,7 +140,8 @@ class AppDelegate
             type: :string,
             placeholder: 'Enter here',
             indented: true,
-            deletable: true
+            deletable: true,
+            text_alignment: :left
           }
         }]
       }, {
