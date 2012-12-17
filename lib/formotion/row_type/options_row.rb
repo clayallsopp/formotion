@@ -10,6 +10,7 @@ module Formotion
         segmentedControl = UISegmentedControl.alloc.initWithItems(item_names || [])
         segmentedControl.selectedSegmentIndex = name_index_of_value(row.value) if row.value
         segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar
+        segmentedControl.userInteractionEnabled = row.editable?
         cell.accessoryView = cell.editingAccessoryView = segmentedControl
 
         segmentedControl.when(UIControlEventValueChanged) do

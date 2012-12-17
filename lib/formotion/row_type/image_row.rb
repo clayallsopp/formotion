@@ -45,6 +45,9 @@ module Formotion
       end
 
       def on_select(tableView, tableViewDelegate)
+        if !row.editable?
+          return
+        end
         @action_sheet = UIActionSheet.alloc.init
         @action_sheet.delegate = self
 

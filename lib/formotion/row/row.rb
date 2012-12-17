@@ -22,6 +22,10 @@ module Formotion
       :format,
       # alternative title for row (only used in EditRow for now)
       :alt_title,
+      # determines if the user can edit the row
+      # OPTIONS: true, false
+      # DEFAULT: true
+      :editable,
 
       # The following apply only to text-input fields
 
@@ -228,6 +232,29 @@ module Formotion
 
     def text_alignment=(alignment)
       @text_alignment = const_int_get("UITextAlignment", alignment)
+    end
+
+    def editable=(editable)
+      case editable
+      when TrueClass
+      when FalseClass
+      when NSNull
+        editable = false
+      when NilClass
+        editable = false
+      when NSString
+        editable = (editable == "true")
+      else
+        raise Formotion::InvalidClassError, "Invalid class for `Row#editable`: #{editable.inspect}; should be TrueClass, FalseCLass, or NSString"
+      end
+      @editable = editable
+    end
+
+    def editable?
+      if !self.editable.nil?
+        return self.editable
+      end
+      true
     end
 
     #########################

@@ -15,6 +15,7 @@ module Formotion
         slideView.tag = SLIDER_VIEW_TAG
         slideView.setValue(row.value, animated:true) if row.value
         slideView.accessibilityLabel = (row.title || "") + " Slider"
+        slideView.userInteractionEnabled = row.editable?
 
         slideView.when(UIControlEventValueChanged) do
           break_with_semaphore do

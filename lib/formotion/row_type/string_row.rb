@@ -39,6 +39,7 @@ module Formotion
         field.autocapitalizationType = row.auto_capitalization if row.auto_capitalization
         field.autocorrectionType = row.auto_correction if row.auto_correction
         field.clearButtonMode = row.clear_button || UITextFieldViewModeWhileEditing
+        field.enabled = row.editable?
 
         add_callbacks(field)
 
@@ -127,6 +128,9 @@ module Formotion
       end
 
       def on_select(tableView, tableViewDelegate)
+        if !row.editable?
+          return
+        end
         row.text_field.becomeFirstResponder
       end
 

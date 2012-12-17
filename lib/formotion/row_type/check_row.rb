@@ -20,6 +20,9 @@ module Formotion
       end
 
       def on_select(tableView, tableViewDelegate)
+        if !row.editable?
+          return
+        end
         if row.section.select_one and !row.value
           row.section.rows.each do |other_row|
             other_row.value = (other_row == row)

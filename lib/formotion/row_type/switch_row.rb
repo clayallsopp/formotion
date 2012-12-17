@@ -14,6 +14,7 @@ module Formotion
             row.value = switchView.isOn
           end
         end
+        switchView.userInteractionEnabled = row.editable?
         observe(self.row, "value") do |old_value, new_value|
           break_with_semaphore do
             switchView.setOn(row.value || false, animated: false)

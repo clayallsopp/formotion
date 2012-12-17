@@ -6,6 +6,8 @@
 
 - Added `:text_alignment` row property which controls how a row's input field's text is aligned (i.e. `:right` (default), `:left`, or `:center`).
 
+- Added `:editable` row property which controls if a user can interact with the row's control (a text input, slider, etc)
+
 ### Bug Fixes
 
 - Fixed size issue with iPhone apps running @2x on an iPad (see `row_type/base.rb#field_buffer`)
