@@ -1,8 +1,11 @@
 describe "Form Persisting" do
 
   it "works" do
+    key = "test_#{rand(255)}"
+    App::Persistence["FORMOTION_#{key}"] = nil
+    App::Persistence["FORMOTION_#{key}_ORIGINAL"] = nil
     f = Formotion::Form.persist({
-      persist_as: "test_#{rand(255)}",
+      persist_as: key,
       sections: [
         rows: [ {
             key: "first",
@@ -24,8 +27,11 @@ describe "Form Persisting" do
   end
 
   it "works with subforms" do
-    f = Formotion::Form.persist({
-      persist_as: "test_#{rand(255)}",
+    key = "test_#{rand(255)}"
+    App::Persistence["FORMOTION_#{key}"] = nil
+    App::Persistence["FORMOTION_#{key}_ORIGINAL"] = nil
+    hash = {
+      persist_as: key,
       sections: [
         rows: [ {
             key: :subform,
@@ -44,7 +50,9 @@ describe "Form Persisting" do
           }
         ]
       ]
-    })
+    }
+    f = Formotion::Form.persist(hash)
+    f.to_hash.should == hash
 
     r = f.sections[0].rows[0].subform.to_form.sections[0].rows[0]
     r.value = "new value"

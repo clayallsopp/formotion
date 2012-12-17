@@ -229,18 +229,20 @@ module Formotion
     # places observers to save on changes
     def open
       @form_observer ||= lambda { |form, saved_form|
-        form.send(:each_row) do |row, index|
-          s_index = row.section.index
-          temp_row = saved_form.sections[s_index].rows[index]
+        form.sections.each_with_index do |section, s_index|
+          section.rows.each_with_index do |row, index|
+            temp_row = saved_form.sections[s_index].rows[index]
 
-          if row.subform?
-            saved_subform = temp_row.subform.to_form
-            @form_observer.call(row.subform.to_form, saved_subform)
-          else
-            row.value = temp_row.value
+            if row.subform?
+              @saved_subform = temp_row.subform.to_form
+              @form_observer.call(row.subform.to_form, @saved_subform)
+              @saved_subform = nil
+            else
+              row.value = temp_row.value
 
-            observe(row, "value") do |old_value, new_value|
-              self.save
+              observe(row, "value") do |old_value, new_value|
+                self.save
+              end
             end
           end
         end
@@ -260,15 +262,16 @@ module Formotion
       App::Persistence[persist_key] = nil
 
       @form_resetter ||= lambda { |form, original_form|
-        form.send(:each_row) do |row, index|
-          s_index = row.section.index
-          temp_row = original_form.sections[s_index].rows[index]
+        form.sections.each_with_index do |section, s_index|
+          section.rows.each_with_index do |row, index|
+            temp_row = original_form.sections[s_index].rows[index]
 
-          if row.subform?
-            original_subform = temp_row.subform.to_form
-            @form_resetter.call(row.subform.to_form, original_subform)
-          else
-            row.value = temp_row.value
+            if row.subform?
+              original_subform = temp_row.subform.to_form
+              @form_resetter.call(row.subform.to_form, original_subform)
+            else
+              row.value = temp_row.value
+            end
           end
         end
       }

@@ -181,7 +181,7 @@ module Formotion
     end
 
     def subform?
-      self.type == :subform
+      self.type.to_s == "subform"
     end
 
     #########################
