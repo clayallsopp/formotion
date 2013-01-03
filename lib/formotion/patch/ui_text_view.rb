@@ -18,7 +18,7 @@ class UITextView
   attr_accessor :menu_options_enabled
 
   def canPerformAction(action, withSender:sender)
-    self.menu_options_enabled
+    self.menu_options_enabled.nil? ? true : self.menu_options_enabled
   end
 
   # block takes argument textView; should return true/false
