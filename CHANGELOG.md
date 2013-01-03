@@ -1,4 +1,4 @@
-## 1.2 - ??
+## 1.2 - January 3, 2013
 
 ### Features
 
@@ -13,6 +13,8 @@
 - Fixed size issue with iPhone apps running @2x on an iPad (see `row_type/base.rb#field_buffer`)
 
 - Fixed bug in `PickerRow` where KVOing `:value` changes woulnd't reflect in the picker UI.
+
+- Fixed bug in a `UITextView` patch that removed copy and paste by default for all `UITextView`s.
 
 ## 1.1.5 - November 9, 2012
 
