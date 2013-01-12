@@ -18,7 +18,7 @@ module Formotion
     def controller=(controller)
       @controller = controller
       @controller.title = self.title
-      self.table = controller.respond_to?(:table_view) ? controller.table_view : controller.tableView
+      self.table = @controller.tableView
     end
 
     def table=(table_view)
