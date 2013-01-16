@@ -93,6 +93,13 @@ class AppDelegate
           type: :date,
           format: :short
         }, {
+          title: "Date (Time)",
+          subtitle: "w/picker_mode => :time",
+          key: :date_time_short,
+          type: :date,
+          picker_mode: :time,
+          format: :short
+        }, {
           title: "Slider",
           key: :slider,
           type: :slider,
