@@ -50,7 +50,6 @@ module Formotion
             if self.row.picker_mode == :countdown
               self.row.value = @picker.countDownDuration
             else
-              puts "picker date is: #{@picker.date} and returning: #{Time.at(@picker.date)}"
               self.row.value = Time.at(@picker.date).to_i 
             end
             update
