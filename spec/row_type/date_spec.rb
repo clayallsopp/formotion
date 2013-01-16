@@ -1,4 +1,4 @@
-MILLENIUM = 946684672
+MILLENIUM = 946684772 # Time.at(MILLENIUM) => 1999-12-31 18:59:32 -0500
 TIME_ZONE = NSTimeZone.timeZoneWithName "Europe/Paris"
 
 describe "Date Row" do
@@ -34,7 +34,7 @@ describe "Date Row" do
   it "should update value when date is picked" do
     cell = @row.make_cell
 
-    @row.object.picker.date = NSDate.dateWithTimeIntervalSince1970(MILLENIUM)
+    @row.object.picker.date = Time.at MILLENIUM
     @row.object.picker.trigger UIControlEventValueChanged
 
     @row.value.should == MILLENIUM
@@ -63,16 +63,16 @@ describe "Date Row" do
   # Modes
   {
     :date => '1/1/00',
-    :time => '12:57 AM',
-    :date_time => '1/1/00, 12:57 AM',
-    :countdown => '00:57'
+    :time => '12:59 AM',
+    :date_time => '1/1/00, 12:59 AM',
+    :countdown => '00:59'
   }.each do |mode, expected_output|
 
     it "should display chosen mode #{mode} date/time format #{expected_output}" do
       @row.format = :short
       @row.picker_mode = mode
       cell = @row.make_cell
-      @row.object.picker.date = NSDate.dateWithTimeIntervalSince1970(MILLENIUM)
+      @row.object.picker.date = Time.at MILLENIUM
       @row.object.picker.trigger UIControlEventValueChanged
 
       @row.text_field.text.should == expected_output

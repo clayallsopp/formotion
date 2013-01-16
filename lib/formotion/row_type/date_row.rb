@@ -12,7 +12,7 @@ module Formotion
       def date_value
         value = self.row.value
         if value.is_a? Numeric
-          NSDate.dateWithTimeIntervalSince1970(value.to_i)
+          Time.at value
         else
           nil
         end
@@ -43,13 +43,13 @@ module Formotion
           picker = UIDatePicker.alloc.initWithFrame(CGRectZero)
           picker.datePickerMode = self.picker_mode
           picker.hidden = false
-          picker.date = self.date_value || NSDate.date
+          picker.date = self.date_value || Time.now
 
           picker.when(UIControlEventValueChanged) do
             if self.row.picker_mode == :countdown
               self.row.value = @picker.countDownDuration
             else
-              self.row.value = @picker.date.timeIntervalSince1970.to_i
+              self.row.value = @picker.date.to_i #timeIntervalSince1970.to_i
             end
             update
           end
