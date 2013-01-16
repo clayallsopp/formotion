@@ -116,6 +116,25 @@ To add your own, check [the guide to adding new row types](https://github.com/cl
 
 `Formotion::Form`, `Formotion::Section`, and `Formotion::Row` all respond to a `::PROPERTIES` attribute. These are settable as an attribute (ie `section.title = 'title'`) or in the initialization hash (ie `{sections: [{title: 'title', ...}]}`). Check the comments in the 3 main files (`form.rb`, `section.rb`, and `row.rb` for details on what these do).
 
+### Setting Initial Values
+
+Forms, particularly edit forms, have default initial values. You can supply these in the `:value` attribute for a given row. So, for example:
+
+```ruby
+{
+  title: "Email",
+  key: :email,
+  placeholder: "me@mail.com",
+  type: :email,
+  auto_correction: :no,
+  auto_capitalization: :none,
+  value: 'zippity_dippity@doo.com'
+}
+```
+
+Setting values for non-string types can be tricky, so you need to watch what the particular field expects. In particular, date types require
+the number of seconds from the beginning of the epoch as a number.
+
 ### Retrieve
 
 You have `form#submit`, `form#on_submit`, and `form#render` at your disposal. Here's an example:
