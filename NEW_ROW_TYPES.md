@@ -54,7 +54,7 @@ module Formotion
       def build_cell(cell)
         blue_box = UIView.alloc.initWithFrame [[10, 10], [30, 30]]
         blux_box.backgroundColor = UIColor.blueColor
-        cell.addSubview = blue_box
+        cell.addSubview blue_box
 
         # return nil because no UITextField added.
         nil
