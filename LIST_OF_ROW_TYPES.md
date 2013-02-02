@@ -4,6 +4,7 @@
 [Email](#email)<br/>
 [Phone](#phone)<br/>
 [Number](#number)<br/>
+[Currency](#currency)<br/>
 [Date](#date)
 
 **Other**<br/>
@@ -129,6 +130,21 @@ The `PhoneRow` is a string input row for a phone number and opens a `UIKeyboardT
 ```
 
 The `NumberRow` is a string input row for a number and opens a `UIKeyboardTypeDecimalPad` keyboard when editing.
+
+
+### <a name="currency"></a> Currency Row
+![Currency row](https://github.com/clayallsopp/formotion/wiki/row-types/currency_row.png)
+
+```ruby
+{
+  title: "Amount",
+  key: :amount,
+  placeholder: "0.00",
+  type: :currency
+}
+```
+
+The `CurrentyRow` is a string input row with a number keyboard that restricts users to entering valid currency without tapping the decimal key on the keyboard.
 
 
 ### <a name="date"></a> Date row

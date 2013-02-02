@@ -172,9 +172,9 @@ module Formotion
               # If this row is part of a template
               # use the parent's key
               kv[row.template_parent.key] ||= []
-              kv[row.template_parent.key] << row.value
+              kv[row.template_parent.key] << row.value_for_save_hash
             else
-              kv[row.key] ||= row.value
+              kv[row.key] ||= row.value_for_save_hash
             end
           }
         end

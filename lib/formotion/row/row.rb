@@ -145,6 +145,14 @@ module Formotion
     #########################
     # pseudo-properties
 
+    def value_for_save_hash
+      if self.object.respond_to? :value_for_save_hash
+        self.object.value_for_save_hash
+      else
+        self.value
+      end
+    end
+
     def index_path
       NSIndexPath.indexPathForRow(self.index, inSection:self.section.index)
     end
