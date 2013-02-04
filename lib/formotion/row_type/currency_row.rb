@@ -1,51 +1,31 @@
 module Formotion
   module RowType
     class CurrencyRow < NumberRow
+      def on_change(text_field)
+        break_with_semaphore do
+          edited_text = text_field.text
+          entered_digits = edited_text.gsub %r{\D+}, ''
+          decimal_num = 0.0
 
-      def add_callbacks(field)
-        super
-
-        field.should_change? do |text_field, range, replacements|
-
-          original_txt = text_field.text
-          edited_txt = original_txt.stringByReplacingCharactersInRange(range, withString:replacements)
-          entered_digits = edited_txt.gsub %r{\D+}, ''
-
-          if entered_digits.length >= 9
-            
-            text_field.text = original_txt
-
-          else 
-
-            if entered_digits.empty?
-              decimal_num = 0.0
-            else
-              decimal_num = entered_digits.to_i * (10 ** currency_scale)
-              decimal_num = decimal_num.to_f
-            end
-
-            text_field.text = number_formatter.stringFromNumber decimal_num
-
+          if !entered_digits.empty?
+            decimal_num = entered_digits.to_i * (10 ** currency_scale.to_i)
+            decimal_num = decimal_num.to_f
           end
 
-          false
+          row.value = decimal_num
+          text_field.text = row_value
         end
-
       end
-
 
       def row_value
         number_formatter.stringFromNumber super.to_f
       end
 
-
       def value_for_save_hash
-        number_formatter.numberFromString(row.text_field.text) || 0.0
+        number_formatter.numberFromString(row_value)
       end
 
-
       private
-
       def number_formatter
         @number_formatter ||= begin
           formatter = NSNumberFormatter.alloc.init
@@ -58,7 +38,6 @@ module Formotion
       def currency_scale
         @currency_scale ||= number_formatter.maximumFractionDigits * -1
       end
-
     end
   end
 end
