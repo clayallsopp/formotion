@@ -136,7 +136,7 @@ module Formotion
 
       # Used when row.value changes
       def update_text_field(new_value)
-        self.row.text_field.text = new_value
+        self.row.text_field.text = row_value
       end
     end
   end
