@@ -1,8 +1,10 @@
 ## 1.3 - ??
 
-### Featuers
+### Features
 
 - Added `:currency` row type, which automatically presents an entered number into the current locale's format (i.e. "$4,003.45" or "€ 3.004,35")
+
+- Correctly handle `on_tap` for `Row` objects, regardless of whether or not they are `:button`s.
 
 ## 1.2 - January 3, 2013
 
