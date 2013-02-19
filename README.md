@@ -175,7 +175,7 @@ Your form values and state are automatically persisted across application loads,
 
 To reset the form, `persist` it and call `reset`, which restores it to the original state.
 
-View the [Persistence Example](./formotion/tree/master/examples/Persistence) to see it in action.
+View the [Persistence Example](./examples/Persistence) to see it in action.
      
 ## Forking
 
