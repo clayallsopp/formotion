@@ -172,6 +172,19 @@ You can pass one of following formats as property:
 
 The `value` is a `NSDate.timeIntervalSince1970` as an integer.
 
+Note that you can pass a `:picker_mode` argument to affect what kind of date picker is displayed:
+
+```ruby
+  :time          # UIDatePickerModeTime
+  :date_time     # UIDatePickerModeDateAndTime
+  :countdown     # UIDatePickerModeCountDownTimer
+```
+
+If none of these are specified, `UIDatePickerModeDate` is used.
+
+Note: If you use `:date_time` or `:time` for the type, `:minute_interval` will be applied to the time picker if you specify a value for it.
+the default is the Apple default of 1.
+
 
 ## Other
 
