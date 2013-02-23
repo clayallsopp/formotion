@@ -17,6 +17,11 @@ BW.require File.expand_path('../formotion/**/*.rb', __FILE__) do
   ['date_row', 'email_row', 'number_row', 'phone_row'].each {|file|
     file("lib/formotion/row_type/#{file}.rb").depends_on 'lib/formotion/row_type/string_row.rb'
   }
+
+  ['currency_row'].each {|file|
+    file("lib/formotion/row_type/#{file}.rb").depends_on 'lib/formotion/row_type/number_row.rb'
+  }
+  
   ['submit_row', 'back_row'].each {|file|
     file("lib/formotion/row_type/#{file}.rb").depends_on 'lib/formotion/row_type/button.rb'
   }

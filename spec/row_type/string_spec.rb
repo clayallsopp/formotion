@@ -53,4 +53,33 @@ describe "String Row Type" do
     cell = @row.make_cell
     @row.text_field.keyboardType.should == UIKeyboardTypeDefault
   end
+
+  describe "on_select" do
+
+    it "should call _on_select" do
+      @row.object.instance_variable_set("@called_on_select", false)
+      def (@row.object)._on_select(a, b); @called_on_select = true end
+      @row.object.on_select(nil, nil)
+      @row.object.instance_variable_get("@called_on_select").should == true
+    end
+
+    describe "when on_tap callback is set" do
+      tests_row :string do |row|
+        @on_tap_called = false
+        row.on_tap { |row| @on_tap_called = true }
+      end
+
+      it "should return true" do
+        @row.object.on_select(nil, nil).should == true
+      end
+
+      it "should call the callback" do
+        @row.object.on_select(nil, nil)
+        @on_tap_called.should == true
+      end
+
+    end
+
+  end
+
 end

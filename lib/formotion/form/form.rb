@@ -172,9 +172,9 @@ module Formotion
               # If this row is part of a template
               # use the parent's key
               kv[row.template_parent.key] ||= []
-              kv[row.template_parent.key] << row.value
+              kv[row.template_parent.key] << row.value_for_save_hash
             else
-              kv[row.key] ||= row.value
+              kv[row.key] ||= row.value_for_save_hash
             end
           }
         end
@@ -260,29 +260,28 @@ module Formotion
 
     def reset
       App::Persistence[persist_key] = nil
-
-      @form_resetter ||= lambda { |form, original_form|
-        form.sections.each_with_index do |section, s_index|
-          section.rows.each_with_index do |row, index|
-            temp_row = original_form.sections[s_index].rows[index]
-
-            if row.subform?
-              original_subform = temp_row.subform.to_form
-              @form_resetter.call(row.subform.to_form, original_subform)
-            else
-              row.value = temp_row.value
-            end
-          end
-        end
-      }
-
       temp_form = Formotion::Form.new(App::Persistence[original_persist_key].unarchive)
-      @form_resetter.call(self, temp_form)
-
+      reset_form_from(temp_form)
       self.save
     end
 
+    def reset_form_from(original_form)
+      sections.each_with_index do |section, s_index|
+        section.rows.each_with_index do |row, index|
+          temp_row = original_form.sections[s_index].rows[index]
+
+          if row.subform?
+            original_subform = temp_row.subform.to_form
+            row.subform.to_form.reset_form_from(original_subform)
+          else
+            row.value = temp_row.value
+          end
+        end
+      end
+    end
+
     private
+
     def persist_key
       "FORMOTION_#{self.persist_as}"
     end

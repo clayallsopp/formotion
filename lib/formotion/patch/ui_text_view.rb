@@ -15,12 +15,6 @@
 # end
 
 class UITextView
-  attr_accessor :menu_options_enabled
-
-  def canPerformAction(action, withSender:sender)
-    self.menu_options_enabled
-  end
-
   # block takes argument textView; should return true/false
   def should_begin?(&block)
     add_delegate_method do

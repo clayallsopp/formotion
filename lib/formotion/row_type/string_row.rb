@@ -128,15 +128,20 @@ module Formotion
       end
 
       def on_select(tableView, tableViewDelegate)
+        super or _on_select(tableView, tableViewDelegate)
+      end
+
+      def _on_select(tableView, tableViewDelegate)
         if !row.editable?
           return
+        else
+          row.text_field.becomeFirstResponder
         end
-        row.text_field.becomeFirstResponder
       end
 
       # Used when row.value changes
       def update_text_field(new_value)
-        self.row.text_field.text = new_value
+        self.row.text_field.text = row_value
       end
     end
   end

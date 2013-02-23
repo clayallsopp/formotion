@@ -12,7 +12,7 @@ module Formotion
       def date_value
         value = self.row.value
         if value.is_a? Numeric
-          Time.at(value)
+          Time.at value
         else
           nil
         end

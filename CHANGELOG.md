@@ -1,4 +1,12 @@
-## 1.2 - ??
+## 1.3 - ??
+
+### Features
+
+- Added `:currency` row type, which automatically presents an entered number into the current locale's format (i.e. "$4,003.45" or "€ 3.004,35")
+
+- Correctly handle `on_tap` for `Row` objects, regardless of whether or not they are `:button`s.
+
+## 1.2 - January 3, 2013
 
 ### Features
 
@@ -13,6 +21,8 @@
 - Fixed size issue with iPhone apps running @2x on an iPad (see `row_type/base.rb#field_buffer`)
 
 - Fixed bug in `PickerRow` where KVOing `:value` changes woulnd't reflect in the picker UI.
+
+- Fixed bug in a `UITextView` patch that removed copy and paste by default for all `UITextView`s.
 
 ## 1.1.5 - November 9, 2012
 
