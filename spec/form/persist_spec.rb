@@ -19,8 +19,8 @@ describe "Form Persisting" do
     r = f.sections[0].rows[0]
     r.value = "new value"
 
-    saved = Formotion::Form.new(f.send(:load_state))
-    saved.sections[0].rows[0].value.should == r.value
+    saved = f.send(:load_state)
+    saved["first"] == r.value
 
     f.reset
     r.value.should == "initial value"
@@ -57,10 +57,45 @@ describe "Form Persisting" do
     r = f.sections[0].rows[0].subform.to_form.sections[0].rows[0]
     r.value = "new value"
 
-    saved = Formotion::Form.new(f.send(:load_state))
-    saved.sections[0].rows[0].subform.to_form.sections[0].rows[0].value.should == r.value
+    saved = f.send(:load_state)
+    saved[:subform]["second"].should == r.value
 
     f.reset
     r.value.should == "initial value"
+  end
+
+  it "works with templates" do
+    key = "test_#{rand(255)}"
+    App::Persistence["FORMOTION_#{key}"] = nil
+    App::Persistence["FORMOTION_#{key}_ORIGINAL"] = nil
+    hash = {
+      persist_as: key,
+      sections: [
+        rows: [{
+          title: "Add nickname",
+          key: :nicknames,
+          type: :template,
+          value: ['Nici', 'Sam'],
+          template: {
+            title: 'Nickname',
+            type: :string,
+            placeholder: 'Enter here',
+            indented: true,
+            deletable: true
+          }
+        }]
+      ]
+    }
+    f = Formotion::Form.persist(hash)
+    f.render.should == { :nicknames => ['Nici', 'Sam'] }
+
+    r = f.sections[0].rows[0]
+    r.value = "Sandra"
+
+    saved = f.send(:load_state)
+    saved[:nicknames].should == ["Sandra", "Sam"]
+
+    f.reset
+    r.value.should == "Nici"
   end
 end

@@ -73,6 +73,7 @@ module Formotion
           row.section.rows.delete_at(row.index)
           row.section.refresh_row_indexes
           delete_row
+          after_delete
         else
           row.value = nil
           self.tableView.reloadData
@@ -83,6 +84,9 @@ module Formotion
         tableView.beginUpdates
         tableView.deleteRowsAtIndexPaths [row.index_path], withRowAnimation:UITableViewRowAnimationBottom
         tableView.endUpdates
+      end
+
+      def after_delete
       end
 
       def break_with_semaphore(&block)
