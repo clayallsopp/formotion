@@ -6,6 +6,12 @@
 
 - Correctly handle `on_tap` for `Row` objects, regardless of whether or not they are `:button`s.
 
+### Bug Fixes
+
+- Fixed a crash that occured when rapidly serializing a form.
+
+- Template rows are now persisted correctly.
+
 ## 1.2 - January 3, 2013
 
 ### Features
