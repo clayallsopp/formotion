@@ -127,6 +127,7 @@ module Formotion
 
     # Owning template row, if applicable
     attr_accessor :template_parent
+    attr_accessor :template_children
 
     def initialize(params = {})
       super
@@ -134,14 +135,13 @@ module Formotion
       BOOLEAN_PROPERTIES.each { |prop|
         Formotion::Conditions.assert_nil_or_boolean(self.send(prop))
       }
+      @template_children = []
     end
 
     # called after section and index have been assigned
     def after_create
-      if self.type == :template and (self.value && self.value.any?)
-        self.value.each do |value|
-          new_row = self.object.build_new_row({:value => value})
-        end
+      if self.type == :template
+        self.object.update_template_rows
       end
     end
 
@@ -193,6 +193,10 @@ module Formotion
 
     def subform?
       self.type.to_s == "subform"
+    end
+
+    def templated?
+      !!self.template_parent
     end
 
     #########################

@@ -29,7 +29,7 @@ module Formotion
 
     def initialize(params = {})
       super
-
+      self.form = params[:form]
       Formotion::Conditions.assert_nil_or_boolean(self.select_one)
 
       rows = params[:rows] || params["rows"]
@@ -112,7 +112,10 @@ module Formotion
     # Retreiving data
     def to_hash
       h = super
-      h[:rows] = self.rows.collect {|row| row.to_hash}
+      h[:rows] = []
+      self.rows.each do |row|
+        h[:rows] << row.to_hash if row.template_parent.nil?
+      end
       h
     end
   end

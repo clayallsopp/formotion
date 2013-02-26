@@ -22,7 +22,8 @@ module Formotion
 
     def self.persist(params = {})
       form = new(params)
-      form.open && form.save
+      form.open
+      form.init_observer_for_save
       form
     end
 
@@ -65,8 +66,8 @@ module Formotion
     # EX
     # @form.create_section(:title => 'Section Title')
     def create_section(hash = {})
+      hash = hash.merge({:form => self})
       section = Formotion::Section.new(hash)
-      section.form = self
       section.index = self.sections.count
       self.sections << section
       section
@@ -168,11 +169,10 @@ module Formotion
         else
           section.rows.each {|row|
             next if row.button?
-            if row.template_parent
+            if row.templated?
               # If this row is part of a template
               # use the parent's key
-              kv[row.template_parent.key] ||= []
-              kv[row.template_parent.key] << row.value_for_save_hash
+              kv[row.template_parent.key] = row.template_parent.value
             else
               kv[row.key] ||= row.value_for_save_hash
             end
@@ -200,7 +200,7 @@ module Formotion
           # see if one of the select one value is used
           unless (section.rows.map{ |r| r.key } & data.keys).empty?
             section.rows.each { |row|
-              row.value = data.has_key?(row.key) ? true : nil 
+              row.value = data.has_key?(row.key) ? true : nil
             }
           end
         else
@@ -221,25 +221,20 @@ module Formotion
     end
 
     alias_method :fill_out, :values=
-  
+
     #########################
     # Persisting Forms
 
     # loads the given settings into the the form, and
     # places observers to save on changes
-    def open
-      @form_observer ||= lambda { |form, saved_form|
+
+    def init_observer_for_save
+      @form_save_observer ||= lambda { |form|
         form.sections.each_with_index do |section, s_index|
           section.rows.each_with_index do |row, index|
-            temp_row = saved_form.sections[s_index].rows[index]
-
             if row.subform?
-              @saved_subform = temp_row.subform.to_form
-              @form_observer.call(row.subform.to_form, @saved_subform)
-              @saved_subform = nil
-            else
-              row.value = temp_row.value
-
+              @form_save_observer.call(row.subform.to_form)
+            elsif !row.templated?
               observe(row, "value") do |old_value, new_value|
                 self.save
               end
@@ -248,36 +243,44 @@ module Formotion
         end
       }
 
-      saved_hash = load_state
-      @form_observer.call(self, Formotion::Form.new(saved_hash))
+      @form_save_observer.call(self)
+    end
+
+    def open
+      @form_observer ||= lambda { |form, saved_render|
+        form.sections.each_with_index do |section, s_index|
+          section.rows.each_with_index do |row, index|
+            next if row.templated?
+            saved_row_value = saved_render[row.key]
+
+            if row.subform?
+              @form_observer.call(row.subform.to_form, saved_row_value)
+            elsif row.type == :template
+              row.value = saved_row_value
+              row.object.update_template_rows
+            else
+              row.value = saved_row_value
+            end
+          end
+        end
+      }
+      rendered_data = load_state
+      if rendered_data
+        @form_observer.call(self, rendered_data)
+      else
+        save
+      end
     end
 
     # places hash of values into application persistance
     def save
-      App::Persistence[persist_key] = to_hash.to_archived_data
-      App::Persistence[original_persist_key] ||= self.to_hash.to_archived_data
+      App::Persistence[persist_key] = render
+      App::Persistence[original_persist_key] ||= render
     end
 
     def reset
-      App::Persistence[persist_key] = nil
-      temp_form = Formotion::Form.new(App::Persistence[original_persist_key].unarchive)
-      reset_form_from(temp_form)
-      self.save
-    end
-
-    def reset_form_from(original_form)
-      sections.each_with_index do |section, s_index|
-        section.rows.each_with_index do |row, index|
-          temp_row = original_form.sections[s_index].rows[index]
-
-          if row.subform?
-            original_subform = temp_row.subform.to_form
-            row.subform.to_form.reset_form_from(original_subform)
-          else
-            row.value = temp_row.value
-          end
-        end
-      end
+      App::Persistence[persist_key] = App::Persistence[original_persist_key]
+      open
     end
 
     private
@@ -291,13 +294,16 @@ module Formotion
     end
 
     def load_state
-      begin
-        state = App::Persistence[persist_key] && App::Persistence[persist_key].unarchive
-      rescue
-        self.save
+      state = App::Persistence[persist_key]
+      # support old archived format
+      if state.respond_to? :unarchive
+        begin
+          form = Formotion::Form.new(state.unarchive)
+          state = form.render
+          p "Old archived data found: #{state}"
+        end
       end
-      
-      state ||= self.to_hash
+      state
     end
 
     def each_row(&block)

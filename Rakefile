@@ -5,6 +5,7 @@ require "bundler/setup"
 
 $:.unshift("./lib/")
 require './lib/formotion'
+require 'guard/motion'
 
 Motion::Project::App.setup do |app|
   # Use `rake config' to see complete project settings.
