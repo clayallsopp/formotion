@@ -251,6 +251,13 @@ You can create a radio button style group by defining a section with `select_one
 }
 ```
 
+This would result in a form's `render` as:
+
+```ruby
+{
+  account_type: :basic
+}
+```
 
 ### <a name="slider"></a> Slider row
 ![Slider row](https://github.com/clayallsopp/formotion/wiki/row-types/slider.png)
