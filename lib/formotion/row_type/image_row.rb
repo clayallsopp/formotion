@@ -81,6 +81,10 @@ module Formotion
           @camera = BW::Device.camera.send((source == :camera) ? :rear : :any)
           @camera.picture(source_type: source, media_types: [:image]) do |result|
             if result[:original_image]
+              #-Resize image when requested and Sugarcube available
+              if result[:original_image].respond_to?(:scale_within) and row.max_image_size
+                result[:original_image]=result[:original_image].scale_within(row.max_image_size)
+              end
               row.value = result[:original_image]
             end
           end
