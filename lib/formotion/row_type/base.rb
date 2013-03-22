@@ -69,6 +69,10 @@ module Formotion
 
       # called when the delete editing style was triggered tableView:commitEditingStyle:forRowAtIndexPath:
       def on_delete(tableView, tableViewDelegate)
+        #-Callback for some app-specific delete functionality
+        if row.on_delete
+          row.on_delete.call(self.row)
+        end
         if row.remove_on_delete?
           row.section.rows.delete_at(row.index)
           row.section.refresh_row_indexes

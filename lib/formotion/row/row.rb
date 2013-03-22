@@ -85,7 +85,11 @@ module Formotion
       :remove_on_delete,
       # In a date/time or time picker, the minute interval can
       # be set. That allows picking by every 15 minutes, etc.
-      :minute_interval
+      :minute_interval,
+      #-Callback for delete an entry
+      :on_delete,
+      #-Callback for some app-specific on_select
+      :on_select,
     ]
     PROPERTIES.each {|prop|
       attr_accessor prop
