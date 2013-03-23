@@ -51,10 +51,17 @@ module Formotion
         @action_sheet = UIActionSheet.alloc.init
         @action_sheet.delegate = self
 
-        @action_sheet.destructiveButtonIndex = (@action_sheet.addButtonWithTitle "Delete") if row.value
-        @action_sheet.addButtonWithTitle "Take" if BW::Device.camera.front? or BW::Device.camera.rear?
-        @action_sheet.addButtonWithTitle "Choose"
-        @action_sheet.cancelButtonIndex = (@action_sheet.addButtonWithTitle "Cancel")
+        #-added some localisation functionality
+        @action_sheet.destructiveButtonIndex = (@action_sheet.addButtonWithTitle BW.localized_string("Delete", nil)) if row.value
+        @action_sheet_index={}
+        if BW::Device.camera.front? or BW::Device.camera.rear?
+          idx=@action_sheet.addButtonWithTitle BW.localized_string("Take", nil)
+          @action_sheet_index[idx]="Take"
+        end
+        idx=@action_sheet.addButtonWithTitle BW.localized_string("Choose")
+        @action_sheet_index[idx]="Choose"
+        idx=@action_sheet.cancelButtonIndex = (@action_sheet.addButtonWithTitle BW.localized_string("Cancel"))
+        @action_sheet_index[idx]="Cancel"
 
         @action_sheet.showInView @image_view
       end
@@ -67,7 +74,8 @@ module Formotion
           return
         end
 
-        case actionSheet.buttonTitleAtIndex(index)
+        #-for localisation, as there is only a string comparison
+        case @action_sheet_index[index]
         when "Take"
           source = :camera
         when "Choose"
