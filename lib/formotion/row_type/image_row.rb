@@ -58,9 +58,9 @@ module Formotion
           idx=@action_sheet.addButtonWithTitle BW.localized_string("Take", nil)
           @action_sheet_index[idx]="Take"
         end
-        idx=@action_sheet.addButtonWithTitle BW.localized_string("Choose")
+        idx=@action_sheet.addButtonWithTitle BW.localized_string("Choose", nil)
         @action_sheet_index[idx]="Choose"
-        idx=@action_sheet.cancelButtonIndex = (@action_sheet.addButtonWithTitle BW.localized_string("Cancel"))
+        idx=@action_sheet.cancelButtonIndex = (@action_sheet.addButtonWithTitle BW.localized_string("Cancel", nil))
         @action_sheet_index[idx]="Cancel"
 
         @action_sheet.showInView @image_view
