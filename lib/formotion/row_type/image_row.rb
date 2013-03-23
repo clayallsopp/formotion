@@ -6,7 +6,8 @@ module Formotion
       IMAGE_VIEW_TAG=1100
 
       def build_cell(cell)
-        add_plus_accessory(cell)
+        #-only show the "plus" when editable
+        add_plus_accessory(cell) if row.editable?
 
         observe(self.row, "value") do |old_value, new_value|
           @image_view.image = new_value
@@ -15,7 +16,8 @@ module Formotion
             cell.accessoryView = cell.editingAccessoryView = nil
           else
             self.row.row_height = 44
-            add_plus_accessory(cell)
+            #-only show the "plus" when editable
+            add_plus_accessory(cell) if row.editable?
           end
           row.form.reload_data
         end
