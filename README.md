@@ -195,6 +195,27 @@ Your form values and state are automatically persisted across application loads,
 To reset the form, `persist` it and call `reset`, which restores it to the original state.
 
 View the [Persistence Example](./examples/Persistence) to see it in action.
+
+### Callbacks
+
+`Row` objects support the following callbacks:
+
+```ruby
+row.on_tap do |row|
+  p "I'm tapped!"
+end
+
+row.on_delete do |row|
+  p "I'm called before the delete animation"
+end
+
+row.on_begin do |row|
+  p "I'm called when my text field begins editing"
+end
+
+row.on_enter do |row|
+  p "I'm called when the user taps the return key while typing in my text field"
+end
      
 ## Forking
 
