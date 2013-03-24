@@ -1,6 +1,11 @@
 module Formotion
   module RowType
     class ImageRow < Base
+      TAKE = BW.localized_string("Take", nil)
+      DELETE = BW.localized_string("Delete", nil)
+      CHOOSE = BW.localized_string("Choose", nil)
+      CANCEL = BW.localized_string("Cancel", nil)
+
       include BW::KVO
 
       IMAGE_VIEW_TAG=1100
@@ -51,17 +56,10 @@ module Formotion
         @action_sheet = UIActionSheet.alloc.init
         @action_sheet.delegate = self
 
-        #-added some localisation functionality
-        @action_sheet.destructiveButtonIndex = (@action_sheet.addButtonWithTitle BW.localized_string("Delete", nil)) if row.value
-        @action_sheet_index={}
-        if BW::Device.camera.front? or BW::Device.camera.rear?
-          idx=@action_sheet.addButtonWithTitle BW.localized_string("Take", nil)
-          @action_sheet_index[idx]="Take"
-        end
-        idx=@action_sheet.addButtonWithTitle BW.localized_string("Choose", nil)
-        @action_sheet_index[idx]="Choose"
-        idx=@action_sheet.cancelButtonIndex = (@action_sheet.addButtonWithTitle BW.localized_string("Cancel", nil))
-        @action_sheet_index[idx]="Cancel"
+        @action_sheet.destructiveButtonIndex = (@action_sheet.addButtonWithTitle DELETE) if row.value
+        @action_sheet.addButtonWithTitle TAKE if BW::Device.camera.front? or BW::Device.camera.rear?
+        @action_sheet.addButtonWithTitle CHOOSE
+        @action_sheet.cancelButtonIndex = (@action_sheet.addButtonWithTitle CANCEL)
 
         @action_sheet.showInView @image_view
       end
@@ -74,13 +72,12 @@ module Formotion
           return
         end
 
-        #-for localisation, as there is only a string comparison
-        case @action_sheet_index[index]
-        when "Take"
+        case actionSheet.buttonTitleAtIndex(index)
+        when TAKE
           source = :camera
-        when "Choose"
+        when CHOOSE
           source = :photo_library
-        when "Cancel"
+        when CANCEL
         else
           p "Unrecognized button title #{actionSheet.buttonTitleAtIndex(index)}"
         end
