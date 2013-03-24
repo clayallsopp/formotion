@@ -45,10 +45,6 @@ module Formotion
       end
 
       def on_select(tableView, tableViewDelegate)
-        #-app-specific on_select
-        if row.on_select
-          row.on_select.call(row)
-        end
         if !row.editable?
           return
         end
