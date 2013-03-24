@@ -85,11 +85,7 @@ module Formotion
       :remove_on_delete,
       # In a date/time or time picker, the minute interval can
       # be set. That allows picking by every 15 minutes, etc.
-      :minute_interval,
-      #-Callback for delete an entry
-      :on_delete,
-      #-Callback for some app-specific on_select
-      :on_select,
+      :minute_interval
     ]
     PROPERTIES.each {|prop|
       attr_accessor prop
@@ -125,6 +121,8 @@ module Formotion
     # callback for what happens when the user
     # taps a ButtonRow
     attr_accessor :on_tap_callback
+    # callback for when a row is tapped
+    attr_accessor :on_delete_callback
 
     # RowType object
     attr_accessor :object
@@ -290,6 +288,10 @@ module Formotion
     # Used in :button type rows
     def on_tap(&block)
       self.on_tap_callback = block
+    end
+
+    def on_delete(&block)
+      self.on_delete_callback = block
     end
 
     #########################
