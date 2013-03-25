@@ -1,8 +1,10 @@
-## 1.3 - ??
+## 1.3 - March 25, 2013
 
 ### Features
 
 - Added `:currency` row type, which automatically presents an entered number into the current locale's format (i.e. "$4,003.45" or "€ 3.004,35")
+
+- Added `on_delete` callback for when a `Row` is deleted
 
 - Correctly handle `on_tap` for `Row` objects, regardless of whether or not they are `:button`s.
 
@@ -11,6 +13,8 @@
 - Fixed a crash that occured when rapidly serializing a form.
 
 - Template rows are now persisted correctly.
+
+- `ImageRow`s which are disabled will not show the "plus" icon
 
 ## 1.2 - January 3, 2013
 
