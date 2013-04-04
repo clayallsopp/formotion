@@ -55,7 +55,10 @@ class UITextView
   end
 
   def placeholder_rect
-    CGRectMake(self.contentInset.left + 10.0, self.contentInset.top, self.frame.size.width - self.contentInset.left - self.contentInset.right - 16.0, self.frame.size.height - self.contentInset.top - self.contentInset.bottom - 16.0)
+    x_offset = font.xHeight
+    y_offset = font.capHeight + font.descender
+
+    CGRectMake(self.contentInset.left + x_offset, self.contentInset.top + y_offset, self.frame.size.width - self.contentInset.left - self.contentInset.right - x_offset, self.frame.size.height - self.contentInset.top - self.contentInset.bottom - y_offset)
   end
 
   def placeholder_color

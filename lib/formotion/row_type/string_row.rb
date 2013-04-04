@@ -69,6 +69,7 @@ module Formotion
           end
         end
 
+        field.font = row.font if row.font
         field.placeholder = row.placeholder
         field.text = row_value
         cell.addSubview(field)

@@ -26,6 +26,13 @@ describe "Text Row" do
     @row.text_field.text.should == 'new value'
   end
 
+  it "should use custom font" do
+    huge_non_default_font = UIFont.boldSystemFontOfSize(20)
+    @row.font = huge_non_default_font
+    cell = @row.make_cell
+    @row.text_field.font.should == huge_non_default_font
+  end
+
   # Placeholder
   it "should have no placeholder by default" do
     cell = @row.make_cell
