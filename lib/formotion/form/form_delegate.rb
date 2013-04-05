@@ -1,3 +1,5 @@
+motion_require "../base"
+
 module Formotion
   class Form < Formotion::Base
     attr_reader :table

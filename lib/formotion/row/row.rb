@@ -1,3 +1,5 @@
+motion_require "../base"
+
 module Formotion
   class Row < Formotion::Base
     PROPERTIES = [

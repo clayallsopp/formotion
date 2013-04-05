@@ -1,3 +1,5 @@
+motion_require 'base'
+
 # Define template row:
 # {
 #   title: "Add nickname",

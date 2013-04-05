@@ -1,3 +1,5 @@
+motion_require 'base'
+
 module Formotion
   module RowType
     class SliderRow < Base
