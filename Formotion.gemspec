@@ -15,6 +15,6 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_dependency "bubble-wrap", ">= 1.1.4"
-  s.add_dependency "motion-require", "~> 0.0.2"
+  s.add_dependency "motion-require", "~> 0.0.3"
   s.add_development_dependency 'rake'
 end
