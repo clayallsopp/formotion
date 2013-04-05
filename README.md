@@ -1,5 +1,7 @@
 # Formotion
 
+[![Build Status](https://travis-ci.org/clayallsopp/formotion.png)](https://travis-ci.org/clayallsopp/formotion)
+
 Make this:
 
 ![Complex data form](http://i.imgur.com/TMwXI.png)
