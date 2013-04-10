@@ -87,7 +87,12 @@ module Formotion
       :remove_on_delete,
       # In a date/time or time picker, the minute interval can
       # be set. That allows picking by every 15 minutes, etc.
-      :minute_interval
+      :minute_interval,
+      # Display an inputAccessoryView when editing a StringRow.
+      # Default input accessory view is nav bar with a "Done" button.
+      # It can be changed by overriding the input_accessory_view method.
+      # DEFAULT is false
+      :display_input_accessory_view
     ]
     PROPERTIES.each {|prop|
       attr_accessor prop

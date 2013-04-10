@@ -42,6 +42,7 @@ module Formotion
         field.autocorrectionType = row.auto_correction if row.auto_correction
         field.clearButtonMode = row.clear_button || UITextFieldViewModeWhileEditing
         field.enabled = row.editable?
+        field.inputAccessoryView = input_accessory_view if row.display_input_accessory_view
 
         add_callbacks(field)
 
@@ -145,6 +146,29 @@ module Formotion
       def update_text_field(new_value)
         self.row.text_field.text = row_value
       end
+
+      # Creates the default inputAccessoryView to show
+      # if display_input_accessory_view property is set.
+      def input_accessory_view
+        @nav_bar ||= begin
+          nav_bar = UINavigationBar.alloc.initWithFrame([[0, 0], [320, 44]])
+          nav_bar.autoresizingMask = UIViewAutoresizingFlexibleWidth
+          item = UINavigationItem.new
+          item.rightBarButtonItem = UIBarButtonItem.alloc.initWithBarButtonSystemItem(
+              UIBarButtonSystemItemDone,
+              target: self,
+              action: :done_editing)
+          nav_bar.items = [item]
+
+          nav_bar
+        end
+      end
+
+      # Callback for "Done" button in input_accessory_view
+      def done_editing
+        self.row.text_field.endEditing(true)
+      end
+
     end
   end
 end
