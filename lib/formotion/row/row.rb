@@ -89,10 +89,9 @@ module Formotion
       # be set. That allows picking by every 15 minutes, etc.
       :minute_interval,
       # Display an inputAccessoryView when editing a StringRow.
-      # Default input accessory view is nav bar with a "Done" button.
-      # It can be changed by overriding the input_accessory_view method.
-      # DEFAULT is false
-      :display_input_accessory_view
+      # OPTIONS: :done (a black translucent toolbar with a right-aligned "Done" button)
+      # DEFAULT is nil
+      :input_accessory
     ]
     PROPERTIES.each {|prop|
       attr_accessor prop

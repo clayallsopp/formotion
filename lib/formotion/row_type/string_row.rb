@@ -42,7 +42,7 @@ module Formotion
         field.autocorrectionType = row.auto_correction if row.auto_correction
         field.clearButtonMode = row.clear_button || UITextFieldViewModeWhileEditing
         field.enabled = row.editable?
-        field.inputAccessoryView = input_accessory_view if row.display_input_accessory_view
+        field.inputAccessoryView = input_accessory_view(row.input_accessory) if row.input_accessory
 
         add_callbacks(field)
 
@@ -147,20 +147,34 @@ module Formotion
         self.row.text_field.text = row_value
       end
 
-      # Creates the default inputAccessoryView to show
-      # if display_input_accessory_view property is set.
-      def input_accessory_view
-        @nav_bar ||= begin
-          nav_bar = UINavigationBar.alloc.initWithFrame([[0, 0], [320, 44]])
-          nav_bar.autoresizingMask = UIViewAutoresizingFlexibleWidth
-          item = UINavigationItem.new
-          item.rightBarButtonItem = UIBarButtonItem.alloc.initWithBarButtonSystemItem(
-              UIBarButtonSystemItemDone,
-              target: self,
-              action: :done_editing)
-          nav_bar.items = [item]
+      # Creates the inputAccessoryView to show
+      # if input_accessory property is set on row.
+      # :done is currently the only supported option.
+      def input_accessory_view(input_accessory)
+        case input_accessory
+        when :done
+          @input_accessory ||= begin
+            tool_bar = UIToolbar.alloc.initWithFrame([[0, 0], [0, 44]])
+            tool_bar.autoresizingMask = UIViewAutoresizingFlexibleWidth
+            tool_bar.barStyle = UIBarStyleBlack
+            tool_bar.translucent = true
 
-          nav_bar
+            left_space = UIBarButtonItem.alloc.initWithBarButtonSystemItem(
+                UIBarButtonSystemItemFlexibleSpace,
+                target: nil,
+                action: nil)
+
+            done_button = UIBarButtonItem.alloc.initWithBarButtonSystemItem(
+                UIBarButtonSystemItemDone,
+                target: self,
+                action: :done_editing)
+
+            tool_bar.items = [left_space, done_button]
+
+            tool_bar
+          end
+        else
+          nil
         end
       end
 
