@@ -40,20 +40,26 @@ module Formotion
       }
     end
 
-    def build_row(&block)
-      row = create_row
-      block.call(row)
-      row
-    end
-
-    def create_row(hash = {})
+    def generate_row(hash = {})
       row = hash
       if hash.class == Hash
         row = Formotion::Row.new(hash)
       end
       row.section = self
       row.index = self.rows.count
-      # dont move to after the appending.
+      row
+    end
+
+    def build_row(&block)
+      row = generate_row
+      block.call(row)
+      row.after_create
+      self.rows << row
+      row
+    end
+
+    def create_row(hash = {})
+      row = generate_row(hash)
       row.after_create
       self.rows << row
       row
