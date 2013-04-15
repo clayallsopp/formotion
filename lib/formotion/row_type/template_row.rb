@@ -57,6 +57,7 @@ module Formotion
             template_value = row.template_parent.value
             template_value.delete_at(row.index)
             row.template_parent.value = template_value
+            row.template_parent.template_children.delete_at(row.index)
           end
         end
         new_row.remove_on_delete = true
