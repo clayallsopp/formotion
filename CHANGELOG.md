@@ -1,3 +1,17 @@
+## 1.3.1 - April 15, 2013
+
+### Features
+
+- Added `:input_accessory` property, which currently accepts `:done` as the value. This will add a `UIToolbar` above the keyboard with a "Done" button the user can tap to dismiss the keyboard.
+
+- Added `Row#on_delete` callback which occurs when a row is swipe-to-delete'd.
+
+### Bug Fixes
+
+-  `:image` rows which are not editable do not show the "plus" icon.
+
+- Fixed bugs in `:template` rows (see [#100](https://github.com/clayallsopp/formotion/issues/100) and [#101](https://github.com/clayallsopp/formotion/pull/101)).
+
 ## 1.3 - March 25, 2013
 
 ### Features
