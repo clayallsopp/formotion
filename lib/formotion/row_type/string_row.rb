@@ -1,3 +1,5 @@
+motion_require 'base'
+
 module Formotion
   module RowType
     class StringRow < Base
@@ -40,6 +42,7 @@ module Formotion
         field.autocorrectionType = row.auto_correction if row.auto_correction
         field.clearButtonMode = row.clear_button || UITextFieldViewModeWhileEditing
         field.enabled = row.editable?
+        field.inputAccessoryView = input_accessory_view(row.input_accessory) if row.input_accessory
 
         add_callbacks(field)
 
@@ -144,6 +147,43 @@ module Formotion
       def update_text_field(new_value)
         self.row.text_field.text = row_value
       end
+
+      # Creates the inputAccessoryView to show
+      # if input_accessory property is set on row.
+      # :done is currently the only supported option.
+      def input_accessory_view(input_accessory)
+        case input_accessory
+        when :done
+          @input_accessory ||= begin
+            tool_bar = UIToolbar.alloc.initWithFrame([[0, 0], [0, 44]])
+            tool_bar.autoresizingMask = UIViewAutoresizingFlexibleWidth
+            tool_bar.barStyle = UIBarStyleBlack
+            tool_bar.translucent = true
+
+            left_space = UIBarButtonItem.alloc.initWithBarButtonSystemItem(
+                UIBarButtonSystemItemFlexibleSpace,
+                target: nil,
+                action: nil)
+
+            done_button = UIBarButtonItem.alloc.initWithBarButtonSystemItem(
+                UIBarButtonSystemItemDone,
+                target: self,
+                action: :done_editing)
+
+            tool_bar.items = [left_space, done_button]
+
+            tool_bar
+          end
+        else
+          nil
+        end
+      end
+
+      # Callback for "Done" button in input_accessory_view
+      def done_editing
+        self.row.text_field.endEditing(true)
+      end
+
     end
   end
 end

@@ -33,6 +33,28 @@ describe "FormController/TemplateRow" do
     @controller = nil
   end
 
+  it "should work with DSL" do
+    @form = Formotion::Form.new
+
+    @form.build_section do |section|
+      section.build_row do |row|
+        row.title = "Add element"
+        row.type = :template
+        row.key = :template
+        row.value = ["Value 1", "Value 2"]
+        row.template = {
+          title: 'Element',
+          type: :string,
+          indented: true,
+          deletable: true
+        }
+      end
+    end
+
+    @controller ||= Formotion::FormController.alloc.initWithForm(@form)
+    @form.render[:template].should == ['Value 1', 'Value 2']
+  end
+
   it "should insert row" do
     tap("Add element")
     @form.sections.first.rows.size.should == 3

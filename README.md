@@ -1,5 +1,7 @@
 # Formotion
 
+[![Build Status](https://travis-ci.org/clayallsopp/formotion.png)](https://travis-ci.org/clayallsopp/formotion)
+
 Make this:
 
 ![Complex data form](http://i.imgur.com/TMwXI.png)
@@ -216,6 +218,7 @@ end
 row.on_enter do |row|
   p "I'm called when the user taps the return key while typing in my text field"
 end
+```
      
 ## Forking
 

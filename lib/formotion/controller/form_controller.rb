@@ -1,3 +1,5 @@
+motion_require '../patch/ui_text_field'
+
 #################
 #
 # Formotion::FormController

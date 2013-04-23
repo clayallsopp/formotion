@@ -1,3 +1,5 @@
+motion_require 'button'
+
 module Formotion
   module RowType
     class SubmitRow < ButtonRow
