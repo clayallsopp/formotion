@@ -57,10 +57,24 @@ class AppDelegate
           type: :string,
           row_height: 60
         }, {
-          title: "Text",
+            title: "Text",
+            key: :text,
+            type: :text,
+            placeholder: "Enter your text here",
+            row_height: 100
+        }, {
+          title: "Big Text",
           key: :text,
           type: :text,
-          placeholder: "Enter your text here",
+          font: {name: 'Helvetica', size: 24},
+          placeholder: "Enter your big text here",
+          row_height: 100
+        }, {
+          title: "Small Text",
+          key: :text,
+          type: :text,
+          font: {name: 'Chalkduster', size: 8},
+          placeholder: "Enter your small text here",
           row_height: 100
         }, {
           title: "Check",

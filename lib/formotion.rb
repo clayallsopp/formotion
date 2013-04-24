@@ -1,5 +1,6 @@
 require File.expand_path(File.join(File.dirname(__FILE__), "formotion/version"))
 require 'bubble-wrap/core'
+require 'bubble-wrap/font'
 require 'bubble-wrap/camera'
 
 require 'motion-require'
