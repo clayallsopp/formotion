@@ -23,7 +23,7 @@ module Formotion
         field.autocorrectionType = row.auto_correction if row.auto_correction
 
         # must be set prior to placeholder!
-        field.font = row.font if row.font
+        field.font = BW::Font.new(row.font) if row.font
         field.placeholder = row.placeholder
         field.enabled = row.editable?
 

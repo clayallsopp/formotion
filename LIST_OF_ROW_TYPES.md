@@ -89,6 +89,34 @@ The `TextRow` is a multiline text input row and opens the default keyboard when 
 To define the height of the row set the property `row_height`.
 
 
+#### <a name="text_fonts"></a> Text row with Big Font
+![Text Row](https://github.com/clayallsopp/formotion/wiki/row-types/text_big_font.png)
+
+```ruby
+{
+  title: "Big Text",
+  key: :text,
+  type: :text,
+  font: {name: 'Helvetica', size: 24},
+  placeholder: "Enter your big text here",
+  row_height: 100
+}
+```
+
+#### <a name="text_fonts"></a> Text row with Small Font
+![Text Row](https://github.com/clayallsopp/formotion/wiki/row-types/text_small_font.png)
+
+```ruby
+{
+  title: "Small Text",
+  key: :text,
+  type: :text,
+  font: {name: 'Chalkduster', size: 8},
+  placeholder: "Enter your small text here",
+  row_height: 100
+}
+```
+
 ### <a name="email"></a> Email row
 ![Email row](https://github.com/clayallsopp/formotion/wiki/row-types/email.png)
 ```ruby
