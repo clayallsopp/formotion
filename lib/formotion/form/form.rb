@@ -96,6 +96,13 @@ module Formotion
       self.sections[index_path.section].rows[index_path.row]
     end
 
+    def row(key)
+      each_row do |row|
+        return row if row.key == key
+      end
+      nil
+    end
+
     #########################
     #  callbacks
 

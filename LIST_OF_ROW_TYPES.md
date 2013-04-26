@@ -414,10 +414,11 @@ Use a `:display_key` to show the value of the subform in the row:
 {
   title: "Any Button",
   type: :button,
+  key: :some_button
 }
 
 # later...
-form.sections[0].rows[0].on_tap do |row|
+form.row(:some_button).on_tap do |row|
   # do something when tapped
 end
 ```
