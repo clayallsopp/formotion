@@ -131,13 +131,7 @@ module Formotion
       end
 
       def on_select(tableView, tableViewDelegate)
-        super or _on_select(tableView, tableViewDelegate)
-      end
-
-      def _on_select(tableView, tableViewDelegate)
-        if !row.editable?
-          return
-        else
+        if row.editable?
           row.text_field.becomeFirstResponder
         end
       end

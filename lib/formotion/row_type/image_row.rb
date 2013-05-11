@@ -100,7 +100,7 @@ module Formotion
         @add_button ||= begin
           button = UIButton.buttonWithType(UIButtonTypeContactAdd)
           button.when(UIControlEventTouchUpInside) do
-            self.on_select(nil, nil)
+            self._on_select(nil, nil)
           end
           button
         end

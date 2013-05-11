@@ -92,7 +92,7 @@ module Formotion
     def tableView(tableView, didSelectRowAtIndexPath:indexPath)
       tableView.deselectRowAtIndexPath(indexPath, animated:true)
       row = row_for_index_path(indexPath)
-      row.object.on_select(tableView, self)
+      row.object._on_select(tableView, self)
     end
 
     def tableView(tableView, editingStyleForRowAtIndexPath:indexPath)

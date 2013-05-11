@@ -8,7 +8,7 @@ describe "Back Row" do
   it "should pop subform on select" do
     form = FakeForm.new
     @row.instance_variable_set("@section", form)
-    @row.object.on_select(nil, nil)
+    @row.object._on_select(nil, nil)
     form.controller.pop_subform_called.should == true
   end
 end

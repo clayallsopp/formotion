@@ -11,7 +11,7 @@ describe "Base Row Type" do
     tests_row :dummy
 
     it "should return false if callback is not defined" do
-      @row.object.on_select(nil, nil).should == false
+      @row.object._on_select(nil, nil).should == false
     end
 
     describe 'when on_tap_callback is set' do
@@ -24,11 +24,11 @@ describe "Base Row Type" do
       end
 
       it "should return true" do
-        @row.object.on_select(nil, nil).should == true
+        @row.object._on_select(nil, nil).should == true
       end
 
       it "should call the callback" do
-        @row.object.on_select(nil, nil)
+        @row.object._on_select(nil, nil)
         @called.should == true
       end
 
