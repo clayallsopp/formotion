@@ -52,6 +52,32 @@ describe "Forms" do
     row.title.should == "Label"
     row.subtitle.should == "Placeholder"
   end
+  
+  it "should return row by key" do
+    @form = Formotion::Form.new(sections: [{
+      rows: [{
+        key: :email,
+        type: :email,
+        editable: true,
+        title: 'Email'
+      }]
+    }])
+
+    expected = @form.sections[0].rows[0]
+    @form.row(:email).should == expected
+  end
+  
+  it "should return nil for row by key if key does not exist" do
+    @form = Formotion::Form.new(sections: [{
+      rows: [{
+        key: :email,
+        type: :email,
+        editable: true,
+        title: 'Email'
+      }]
+    }])
+    @form.row(:foobar).should.be.nil
+  end
 
   it "render works correctly" do
     @form = Formotion::Form.new(sections: [{
