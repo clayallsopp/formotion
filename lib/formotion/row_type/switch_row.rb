@@ -6,7 +6,7 @@ module Formotion
       include BW::KVO
 
       def build_cell(cell)
-        cell.selectionStyle = UITableViewCellSelectionStyleNone
+        cell.selectionStyle = self.row.selection_style || UITableViewCellSelectionStyleNone
         switchView = UISwitch.alloc.initWithFrame(CGRectZero)
         switchView.accessibilityLabel = (row.title || "") + " Switch"
         cell.accessoryView = cell.editingAccessoryView = switchView

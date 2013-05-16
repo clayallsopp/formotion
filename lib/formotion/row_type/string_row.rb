@@ -21,6 +21,7 @@ module Formotion
       # Also does the layoutSubviews swizzle trick
       # to size the UITextField so it won't bump into the titleLabel.
       def build_cell(cell)
+        cell.selectionStyle = self.row.selection_style || UITableViewCellSelectionStyleBlue
         field = UITextField.alloc.initWithFrame(CGRectZero)
         field.tag = TEXT_FIELD_TAG
 

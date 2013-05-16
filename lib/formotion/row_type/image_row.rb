@@ -13,6 +13,7 @@ module Formotion
       IMAGE_VIEW_TAG=1100
 
       def build_cell(cell)
+        cell.selectionStyle = self.row.selection_style || UITableViewCellSelectionStyleBlue
         # only show the "plus" when editable
         add_plus_accessory(cell) if row.editable?
 
