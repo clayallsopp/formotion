@@ -7,6 +7,7 @@ module Formotion
       LABEL_TAG=1001
 
       def build_cell(cell)
+        cell.selectionStyle = self.row.selection_style || UITableViewCellSelectionStyleBlue
         cell.accessoryType = cell.editingAccessoryType = UITableViewCellAccessoryDisclosureIndicator
 
         cell.contentView.addSubview(self.display_key_label)

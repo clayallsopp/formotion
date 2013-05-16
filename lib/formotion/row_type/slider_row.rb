@@ -8,7 +8,7 @@ module Formotion
       SLIDER_VIEW_TAG = 1200
 
       def build_cell(cell)
-        cell.selectionStyle = UITableViewCellSelectionStyleNone
+        cell.selectionStyle = self.row.selection_style || UITableViewCellSelectionStyleNone
         slideView = UISlider.alloc.initWithFrame(CGRectZero)
         cell.accessoryView = cell.editingAccessoryView = slideView
         row.range ||= (1..10)

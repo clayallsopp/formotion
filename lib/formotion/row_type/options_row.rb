@@ -8,7 +8,7 @@ module Formotion
       include RowType::ItemsMapper
 
       def build_cell(cell)
-        cell.selectionStyle = UITableViewCellSelectionStyleNone
+        cell.selectionStyle = self.row.selection_style || UITableViewCellSelectionStyleNone
 
         segmentedControl = UISegmentedControl.alloc.initWithItems(item_names || [])
         segmentedControl.selectedSegmentIndex = name_index_of_value(row.value) if row.value

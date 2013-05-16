@@ -27,7 +27,7 @@ module Formotion
       end
 
       def build_cell(cell)
-        cell.selectionStyle = UITableViewCellSelectionStyleBlue
+        cell.selectionStyle = self.row.selection_style || UITableViewCellSelectionStyleBlue
         @add_button ||= begin
           button = UIButton.buttonWithType(UIButtonTypeContactAdd)
           button.when(UIControlEventTouchUpInside) do
