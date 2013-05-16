@@ -93,7 +93,11 @@ module Formotion
       # Display an inputAccessoryView when editing a StringRow.
       # OPTIONS: :done (a black translucent toolbar with a right-aligned "Done" button)
       # DEFAULT is nil
-      :input_accessory
+      :input_accessory,
+      # Cell selection style
+      # OPTIONS: :blue, :gray, :none
+      # DEFAULT is :blue
+      :selection_style
     ]
     PROPERTIES.each {|prop|
       attr_accessor prop
@@ -257,6 +261,10 @@ module Formotion
 
     def text_alignment=(alignment)
       @text_alignment = const_int_get("UITextAlignment", alignment)
+    end
+
+    def selection_style=(style)
+      @selection_style = const_int_get("UITableViewCellSelectionStyle", style || :blue)
     end
 
     def editable=(editable)
