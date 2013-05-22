@@ -28,6 +28,7 @@ module Formotion
         end
 
         display_key_label.highlightedTextColor = cell.textLabel.highlightedTextColor
+        nil
       end
 
       def update_cell(cell)
