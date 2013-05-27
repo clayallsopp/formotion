@@ -5,6 +5,7 @@ module Formotion
   module RowType
     class PickerRow < StringRow
       include RowType::ItemsMapper
+      include RowType::MultiChoiceRow
 
       def after_build(cell)
         self.row.text_field.inputView = self.picker
