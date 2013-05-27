@@ -3,17 +3,7 @@ motion_require 'string_row'
 module Formotion
   module RowType
     class DateRow < StringRow
-
-      def build_cell(cell)
-        field = super(cell)
-        field.clearButtonMode = UITextFieldViewModeNever
-        field.swizzle(:caretRectForPosition) do
-          def caretRectForPosition(position)
-            CGRectZero
-          end
-        end
-        field
-      end
+      include RowType::MultiChoiceRow
 
       # overwrite Character on_change method
       def on_change(text_field)
@@ -50,13 +40,6 @@ module Formotion
       def after_build(cell)
         self.row.text_field.inputView = self.picker
         update
-      end
-
-      def add_callbacks(field)
-        super
-        field.should_change? do |text_field|
-          false
-        end
       end
 
       def picker

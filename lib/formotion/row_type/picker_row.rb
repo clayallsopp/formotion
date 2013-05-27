@@ -5,28 +5,11 @@ module Formotion
   module RowType
     class PickerRow < StringRow
       include RowType::ItemsMapper
-
-      def build_cell(cell)
-        field = super(cell)
-        field.clearButtonMode = UITextFieldViewModeNever
-        field.swizzle(:caretRectForPosition) do
-          def caretRectForPosition(position)
-            CGRectZero
-          end
-        end
-        field
-      end
+      include RowType::MultiChoiceRow
 
       def after_build(cell)
         self.row.text_field.inputView = self.picker
         self.row.text_field.text = name_for_value(row.value).to_s
-      end
-
-      def add_callbacks(field)
-        super
-        field.should_change? do |text_field|
-          false
-        end
       end
 
       def picker
