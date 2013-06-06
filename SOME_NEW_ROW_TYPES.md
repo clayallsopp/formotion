@@ -9,7 +9,7 @@
 ## Other
 
 ### <a name="mapview"></a> Mapview row
-![Static row](https://github.com/clayallsopp/formotion/wiki/row-types/static.png)
+![Mapview row](https://github.com/rheoli/formotion/wiki/row-types/Mapview.png)
 ```ruby
 {
   title: "Map",
@@ -23,7 +23,7 @@ Shows a map with a pin at the coordinates from value.
 
 
 ### <a name="webview"></a> Webview row
-![Static row](https://github.com/clayallsopp/formotion/wiki/row-types/static.png)
+![Webview row](ttps://github.com/rheoli/formotion/wiki/row-types/Webview.png)
 ```ruby
 {
   title: "Page",
@@ -34,7 +34,7 @@ Shows a map with a pin at the coordinates from value.
 ```
 
 ### <a name="pagedimage"></a> Pagedimage row
-![Static row](https://github.com/clayallsopp/formotion/wiki/row-types/static.png)
+![Pagedimage row](ttps://github.com/rheoli/formotion/wiki/row-types/Pagedimage.pngg)
 ```ruby
 {
   title: "Photos",
@@ -45,7 +45,7 @@ Shows a map with a pin at the coordinates from value.
 ```
 
 ### <a name="object"></a> Object row
-![Static row](https://github.com/clayallsopp/formotion/wiki/row-types/static.png)
+
 ```ruby
 {
   title: "My Data",
