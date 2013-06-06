@@ -44,10 +44,16 @@ module Formotion
         @map_view = MKMapView.alloc.init
         @map_view.delegate = self
         if row.value
-          region = MKCoordinateRegionMakeWithDistance(row.value, 400.0, 480.0)
-          @map_view.setRegion(region, animated:true)
-          m=MapviewRowData.new(nil, nil, row.value)
-          @map_view.addAnnotation(m)
+          coord = row.value
+          if row.value.is_a?(Array) and row.value.size==2
+            coord = CLLocationCoordinate2D.new(row.value[0], row.value[1])
+          end
+          if coord.is_a?(CLLocationCoordinate2D)
+            region = MKCoordinateRegionMakeWithDistance(coord, 400.0, 480.0)
+            @map_view.setRegion(region, animated:true)
+            m=MapviewRowData.new(nil, nil, coord)
+            @map_view.addAnnotation(m)
+          end
         end
         @map_view.tag = MAP_VIEW_TAG
         @map_view.contentMode = UIViewContentModeScaleAspectFit
