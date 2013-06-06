@@ -34,7 +34,7 @@ Shows a map with a pin at the coordinates from value.
 ```
 
 ### <a name="pagedimage"></a> Pagedimage row
-![Pagedimage row](https://github.com/rheoli/formotion/wiki/row-types/Pagedimage.pngg)
+![Pagedimage row](https://github.com/rheoli/formotion/wiki/row-types/Pagedimage.png)
 ```ruby
 {
   title: "Photos",
