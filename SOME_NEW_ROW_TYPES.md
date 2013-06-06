@@ -23,7 +23,7 @@ Shows a map with a pin at the coordinates from value.
 
 
 ### <a name="webview"></a> Webview row
-![Webview row](ttps://github.com/rheoli/formotion/wiki/row-types/Webview.png)
+![Webview row](https://github.com/rheoli/formotion/wiki/row-types/Webview.png)
 ```ruby
 {
   title: "Page",
@@ -34,7 +34,7 @@ Shows a map with a pin at the coordinates from value.
 ```
 
 ### <a name="pagedimage"></a> Pagedimage row
-![Pagedimage row](ttps://github.com/rheoli/formotion/wiki/row-types/Pagedimage.pngg)
+![Pagedimage row](https://github.com/rheoli/formotion/wiki/row-types/Pagedimage.pngg)
 ```ruby
 {
   title: "Photos",
