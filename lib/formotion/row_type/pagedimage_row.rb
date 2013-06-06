@@ -19,8 +19,8 @@ module Formotion
         
         @page_view     = UIPageControl.alloc.init
         @page_view.tag = PAGE_VIEW_TAG
-        @page_view.pageIndicatorTintColor        = '#d0d0d0'.uicolor
-        @page_view.currentPageIndicatorTintColor = '#505050'.uicolor
+        @page_view.pageIndicatorTintColor        = '#d0d0d0'.to_color
+        @page_view.currentPageIndicatorTintColor = '#505050'.to_color
         @page_view.currentPage   = 0
         @page_view.numberOfPages = self.row.value.size
         @page_view.when(UIControlEventValueChanged) do
