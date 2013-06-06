@@ -33,6 +33,7 @@ Shows a map with a pin at the coordinates from value.
 }
 ```
 
+
 ### <a name="pagedimage"></a> Pagedimage row
 ![Pagedimage row](https://github.com/rheoli/formotion/wiki/row-types/Pagedimage.png)
 ```ruby
@@ -43,6 +44,8 @@ Shows a map with a pin at the coordinates from value.
   row_height: 200     # for better viewing
 }
 ```
+Same functionality as ImageRow but ypu can scroll through many photos.
+
 
 ### <a name="object"></a> Object row
 
