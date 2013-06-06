@@ -5,7 +5,8 @@
 [Phone](#phone)<br/>
 [Number](#number)<br/>
 [Currency](#currency)<br/>
-[Date](#date)
+[Date](#date)<br/>
+[Object](#object)<br/>
 
 **Other**<br/>
 [Static](#static)<br/>
@@ -16,7 +17,10 @@
 [Option](#option)<br/>
 [Picker](#picker)<br/>
 [Subform](#subform)<br/>
-[Template](#template)
+[Template](#template)<br/>
+[Mapview](#mapview)<br/>
+[Webview](#webview)<br/>
+[Pagedimage](#pagedimage)<br/>
 
 **Buttons**<br/>
 [Button](#button)<br/>
@@ -214,6 +218,21 @@ Note: If you use `:date_time` or `:time` for the type, `:minute_interval` will b
 the default is the Apple default of 1.
 
 
+### <a name="object"></a> Object row
+
+```ruby
+{
+  title: "My Data",
+  type: :object,
+  value: object       # an object
+}
+```
+
+Same as StringRow with the difference that it would not change the row.value to string.
+The object needs a to_s method.
+
+
+
 ## Other
 
 ### <a name="static"></a> Static row
@@ -405,6 +424,47 @@ Use a `:display_key` to show the value of the subform in the row:
   }]
 }
 ```
+
+
+### <a name="mapview"></a> Mapview row
+![Mapview row](https://github.com/rheoli/formotion/wiki/row-types/Mapview.png)
+```ruby
+{
+  title: "Map",
+  type: :mapview,
+  value: coordinates,  # of type CLLocationCoordinate2D
+  row_height: 200      # for better viewing
+}
+```
+
+Shows a map with a pin at the coordinates from value.
+
+
+### <a name="webview"></a> Webview row
+![Webview row](https://github.com/rheoli/formotion/wiki/row-types/Webview.png)
+```ruby
+{
+  title: "Page",
+  type: :webview,
+  value: html,      # HTML code to be shown
+  row_height: 200   # for better viewing
+}
+```
+
+
+### <a name="pagedimage"></a> Pagedimage row
+![Pagedimage row](https://github.com/rheoli/formotion/wiki/row-types/Pagedimage.png)
+```ruby
+{
+  title: "Photos",
+  type: :pagedimage,
+  value: images,      # array of UIImage's
+  row_height: 200     # for better viewing
+}
+```
+Same functionality as ImageRow but ypu can scroll through many photos.
+
+
 
 ## Buttons
 
