@@ -1,5 +1,8 @@
 motion_require 'base'
 
+# ideas taken from:
+# http://www.raywenderlich.com/10518/how-to-use-uiscrollview-to-scroll-and-zoom-content
+
 module Formotion
   module RowType
     class PagedimageRow < Base
@@ -16,6 +19,8 @@ module Formotion
       def build_cell(cell)
         # only show the "plus" when editable
         add_plus_accessory(cell) if row.editable?
+        
+        self.row.value = [] unless self.row.value.is_a?(Array)
         
         @page_view     = UIPageControl.alloc.init
         @page_view.tag = PAGE_VIEW_TAG
