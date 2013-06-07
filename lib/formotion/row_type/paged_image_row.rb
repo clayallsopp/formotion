@@ -5,7 +5,7 @@ motion_require 'base'
 
 module Formotion
   module RowType
-    class PagedimageRow < Base
+    class PagedImageRow < Base
       TAKE = BW.localized_string("Take", nil)
       DELETE = BW.localized_string("Delete", nil)
       CHOOSE = BW.localized_string("Choose", nil)

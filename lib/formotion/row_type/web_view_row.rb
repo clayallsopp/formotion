@@ -2,9 +2,7 @@ motion_require 'base'
 
 module Formotion
   module RowType
-    class WebviewRow < Base
-
-      include BW::KVO
+    class WebViewRow < Base
 
       WEB_VIEW_TAG=1100
 
