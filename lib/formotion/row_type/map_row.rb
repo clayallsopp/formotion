@@ -38,7 +38,7 @@ module Formotion
         @map_view = MKMapView.alloc.init
         @map_view.delegate = self
         if row.value
-          coord = (row.value.is_a?(Array) and row.value.size==2) ? CLLocationCoordinate2D.new(row.value[0], row.value[1]) : coord
+          coord = (row.value.is_a?(Array) and row.value.size==2) ? CLLocationCoordinate2D.new(row.value[0], row.value[1]) : row.value
           if coord.is_a?(CLLocationCoordinate2D)
             region = MKCoordinateRegionMakeWithDistance(coord, 400.0, 480.0)
             @map_view.setRegion(region, animated:true)
