@@ -4,14 +4,26 @@ module Formotion
   module RowType
     class MapRowData
   
-      attr_accessor :pin
-      attr_accessor :title, :subtitle, :coordinate
+      attr_accessor :pin, :options
+      #attr_accessor :title, :subtitle, :coordinate
   
       def initialize(title, subtitle, coordinate, options={})
         @title=title
         @subtitle=subtitle
         @coordinate=coordinate
         @options=options
+      end
+      
+      def title
+        @title
+      end
+      
+      def subtitle
+        @subtitle
+      end
+      
+      def coordinate
+        @coordinate
       end
   
     end
