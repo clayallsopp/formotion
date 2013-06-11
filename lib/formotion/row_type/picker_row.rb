@@ -1,5 +1,6 @@
 # currently supports only one component
 motion_require 'string_row'
+motion_require 'multi_choice_row'
 
 module Formotion
   module RowType
