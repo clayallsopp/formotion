@@ -23,7 +23,7 @@ describe "Subform Row" do
     form = FakeForm.new
     @row.instance_variable_set("@section", form)
 
-    @row.object.on_select(nil, nil)
+    @row.object._on_select(nil, nil)
     form.controller.push_subform_called.should == true
   end
 end

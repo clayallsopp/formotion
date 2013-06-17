@@ -56,19 +56,31 @@ module Formotion
 
       # method gets triggered when tableView(tableView, didSelectRowAtIndexPath:indexPath)
       # in UITableViewDelegate is executed
-      def on_select(tableView, tableViewDelegate)
+      def _on_select(tableView, tableViewDelegate)
         # row class should call super and proceed if false is return (not handled here)
         if row.on_tap_callback
           # Not all row types will want to define on_tap, but call it if so
-          row.on_tap_callback.call(self.row)
-          true
+          if row.on_tap_callback.call(self.row) != false
+            on_select(tableView, tableViewDelegate)
+            true
+          else
+            false
+          end
         else
-          false
+          on_select(tableView, tableViewDelegate)
         end
+      end
+
+      # Override in subclass
+      def on_select(tableView, tableViewDelegate)
+        false
       end
 
       # called when the delete editing style was triggered tableView:commitEditingStyle:forRowAtIndexPath:
       def on_delete(tableView, tableViewDelegate)
+        if row.on_delete_callback
+          row.on_delete_callback.call(self.row)
+        end
         if row.remove_on_delete?
           row.section.rows.delete_at(row.index)
           row.section.refresh_row_indexes

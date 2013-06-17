@@ -1,3 +1,5 @@
+motion_require 'base'
+
 module Formotion
   module RowType
     class ButtonRow < Base
@@ -9,6 +11,7 @@ module Formotion
       # for just this one UITableViewCell object, in order to
       # center it's labels horizontally.
       def build_cell(cell)
+        cell.selectionStyle = self.row.selection_style || UITableViewCellSelectionStyleBlue
         cell.swizzle(:layoutSubviews) do
           def layoutSubviews
             old_layoutSubviews

@@ -1,3 +1,5 @@
+motion_require "../base"
+
 module Formotion
   class Form < Formotion::Base
     extend BubbleWrap::KVO
@@ -92,6 +94,13 @@ module Formotion
     # row = @form.row_for_index_path(NSIndexPath.indexPathForRow(0, inSection: 0))
     def row_for_index_path(index_path)
       self.sections[index_path.section].rows[index_path.row]
+    end
+
+    def row(key)
+      each_row do |row|
+        return row if row.key == key
+      end
+      nil
     end
 
     #########################

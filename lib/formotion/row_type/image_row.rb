@@ -1,12 +1,21 @@
+motion_require 'base'
+
 module Formotion
   module RowType
     class ImageRow < Base
+      TAKE = BW.localized_string("Take", nil)
+      DELETE = BW.localized_string("Delete", nil)
+      CHOOSE = BW.localized_string("Choose", nil)
+      CANCEL = BW.localized_string("Cancel", nil)
+
       include BW::KVO
 
       IMAGE_VIEW_TAG=1100
 
       def build_cell(cell)
-        add_plus_accessory(cell)
+        cell.selectionStyle = self.row.selection_style || UITableViewCellSelectionStyleBlue
+        # only show the "plus" when editable
+        add_plus_accessory(cell) if row.editable?
 
         observe(self.row, "value") do |old_value, new_value|
           @image_view.image = new_value
@@ -15,7 +24,8 @@ module Formotion
             cell.accessoryView = cell.editingAccessoryView = nil
           else
             self.row.row_height = 44
-            add_plus_accessory(cell)
+            # only show the "plus" when editable
+            add_plus_accessory(cell) if row.editable?
           end
           row.form.reload_data
         end
@@ -51,10 +61,10 @@ module Formotion
         @action_sheet = UIActionSheet.alloc.init
         @action_sheet.delegate = self
 
-        @action_sheet.destructiveButtonIndex = (@action_sheet.addButtonWithTitle "Delete") if row.value
-        @action_sheet.addButtonWithTitle "Take" if BW::Device.camera.front? or BW::Device.camera.rear?
-        @action_sheet.addButtonWithTitle "Choose"
-        @action_sheet.cancelButtonIndex = (@action_sheet.addButtonWithTitle "Cancel")
+        @action_sheet.destructiveButtonIndex = (@action_sheet.addButtonWithTitle DELETE) if row.value
+        @action_sheet.addButtonWithTitle TAKE if BW::Device.camera.front? or BW::Device.camera.rear?
+        @action_sheet.addButtonWithTitle CHOOSE
+        @action_sheet.cancelButtonIndex = (@action_sheet.addButtonWithTitle CANCEL)
 
         @action_sheet.showInView @image_view
       end
@@ -68,11 +78,11 @@ module Formotion
         end
 
         case actionSheet.buttonTitleAtIndex(index)
-        when "Take"
+        when TAKE
           source = :camera
-        when "Choose"
+        when CHOOSE
           source = :photo_library
-        when "Cancel"
+        when CANCEL
         else
           p "Unrecognized button title #{actionSheet.buttonTitleAtIndex(index)}"
         end
@@ -95,7 +105,7 @@ module Formotion
         @add_button ||= begin
           button = UIButton.buttonWithType(UIButtonTypeContactAdd)
           button.when(UIControlEventTouchUpInside) do
-            self.on_select(nil, nil)
+            self._on_select(nil, nil)
           end
           button
         end

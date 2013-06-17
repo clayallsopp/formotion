@@ -1,3 +1,5 @@
+motion_require 'string_row'
+
 module Formotion
   module RowType
     class EmailRow < StringRow

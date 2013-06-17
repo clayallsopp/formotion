@@ -1,3 +1,5 @@
+motion_require 'number_row'
+
 module Formotion
   module RowType
     class CurrencyRow < NumberRow

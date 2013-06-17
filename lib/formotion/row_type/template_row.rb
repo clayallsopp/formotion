@@ -1,3 +1,5 @@
+motion_require 'base'
+
 # Define template row:
 # {
 #   title: "Add nickname",
@@ -25,11 +27,11 @@ module Formotion
       end
 
       def build_cell(cell)
-        cell.selectionStyle = UITableViewCellSelectionStyleBlue
+        cell.selectionStyle = self.row.selection_style || UITableViewCellSelectionStyleBlue
         @add_button ||= begin
           button = UIButton.buttonWithType(UIButtonTypeContactAdd)
           button.when(UIControlEventTouchUpInside) do
-            self.on_select(nil, nil)
+            self._on_select(nil, nil)
           end
           button
         end
@@ -55,6 +57,7 @@ module Formotion
             template_value = row.template_parent.value
             template_value.delete_at(row.index)
             row.template_parent.value = template_value
+            row.template_parent.template_children.delete_at(row.index)
           end
         end
         new_row.remove_on_delete = true

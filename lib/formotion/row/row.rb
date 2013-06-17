@@ -1,3 +1,5 @@
+motion_require "../base"
+
 module Formotion
   class Row < Formotion::Base
     PROPERTIES = [
@@ -88,6 +90,16 @@ module Formotion
       :minute_interval,
       #-Resize image when needed (size as Array [1500,1500])
       :max_image_size,
+      # Font for String and Text rows
+      :font,
+      # Display an inputAccessoryView when editing a StringRow.
+      # OPTIONS: :done (a black translucent toolbar with a right-aligned "Done" button)
+      # DEFAULT is nil
+      :input_accessory,
+      # Cell selection style
+      # OPTIONS: :blue, :gray, :none
+      # DEFAULT is :blue
+      :selection_style
     ]
     PROPERTIES.each {|prop|
       attr_accessor prop
@@ -123,6 +135,8 @@ module Formotion
     # callback for what happens when the user
     # taps a ButtonRow
     attr_accessor :on_tap_callback
+    # callback for when a row is tapped
+    attr_accessor :on_delete_callback
 
     # RowType object
     attr_accessor :object
@@ -251,6 +265,10 @@ module Formotion
       @text_alignment = const_int_get("UITextAlignment", alignment)
     end
 
+    def selection_style=(style)
+      @selection_style = const_int_get("UITableViewCellSelectionStyle", style || :blue)
+    end
+
     def editable=(editable)
       case editable
       when TrueClass
@@ -288,6 +306,10 @@ module Formotion
     # Used in :button type rows
     def on_tap(&block)
       self.on_tap_callback = block
+    end
+
+    def on_delete(&block)
+      self.on_delete_callback = block
     end
 
     #########################

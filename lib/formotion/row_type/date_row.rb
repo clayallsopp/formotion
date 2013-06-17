@@ -1,6 +1,11 @@
+motion_require 'string_row'
+motion_require 'multi_choice_row'
+
 module Formotion
   module RowType
     class DateRow < StringRow
+      include RowType::MultiChoiceRow
+
       # overwrite Character on_change method
       def on_change(text_field)
       end

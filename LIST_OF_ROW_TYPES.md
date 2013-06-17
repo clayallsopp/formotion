@@ -5,7 +5,8 @@
 [Phone](#phone)<br/>
 [Number](#number)<br/>
 [Currency](#currency)<br/>
-[Date](#date)
+[Date](#date)<br/>
+[Object](#object)<br/>
 
 **Other**<br/>
 [Static](#static)<br/>
@@ -16,7 +17,10 @@
 [Option](#option)<br/>
 [Picker](#picker)<br/>
 [Subform](#subform)<br/>
-[Template](#template)
+[Template](#template)<br/>
+[Mapview](#mapview)<br/>
+[Webview](#webview)<br/>
+[Pagedimage](#pagedimage)<br/>
 
 **Buttons**<br/>
 [Button](#button)<br/>
@@ -88,6 +92,34 @@ The `StringRow` is a simple text input row and opens a `UIKeyboardTypeDefault` k
 The `TextRow` is a multiline text input row and opens the default keyboard when editing.
 To define the height of the row set the property `row_height`.
 
+
+#### <a name="text_fonts"></a> Text row with Big Font
+![Text Row](https://github.com/clayallsopp/formotion/wiki/row-types/text_big_font.png)
+
+```ruby
+{
+  title: "Big Text",
+  key: :text,
+  type: :text,
+  font: {name: 'Helvetica', size: 24},
+  placeholder: "Enter your big text here",
+  row_height: 100
+}
+```
+
+#### <a name="text_fonts"></a> Text row with Small Font
+![Text Row](https://github.com/clayallsopp/formotion/wiki/row-types/text_small_font.png)
+
+```ruby
+{
+  title: "Small Text",
+  key: :text,
+  type: :text,
+  font: {name: 'Chalkduster', size: 8},
+  placeholder: "Enter your small text here",
+  row_height: 100
+}
+```
 
 ### <a name="email"></a> Email row
 ![Email row](https://github.com/clayallsopp/formotion/wiki/row-types/email.png)
@@ -186,6 +218,21 @@ Note: If you use `:date_time` or `:time` for the type, `:minute_interval` will b
 the default is the Apple default of 1.
 
 
+### <a name="object"></a> Object row
+
+```ruby
+{
+  title: "My Data",
+  type: :object,
+  value: object       # an object
+}
+```
+
+Same as StringRow with the difference that it would not change the row.value to string.
+The object needs a to_s method.
+
+
+
 ## Other
 
 ### <a name="static"></a> Static row
@@ -251,6 +298,13 @@ You can create a radio button style group by defining a section with `select_one
 }
 ```
 
+This would result in a form's `render` as:
+
+```ruby
+{
+  account_type: :basic
+}
+```
 
 ### <a name="slider"></a> Slider row
 ![Slider row](https://github.com/clayallsopp/formotion/wiki/row-types/slider.png)
@@ -371,6 +425,47 @@ Use a `:display_key` to show the value of the subform in the row:
 }
 ```
 
+
+### <a name="mapview"></a> Mapview row
+![Mapview row](https://github.com/rheoli/formotion/wiki/row-types/Mapview.png)
+```ruby
+{
+  title: "Map",
+  type: :mapview,
+  value: coordinates,  # of type CLLocationCoordinate2D
+  row_height: 200      # for better viewing
+}
+```
+
+Shows a map with a pin at the coordinates from value.
+
+
+### <a name="webview"></a> Webview row
+![Webview row](https://github.com/rheoli/formotion/wiki/row-types/Webview.png)
+```ruby
+{
+  title: "Page",
+  type: :webview,
+  value: html,      # HTML code to be shown
+  row_height: 200   # for better viewing
+}
+```
+
+
+### <a name="pagedimage"></a> Pagedimage row
+![Pagedimage row](https://github.com/rheoli/formotion/wiki/row-types/Pagedimage.png)
+```ruby
+{
+  title: "Photos",
+  type: :pagedimage,
+  value: images,      # array of UIImage's
+  row_height: 200     # for better viewing
+}
+```
+Same functionality as ImageRow but ypu can scroll through many photos.
+
+
+
 ## Buttons
 
 ### <a name="button"></a> Button row
@@ -379,10 +474,11 @@ Use a `:display_key` to show the value of the subform in the row:
 {
   title: "Any Button",
   type: :button,
+  key: :some_button
 }
 
 # later...
-form.sections[0].rows[0].on_tap do |row|
+form.row(:some_button).on_tap do |row|
   # do something when tapped
 end
 ```

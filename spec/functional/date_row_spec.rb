@@ -60,4 +60,10 @@ describe "FormController/DateRow" do
       end
     end
   end
+
+  it "doesn't have a clear button" do
+    tap("Date")
+    date_row.text_field.subviews.map(&:class).should.not.include UIButton
+  end
+
 end

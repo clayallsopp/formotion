@@ -1,0 +1,5 @@
+language: objective-c
+before_install:
+  - rvm use 1.9.3
+install: bundle install
+script: bundle exec rake spec:units

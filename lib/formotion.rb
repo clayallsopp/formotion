@@ -1,33 +1,13 @@
 require File.expand_path(File.join(File.dirname(__FILE__), "formotion/version"))
 require 'bubble-wrap/core'
+require 'bubble-wrap/font'
 require 'bubble-wrap/camera'
 
-BW.require File.expand_path('../formotion/**/*.rb', __FILE__) do
-  base_row_type = 'lib/formotion/row_type/base.rb'
+require 'motion-require'
 
-  # hack to make sure base row type is compiled early
-  file('lib/formotion/base.rb').depends_on base_row_type
+Motion::Require.all(Dir.glob(File.expand_path('../formotion/**/*.rb', __FILE__)))
 
-  row_types = Dir.glob('lib/formotion/row_type/**/*.rb')
-  row_types.each {|file|
-    next if file == base_row_type
-    file(file).depends_on base_row_type
-  }
-
-  ['date_row', 'email_row', 'number_row', 'phone_row'].each {|file|
-    file("lib/formotion/row_type/#{file}.rb").depends_on 'lib/formotion/row_type/string_row.rb'
-  }
-
-  ['currency_row'].each {|file|
-    file("lib/formotion/row_type/#{file}.rb").depends_on 'lib/formotion/row_type/number_row.rb'
-  }
-  
-  ['submit_row', 'back_row'].each {|file|
-    file("lib/formotion/row_type/#{file}.rb").depends_on 'lib/formotion/row_type/button.rb'
-  }
-
-  ['form/form.rb', 'row/row.rb', 'section/section.rb'].each {|file|
-    file("lib/formotion/#{file}").depends_on 'lib/formotion/base.rb'
-  }
-  file("lib/formotion/controller/form_controller.rb").depends_on 'lib/formotion/patch/ui_text_field.rb'
+Motion::Project::App.setup do |app|
+  app.frameworks<<'CoreLocation' unless app.frameworks.include?('CoreLocation')
+  app.frameworks<<'MapKit' unless app.frameworks.include?('MapKit')  
 end

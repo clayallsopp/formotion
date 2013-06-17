@@ -1,9 +1,12 @@
 # currently supports only one component
+motion_require 'string_row'
+motion_require 'multi_choice_row'
 
 module Formotion
   module RowType
     class PickerRow < StringRow
       include RowType::ItemsMapper
+      include RowType::MultiChoiceRow
 
       def after_build(cell)
         self.row.text_field.inputView = self.picker

@@ -1,3 +1,5 @@
+motion_require "../base"
+
 module Formotion
   class Form < Formotion::Base
     attr_reader :table
@@ -33,7 +35,7 @@ module Formotion
       previous_row, next_row = nil
 
       last_row = self.sections[-1] && self.sections[-1].rows[-1]
-      if last_row
+      if last_row && last_row.type != :text
         last_row.return_key ||= UIReturnKeyDone
       end
 
@@ -90,7 +92,7 @@ module Formotion
     def tableView(tableView, didSelectRowAtIndexPath:indexPath)
       tableView.deselectRowAtIndexPath(indexPath, animated:true)
       row = row_for_index_path(indexPath)
-      row.object.on_select(tableView, self)
+      row.object._on_select(tableView, self)
     end
 
     def tableView(tableView, editingStyleForRowAtIndexPath:indexPath)

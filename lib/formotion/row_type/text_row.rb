@@ -1,3 +1,5 @@
+motion_require 'base'
+
 module Formotion
   module RowType
     class TextRow < Base
@@ -8,6 +10,7 @@ module Formotion
       attr_accessor :field
 
       def build_cell(cell)
+        cell.selectionStyle = self.row.selection_style || UITableViewCellSelectionStyleBlue
 
         @field = UITextView.alloc.initWithFrame(CGRectZero)
         field.backgroundColor = UIColor.clearColor
@@ -19,6 +22,9 @@ module Formotion
         field.returnKeyType = row.return_key || UIReturnKeyDefault
         field.autocapitalizationType = row.auto_capitalization if row.auto_capitalization
         field.autocorrectionType = row.auto_correction if row.auto_correction
+
+        # must be set prior to placeholder!
+        field.font = BW::Font.new(row.font) if row.font
         field.placeholder = row.placeholder
         field.enabled = row.editable?
 
