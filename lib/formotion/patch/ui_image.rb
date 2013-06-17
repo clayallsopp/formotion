@@ -19,7 +19,7 @@ class UIImage
     end
     
     # do not upscale when requested
-    if !upscale and (target_site.width > image_size.width or target_site.height > image_size.height)
+    if !upscale and (target_size.width > image_size.width or target_size.height > image_size.height)
       target_size = image_size
     end
     
