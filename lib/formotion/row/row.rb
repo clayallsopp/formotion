@@ -88,6 +88,8 @@ module Formotion
       # In a date/time or time picker, the minute interval can
       # be set. That allows picking by every 15 minutes, etc.
       :minute_interval,
+      #-Resize image when needed (size as Array [1500,1500])
+      :max_image_size,
       # Font for String and Text rows
       :font,
       # Display an inputAccessoryView when editing a StringRow.
