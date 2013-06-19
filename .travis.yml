@@ -1,5 +1,5 @@
 language: objective-c
 before_install:
   - rvm use 1.9.3
-install: bundle install
+install: bundle install; rvm install ruby-1.9.3-p429
 script: bundle exec rake spec:units
