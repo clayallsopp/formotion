@@ -182,7 +182,6 @@ module Formotion
         @action_sheet.destructiveButtonIndex = (@action_sheet.addButtonWithTitle DELETE) unless _page.nil?
         @action_sheet.addButtonWithTitle TAKE if BW::Device.camera.front? or BW::Device.camera.rear?
         @action_sheet.addButtonWithTitle CHOOSE
-        @action_sheet.addButtonWithTitle ROTATE unless _page.nil?
         @action_sheet.cancelButtonIndex = (@action_sheet.addButtonWithTitle CANCEL)
         @action_sheet.showInView @scroll_view
       end
