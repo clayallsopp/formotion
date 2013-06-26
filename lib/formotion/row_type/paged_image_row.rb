@@ -10,7 +10,6 @@ module Formotion
       DELETE = BW.localized_string("Delete", nil)
       CHOOSE = BW.localized_string("Choose", nil)
       CANCEL = BW.localized_string("Cancel", nil)
-      ROTATE = BW.localized_string("Rotate 90°", nil)
 
       include BW::KVO
 
@@ -105,10 +104,6 @@ module Formotion
         when CHOOSE
           source = :photo_library
         when CANCEL
-        when ROTATE
-          self.row.value[@photo_page]=self.row.value[@photo_page].rotate_by_degrees(90.0)
-          self.resizePages
-          self.clearPages
         end
 
         if source
