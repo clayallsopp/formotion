@@ -108,7 +108,7 @@ module Formotion
 
         if source
           @camera = BW::Device.camera.send((source == :camera) ? :rear : :any)
-          @camera.picture({source_type: source, media_types: [:image]}, @scroll_view) do |result|
+          @camera.picture(source_type: source, media_types: [:image]) do |result|
             if result[:original_image]
               #-Resize image when requested (no image upscale)
               if result[:original_image].respond_to?(:resize_image_to_size) and row.max_image_size
