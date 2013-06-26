@@ -10,6 +10,7 @@ module Formotion
       DELETE = BW.localized_string("Delete", nil)
       CHOOSE = BW.localized_string("Choose", nil)
       CANCEL = BW.localized_string("Cancel", nil)
+      ROTATE = BW.localized_string("Rotate 90°", nil)
 
       include BW::KVO
 
@@ -104,11 +105,15 @@ module Formotion
         when CHOOSE
           source = :photo_library
         when CANCEL
+        when ROTATE
+          self.row.value[@photo_page]=self.row.value[@photo_page].rotate_by_degrees(90.0)
+          self.resizePages
+          self.clearPages
         end
 
         if source
           @camera = BW::Device.camera.send((source == :camera) ? :rear : :any)
-          @camera.picture(source_type: source, media_types: [:image]) do |result|
+          @camera.picture({source_type: source, media_types: [:image]}, @scroll_view) do |result|
             if result[:original_image]
               #-Resize image when requested (no image upscale)
               if result[:original_image].respond_to?(:resize_image_to_size) and row.max_image_size
@@ -182,6 +187,7 @@ module Formotion
         @action_sheet.destructiveButtonIndex = (@action_sheet.addButtonWithTitle DELETE) unless _page.nil?
         @action_sheet.addButtonWithTitle TAKE if BW::Device.camera.front? or BW::Device.camera.rear?
         @action_sheet.addButtonWithTitle CHOOSE
+        @action_sheet.addButtonWithTitle ROTATE unless _page.nil?
         @action_sheet.cancelButtonIndex = (@action_sheet.addButtonWithTitle CANCEL)
         @action_sheet.showInView @scroll_view
       end
@@ -217,8 +223,9 @@ module Formotion
           frame=@scroll_view.bounds
           frame.origin.x = frame.size.width * _page
           frame.origin.y = 0.0
-          new_page_view = UIImageView.alloc.initWithImage(self.row.value[_page])
-          new_page_view.userInteractionEnabled=true
+          thumb = self.row.value[_page].resize_image_to_size([frame.size.height,frame.size.height], false)
+          new_page_view = UIImageView.alloc.initWithImage(thumb)
+          new_page_view.userInteractionEnabled = true
           new_page_view.contentMode = UIViewContentModeScaleAspectFit
           new_page_view.frame = frame
           single_tap = UITapGestureRecognizer.alloc.initWithTarget(self, action:"pages_single_tap")
