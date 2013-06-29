@@ -18,9 +18,9 @@
 [Picker](#picker)<br/>
 [Subform](#subform)<br/>
 [Template](#template)<br/>
-[Mapview](#mapview)<br/>
-[Webview](#webview)<br/>
-[Pagedimage](#pagedimage)<br/>
+[MapView](#mapview)<br/>
+[WebView](#webview)<br/>
+[PagedImage](#pagedimage)<br/>
 
 **Buttons**<br/>
 [Button](#button)<br/>
@@ -426,12 +426,12 @@ Use a `:display_key` to show the value of the subform in the row:
 ```
 
 
-### <a name="mapview"></a> Mapview row
-![Mapview row](https://github.com/rheoli/formotion/wiki/row-types/Mapview.png)
+### <a name="mapview"></a> MapView row
+![MapView row](https://github.com/rheoli/formotion/wiki/row-types/Mapview.png)
 ```ruby
 {
   title: "Map",
-  type: :mapview,
+  type: :map_view,
   value: coordinates,  # of type CLLocationCoordinate2D
   row_height: 200      # for better viewing
 }
@@ -440,24 +440,24 @@ Use a `:display_key` to show the value of the subform in the row:
 Shows a map with a pin at the coordinates from value.
 
 
-### <a name="webview"></a> Webview row
-![Webview row](https://github.com/rheoli/formotion/wiki/row-types/Webview.png)
+### <a name="webview"></a> WebView row
+![WebView row](https://github.com/rheoli/formotion/wiki/row-types/Webview.png)
 ```ruby
 {
   title: "Page",
-  type: :webview,
+  type: :web_view,
   value: html,      # HTML code to be shown
   row_height: 200   # for better viewing
 }
 ```
 
 
-### <a name="pagedimage"></a> Pagedimage row
+### <a name="pagedimage"></a> PagedImage row
 ![Pagedimage row](https://github.com/rheoli/formotion/wiki/row-types/Pagedimage.png)
 ```ruby
 {
   title: "Photos",
-  type: :pagedimage,
+  type: :paged_image,
   value: images,      # array of UIImage's
   row_height: 200     # for better viewing
 }
