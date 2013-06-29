@@ -217,8 +217,9 @@ module Formotion
           frame=@scroll_view.bounds
           frame.origin.x = frame.size.width * _page
           frame.origin.y = 0.0
-          new_page_view = UIImageView.alloc.initWithImage(self.row.value[_page])
-          new_page_view.userInteractionEnabled=true
+          thumb = self.row.value[_page].resize_image_to_size([frame.size.height,frame.size.height], false)
+          new_page_view = UIImageView.alloc.initWithImage(thumb)
+          new_page_view.userInteractionEnabled = true
           new_page_view.contentMode = UIViewContentModeScaleAspectFit
           new_page_view.frame = frame
           single_tap = UITapGestureRecognizer.alloc.initWithTarget(self, action:"pages_single_tap")
