@@ -118,15 +118,14 @@ module Formotion
         end
       end
       
-      def add_tag(text, mode=:normal)
+      def add_tag(text)
         return if @btns.has_key?(text)
       	btn = UIButton.buttonWithType(UIButtonTypeCustom)
       	btn.adjustsImageWhenHighlighted = false
       	btn.contentEdgeInsets = UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)
         textsize = text.sizeWithFont(UIFont.systemFontOfSize(14.0))
-        width = textsize.width+10.0
-        height = textsize.height+6.0
-        btn.frame = CGRectMake(0.0, 0.0, width, height)
+        width = textsize.width+14.0
+        btn.frame = CGRectMake(0.0, 0.0, width, 24.0)
         [UIControlStateNormal, UIControlStateHighlighted, UIControlStateSelected].each do |state|
       	  btn.setBackgroundImage(image_for_state(state), forState:state)
           attr_text = NSAttributedString.alloc.initWithString(text, attributes:attrib_for_state(state))          
