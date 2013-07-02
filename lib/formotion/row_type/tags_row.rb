@@ -75,18 +75,17 @@ module Formotion
           end
         end
       end
-
-      def on_select(tableView, tableViewDelegate)
-        if !row.editable?
-          return
-        end
+      
+      def _on_select(tableView, tableViewDelegate)
       end
 
       def add_plus_accessory(cell)
         @add_button ||= begin
           button = UIButton.buttonWithType(UIButtonTypeContactAdd)
           button.when(UIControlEventTouchUpInside) do
-            row.form.controller.add_tag(self)
+            if row.on_tap_callback
+              row.on_tap_callback.call(self.row)
+            end
           end
           button
         end
