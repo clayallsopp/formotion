@@ -25,7 +25,7 @@ module Formotion
         @scroll_view.delaysContentTouches = true
         @scroll_view.showsHorizontalScrollIndicator = false
         @scroll_view.showsVerticalScrollIndicator   = false
-        @btns = []
+        @btns = {}
         cell.addSubview(@scroll_view)
         
         row.value.each do |t|
@@ -118,30 +118,31 @@ module Formotion
         end
       end
       
-      def add_tag(text)
-      	@btn = UIButton.buttonWithType(UIButtonTypeCustom)
-      	@btn.adjustsImageWhenHighlighted = false
-      	@btn.contentEdgeInsets = UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)
+      def add_tag(text, mode=:normal)
+        return if @btns.has_key?(text)
+      	btn = UIButton.buttonWithType(UIButtonTypeCustom)
+      	btn.adjustsImageWhenHighlighted = false
+      	btn.contentEdgeInsets = UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)
         textsize = text.sizeWithFont(UIFont.systemFontOfSize(14.0))
         width = textsize.width+10.0
         height = textsize.height+6.0
-        @btn.frame = CGRectMake(0.0, 0.0, width, height)
+        btn.frame = CGRectMake(0.0, 0.0, width, height)
         [UIControlStateNormal, UIControlStateHighlighted, UIControlStateSelected].each do |state|
-      	  @btn.setBackgroundImage(image_for_state(state), forState:state)
+      	  btn.setBackgroundImage(image_for_state(state), forState:state)
           attr_text = NSAttributedString.alloc.initWithString(text, attributes:attrib_for_state(state))          
-          @btn.setAttributedTitle(attr_text, forState:state)
+          btn.setAttributedTitle(attr_text, forState:state)
         end
 
         if row.editable?
-          @btn.addTarget(self, action:'button_click:', forControlEvents:UIControlEventTouchUpInside)
+          btn.addTarget(self, action:'button_click:', forControlEvents:UIControlEventTouchUpInside)
         end
     
-      	@btn.translatesAutoresizingMaskIntoConstraints = false
-      	@scroll_view.addSubview(@btn)
+      	btn.translatesAutoresizingMaskIntoConstraints = false
+      	@scroll_view.addSubview(btn)
         unless row.value.include?(text)
           row.value << text
         end
-        @btns << @btn
+        @btns[text] = btn
       end
     
       def button_click(btn)
