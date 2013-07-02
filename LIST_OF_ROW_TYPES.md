@@ -474,11 +474,16 @@ Same functionality as ImageRow but you can scroll through many photos.
   type: :tags,
   value: ["Beer","Dark Beer"],
   row_height: 200               # for better viewing
-  row.on_tap do |row|
-    ... # will be called when '+' in editable mode will touched
-	    # add the new tag with row.object.add_tag(new_tag)
-  end
 }
+```
+
+Add on_tap callback:
+```ruby
+row.on_tap do |row|
+  ... # will be called when '+' in editable mode will touched
+      # add the new tag with row.object.add_tag(new_tag)
+end
+
 ```
 Show/Edit tags.
 
