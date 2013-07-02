@@ -96,10 +96,10 @@ module Formotion
       def image_for_state(state)
         case state
         when UIControlStateNormal
-          return UIImage.imageNamed("recipient.png").stretchableImageWithLeftCapWidth(14, topCapHeight:0)
+          return UIImage.imageNamed("tags_row.png").stretchableImageWithLeftCapWidth(14, topCapHeight:0)
           
         when UIControlStateHighlighted, UIControlStateSelected
-          return UIImage.imageNamed("recipient-selected.png").stretchableImageWithLeftCapWidth(14, topCapHeight:0)
+          return UIImage.imageNamed("tags_row-selected.png").stretchableImageWithLeftCapWidth(14, topCapHeight:0)
                     
         end
         nil
