@@ -21,6 +21,7 @@
 [MapView](#mapview)<br/>
 [WebView](#webview)<br/>
 [PagedImage](#pagedimage)<br/>
+[Tags](#tags)<br/>
 
 **Buttons**<br/>
 [Button](#button)<br/>
@@ -462,7 +463,21 @@ Shows a map with a pin at the coordinates from value.
   row_height: 200     # for better viewing
 }
 ```
-Same functionality as ImageRow but ypu can scroll through many photos.
+Same functionality as ImageRow but you can scroll through many photos.
+
+
+### <a name="tags"></a> Tags row
+![Tags row](https://github.com/rheoli/formotion/wiki/row-types/Tags.png)
+```ruby
+{
+  title: "Tags",
+  type: :tags,
+  value: ["Beer","Dark Beer"],
+  row_height: 200               # for better viewing
+}
+```
+Show/Edit tags. When the row is editable the row will call the method add_tag(obj) of the controller
+when the '+' is tapped.
 
 
 
