@@ -29,23 +29,36 @@ module Formotion
     end
     
     class MapRow < Base
+      include BW::KVO
 
       MAP_VIEW_TAG=1100
+
+      def set_pin
+        return unless row.value
+        coord = (row.value.is_a?(Array) and row.value.size==2) ? CLLocationCoordinate2D.new(row.value[0], row.value[1]) : row.value
+        if coord.is_a?(CLLocationCoordinate2D)
+          @map_view.removeAnnotation(@map_row_data) if @map_row_data
+          region = MKCoordinateRegionMakeWithDistance(coord, 400.0, 480.0)
+          @map_row_data = MapRowData.new(nil, nil, coord)
+          @map_view.setRegion(region, animated:true)
+          @map_view.addAnnotation(@map_row_data)
+        end
+      end
 
       def build_cell(cell)
         cell.selectionStyle = self.row.selection_style || UITableViewCellSelectionStyleBlue
 
         @map_view = MKMapView.alloc.init
         @map_view.delegate = self
-        if row.value
-          coord = (row.value.is_a?(Array) and row.value.size==2) ? CLLocationCoordinate2D.new(row.value[0], row.value[1]) : row.value
-          if coord.is_a?(CLLocationCoordinate2D)
-            region = MKCoordinateRegionMakeWithDistance(coord, 400.0, 480.0)
-            @map_view.setRegion(region, animated:true)
-            m=MapRowData.new(nil, nil, coord)
-            @map_view.addAnnotation(m)
+        
+        set_pin
+        
+        observe(self.row, "value") do |old_value, new_value|
+          break_with_semaphore do
+            set_pin
           end
         end
+        
         @map_view.tag = MAP_VIEW_TAG
         @map_view.contentMode = UIViewContentModeScaleAspectFit
         @map_view.backgroundColor = UIColor.clearColor
