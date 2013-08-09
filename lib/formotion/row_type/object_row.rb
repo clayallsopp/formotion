@@ -62,7 +62,6 @@ module Formotion
 
       # overriden in subclasses
       def row_value
-        PM::logger.debug "row_value"
         row.value
       end
 

@@ -50,7 +50,6 @@ module Formotion
       end
 
       def build_new_row(options = {})
-        PM::logger.debug "build_new_row"
         # build row
         new_row = row.section.create_row(row.template.merge(options))
         new_row.object.instance_eval do
