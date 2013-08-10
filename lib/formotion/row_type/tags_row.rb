@@ -82,6 +82,7 @@ module Formotion
       def add_plus_accessory(cell)
         @add_button ||= begin
           button = UIButton.buttonWithType(UIButtonTypeContactAdd)
+          button.accessibilityLabel = BW.localized_string("add tag", nil)
           button.when(UIControlEventTouchUpInside) do
             if row.on_tap_callback
               row.on_tap_callback.call(self.row)
