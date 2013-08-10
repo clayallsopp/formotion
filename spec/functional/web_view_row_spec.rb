@@ -8,7 +8,7 @@ describe "FormController/WebViewRow" do
       title: "WebView",
       key: :web_view,
       type: :web_view,
-      value: "<b>This is a Test</b>"
+      value: "<html><body><b class=\"test\">This is a Test</b></body></html>"
     }
     @form ||= Formotion::Form.new(
       sections: [{
@@ -22,25 +22,34 @@ describe "FormController/WebViewRow" do
     @form.row(:web_view)
   end
   
-  it "should only one pin" do
-    p annotations
-    map_row.object.annotations.size.should == 1
-  end
-
-  it "should be a pin at the predefined position" do
-    coord = map_row.object.annotations[0].coordinate
-    coord.latitude.should == 47.5
-    coord.longitude.should == 8.5
-  end
-  
-  it "should set a new pin with new position" do
-    map_row.value = CLLocationCoordinate2D.new(48.5, 9.5)
+  it "should display the html content" do
+    content = ""
     wait 1 do
-      map_row.object.annotations.size.should == 1
-      coord = map_row.object.annotations[0].coordinate
-      coord.latitude.should == 48.5
-      coord.longitude.should == 9.5
+      0.upto(6) do |i|
+        content = webview_row.object.stringByEvaluatingJavaScriptFromString("document.getElementsByClassName('test')[0].innerHTML;")
+        break if content != ""
+        sleep 1
+      end
+      content.should == "This is a Test"
     end
   end
+  
+  it "should load the google home page" do
+    webview_row.value = "https://www.google.com"
+    wait 1 do
+      while webview_row.object.loading
+        sleep 1
+      end
+      content = ""
+      0.upto(6) do |i|
+        content = webview_row.object.stringByEvaluatingJavaScriptFromString("document.body.innerHTML")
+        break if content != ""
+        sleep 1
+      end
+      content.index("google").should > 0
+    end
+  end
+
+
 
 end
