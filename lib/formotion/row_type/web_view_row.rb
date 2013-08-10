@@ -3,14 +3,36 @@ motion_require 'base'
 module Formotion
   module RowType
     class WebViewRow < Base
+      include BW::KVO
 
       WEB_VIEW_TAG=1100
+
+      def set_page
+        if row.value =~/^https?:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(:[a-zA-Z0-9]*)?\/?([a-zA-Z0-9\-\._\?\,\'\/\+&%\$#\=~])*$/
+          req = NSURLRequest.requestWithURL(NSURL.URLWithString(row.value))
+          @web_view.loadRequest(req)
+          p req
+        else
+          @web_view.loadHTMLString(row.value, baseURL:nil) if row.value
+        end
+      end
+      
+      def stringByEvaluatingJavaScriptFromString(script)
+        @web_view.stringByEvaluatingJavaScriptFromString(script)
+      end
 
       def build_cell(cell)
         cell.selectionStyle = self.row.selection_style || UITableViewCellSelectionStyleBlue
 
         @web_view = UIWebView.alloc.init
-        @web_view.loadHTMLString(row.value, baseURL:nil) if row.value
+        set_page
+        
+        observe(self.row, "value") do |old_value, new_value|
+          break_with_semaphore do
+            set_page
+          end
+        end
+        
         @web_view.tag = WEB_VIEW_TAG
         @web_view.contentMode = UIViewContentModeScaleAspectFit
         @web_view.backgroundColor = UIColor.clearColor
