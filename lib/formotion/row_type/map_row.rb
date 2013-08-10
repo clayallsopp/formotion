@@ -44,6 +44,10 @@ module Formotion
           @map_view.addAnnotation(@map_row_data)
         end
       end
+      
+      def annotations
+        @map_view.annotations
+      end
 
       def build_cell(cell)
         cell.selectionStyle = self.row.selection_style || UITableViewCellSelectionStyleBlue
