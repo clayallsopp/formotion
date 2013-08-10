@@ -23,7 +23,6 @@ describe "FormController/MapRow" do
   end
   
   it "should only one pin" do
-    p annotations
     map_row.object.annotations.size.should == 1
   end
 
