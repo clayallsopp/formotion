@@ -37,6 +37,8 @@ module Formotion
       :text_alignment,
       # placeholder text
       :placeholder,
+      # accessibility label
+      :accessibility,
       # whether or not the entry field is secure (like a password)
       :secure,
       # given by a UIReturnKey___ integer, string, or symbol
