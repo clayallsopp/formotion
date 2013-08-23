@@ -24,8 +24,6 @@ module Formotion
 
     def self.persist(params = {})
       form = new(params)
-      form.open
-      form.init_observer_for_save
       form
     end
 
@@ -37,6 +35,15 @@ module Formotion
       sections && sections.each_with_index {|section_hash, index|
         section = create_section(section_hash.merge({index: index}))
       }
+
+      initialize_persist unless self.persist_as.nil?
+
+    end
+
+    def initialize_persist
+      self.open
+      self.init_observer_for_save
+      self
     end
 
     # Use this as a DSL for building forms
