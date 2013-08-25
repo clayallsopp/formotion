@@ -47,7 +47,7 @@ class AccountSettingsController < Formotion::FormController
   end
 
   def initController
-    f = Formotion::Form.persist(SETTINGS_HASH)
+    f = Formotion::Form.new(SETTINGS_HASH)
     initWithForm(f)
   end
 end
