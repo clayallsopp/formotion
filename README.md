@@ -112,7 +112,7 @@ self.navigationController.pushViewController(@controller, animated: true)
 
 ### Data Types
 
-See [the visual list of support row types](https://github.com/clayallsopp/formotion/wiki/List-of-all-the-row-types).
+See [the visual list of support row types](https://github.com/clayallsopp/formotion/blob/master/LIST_OF_ROW_TYPES.md).
 
 To add your own, check [the guide to adding new row types](https://github.com/clayallsopp/formotion/blob/master/NEW_ROW_TYPES.md).
 
