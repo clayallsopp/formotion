@@ -45,7 +45,7 @@ module Formotion
       if hash.class == Hash
         row = Formotion::Row.new(hash)
       end
-      row.section = self
+      row.section = WeakRef.new(self)
       row.index = self.rows.count
       row
     end
