@@ -104,6 +104,7 @@ module Formotion
       def add_plus_accessory(cell)
         @add_button ||= begin
           button = UIButton.buttonWithType(UIButtonTypeContactAdd)
+          button.accessibilityLabel = BW.localized_string("add image", nil)
           button.when(UIControlEventTouchUpInside) do
             self._on_select(nil, nil)
           end

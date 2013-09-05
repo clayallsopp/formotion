@@ -112,7 +112,7 @@ self.navigationController.pushViewController(@controller, animated: true)
 
 ### Data Types
 
-See [the visual list of support row types](https://github.com/clayallsopp/formotion/wiki/List-of-all-the-row-types).
+See [the visual list of support row types](https://github.com/clayallsopp/formotion/blob/master/LIST_OF_ROW_TYPES.md).
 
 To add your own, check [the guide to adding new row types](https://github.com/clayallsopp/formotion/blob/master/NEW_ROW_TYPES.md).
 
@@ -181,20 +181,20 @@ end
 
 ### Persistence
 
-You can easily synchronize a `Form`'s state to disk using the `persist_as` key in conjunction with the `persist` method. When your user edits the form, any changes will be immediately saved. For example:
+You can easily synchronize a `Form`'s state to disk using the `persist_as` key in form properties. When your user edits the form, any changes will be immediately saved. For example:
 
 ```ruby
-@form = Formotion::Form.persist({
+@form = Formotion::Form.new({
   persist_as: :settings,
   sections: ...
 })
 ```
 
-This will load the form if it exists, or create it if necessary. If you use `Formotion::Form.new`, then the form will not be loaded and any changes you make will override existing saved forms.
+This will load the form if it exists, or create it if necessary. If you use remove the `persist_as` key, then the form will not be loaded and any changes you make will override existing saved forms.
 
 Your form values and state are automatically persisted across application loads, no save buttons needed.
 
-To reset the form, `persist` it and call `reset`, which restores it to the original state.
+To reset the form, call `reset`, which restores it to the original state.
 
 View the [Persistence Example](./examples/Persistence) to see it in action.
 

@@ -37,6 +37,8 @@ module Formotion
       :text_alignment,
       # placeholder text
       :placeholder,
+      # accessibility label
+      :accessibility,
       # whether or not the entry field is secure (like a password)
       :secure,
       # given by a UIReturnKey___ integer, string, or symbol
@@ -306,10 +308,22 @@ module Formotion
     # Used in :button type rows
     def on_tap(&block)
       self.on_tap_callback = block
+      # set on_tap for all template children
+      if self.type == :template
+        for templ in self.template_children do
+          templ.on_tap_callback = block
+        end
+      end
     end
 
     def on_delete(&block)
       self.on_delete_callback = block
+      # set on_tap for all template children
+      if self.type == :template
+        for templ in self.template_children do
+          templ.on_delete_callback = block
+        end
+      end
     end
 
     #########################

@@ -20,6 +20,12 @@ module Formotion
       cell.detailTextLabel.text = row.subtitle
 
       edit_field = row.object.build_cell(cell)
+      
+      if edit_field and edit_field.respond_to?("accessibilityLabel=")
+        label = row.accessibility
+        label = row.title unless label
+        edit_field.accessibilityLabel = label if label
+      end
 
       [cell, edit_field]
     end
