@@ -19,6 +19,21 @@ module Formotion
       h
     end
 
+
+    # Needed so things like @targets[target] with KVO
+    #  (storing Row instances as keys of a hash)
+    def hash
+      "#{self.class.name}-id-#{object_id}".hash
+    end
+
+    def isEqual(other)
+      return true if other == self
+      return false unless other # if other is nil
+      return false unless other.class == self.class
+
+      return other.object_id == self.object_id
+    end
+
     # NSCoding + NSCopying
     def encodeWithCoder(encoder)
       self.class.const_get(:SERIALIZE_PROPERTIES).each {|prop|
