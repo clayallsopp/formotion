@@ -34,6 +34,7 @@ class UITextView
 
     if (@shouldDrawPlaceholder)
         self.placeholder_color.set
+        self.font ||= UIFont.systemFontOfSize(17) # ios7 seems to have a bug where font of uitextview isn't set by default
         self.placeholder.drawInRect(placeholder_rect, withFont:self.font)
     end
   end
