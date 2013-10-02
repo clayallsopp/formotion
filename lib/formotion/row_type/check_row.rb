@@ -28,7 +28,7 @@ module Formotion
         end
         if row.section.select_one and !row.value
           row.section.rows.each do |other_row|
-            other_row.value = (other_row == row)
+            other_row.value = (row == other_row)
           end
         elsif !row.section.select_one
           row.value = !row.value

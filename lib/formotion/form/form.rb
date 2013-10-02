@@ -104,10 +104,14 @@ module Formotion
     end
 
     def row(key)
+      found = nil
       each_row do |row|
-        return row if row.key == key
+        if row.key == key
+          found = row
+          break
+        end
       end
-      nil
+      found
     end
 
     #########################
