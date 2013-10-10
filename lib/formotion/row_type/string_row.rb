@@ -111,7 +111,11 @@ module Formotion
             true
           end
         end
-
+        
+        field.on_end do |text_field|
+          row.on_end_callback && row.on_end_callback.call
+        end
+        
         field.on_begin do |text_field|
           row.on_begin_callback && row.on_begin_callback.call
         end

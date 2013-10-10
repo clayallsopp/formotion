@@ -39,7 +39,7 @@ class UITextField
   # block takes argument textField
   def on_end(&block)
     add_delegate_method do
-      @delegate.textFieldDidBeginEditing_callback = block
+      @delegate.textFieldDidEndEditing_callback = block
     end
   end
 
