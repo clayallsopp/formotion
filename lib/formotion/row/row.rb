@@ -139,6 +139,8 @@ module Formotion
     attr_accessor :on_tap_callback
     # callback for when a row is tapped
     attr_accessor :on_delete_callback
+    # callback for when a row is exited
+    attr_accessor :on_end_callback
 
     # RowType object
     attr_accessor :object
@@ -303,6 +305,10 @@ module Formotion
 
     def on_begin(&block)
       self.on_begin_callback = block
+    end
+    
+    def on_end(&block)
+      self.on_end_callback = block
     end
 
     # Used in :button type rows
