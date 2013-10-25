@@ -156,7 +156,6 @@ module Formotion
           @input_accessory ||= begin
             tool_bar = UIToolbar.alloc.initWithFrame([[0, 0], [0, 44]])
             tool_bar.autoresizingMask = UIViewAutoresizingFlexibleWidth
-            tool_bar.barStyle = UIBarStyleBlack
             tool_bar.translucent = true
 
             left_space = UIBarButtonItem.alloc.initWithBarButtonSystemItem(
