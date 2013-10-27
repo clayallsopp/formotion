@@ -54,7 +54,7 @@ module Formotion
     end
 
     # Creates a Formotion::Form out of the model
-    def to_form
+    def to_form_hash
       rows = self.class.form_properties.collect { |options|
         {
           title: options[:property].capitalize,
@@ -63,14 +63,16 @@ module Formotion
           value: self.send(options[:property])
         }.merge(options)
       }
-      form_hash = {
+      return {
         title: self.class.form_title || self.class.to_s.capitalize,
         sections: [{
-          rows: rows
-        }]
+            rows: rows
+          }]
       }
+    end
 
-      form = Formotion::Form.new(form_hash)
+    def to_form
+      form = Formotion::Form.new(to_form_hash)
       form.on_submit do
         self.on_submit
       end
