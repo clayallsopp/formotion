@@ -70,6 +70,7 @@ module Formotion
           @map_row_data = MapRowData.new(row.value[:pin])
           @map_view.removeAnnotations(@map_view.annotations)
           @map_view.addAnnotation(@map_row_data)
+          @map_view.selectAnnotation(@map_row_data, animated:row.value[:animated]) if row.value[:pin][:title]
         end
 
         @map_view.setUserInteractionEnabled(row.value[:enabled])
