@@ -68,7 +68,7 @@ describe "FormController/MapRow MapType" do
       type: :map,
       value: {
         coord: CLLocationCoordinate2D.new(48.5, 9.5),
-        map_type: MKMapTypeHybrid,
+        type: MKMapTypeHybrid,
         enabled: false
       }
     }

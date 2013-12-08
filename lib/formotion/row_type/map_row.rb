@@ -8,9 +8,6 @@ module Formotion
       #attr_accessor :title, :subtitle, :coordinate
 
       def initialize(options)
-        # puts "-"*10
-        # puts options
-        # puts "-"*10
         @title=options[:title]
         @subtitle=options[:subtitle]
         @coordinate=options[:coord]
@@ -51,7 +48,7 @@ module Formotion
         # Set Defaults
         row.value = {
           animated: true,
-          map_type: MKMapTypeStandard,
+          type: MKMapTypeStandard,
           enabled: true
         }.merge(row.value)
 
@@ -76,7 +73,7 @@ module Formotion
         end
 
         @map_view.setUserInteractionEnabled(row.value[:enabled])
-        @map_view.setMapType(row.value[:map_type])
+        @map_view.setMapType(row.value[:type])
         @map_view.setRegion(region, animated:row.value[:animated])
       end
 
