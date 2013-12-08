@@ -1,6 +1,6 @@
 module Formotion
   module RowType
-    class WebLinkRow < StaticRow
+    class WebLinkRow < ObjectRow
 
       def after_build(cell)
         super
@@ -10,7 +10,7 @@ module Formotion
       end
 
       def on_select(tableView, tableViewDelegate)
-        if row.value.is_a?(String) && row.value[0..3] == "http"
+        if (row.value.is_a?(String) && row.value[0..3] == "http") || row.value.is_a?(NSURL)
           App.open_url row.value
         end
       end
