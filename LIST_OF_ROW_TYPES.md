@@ -7,6 +7,7 @@
 [Currency](#currency)<br/>
 [Date](#date)<br/>
 [Object](#object)<br/>
+[Activity](#activity)<br/>
 
 **Other**<br/>
 [Static](#static)<br/>
@@ -232,7 +233,28 @@ the default is the Apple default of 1.
 Same as StringRow with the difference that it would not change the row.value to string.
 The object needs a to_s method.
 
+### <a name="activity"></a> Activity row
 
+```ruby
+{
+  title: "Share something",
+  type: :activity,
+  value: "Something I want to share."
+}
+```
+
+Creates a `UIActivityViewController` for you with the contents of `:value`. You can also pass a Hash to value:
+
+```ruby
+{
+  title: "Share something",
+  type: :activity,
+  value: {
+    items: "Something I want to share.", # Can be a String, NSURL, or UIImage or Array of those types
+    excluded: [] # Types of activities to exclude. See the UIActivity class docs for a list of activity types.
+  }
+}
+```
 
 ## Other
 
