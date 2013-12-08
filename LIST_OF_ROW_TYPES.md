@@ -432,7 +432,7 @@ Use a `:display_key` to show the value of the subform in the row:
 ```ruby
 {
   title: "Map",
-  type: :map_view,
+  type: :map,
   value: coordinates,  # of type CLLocationCoordinate2D
   row_height: 200      # for better viewing
 }
