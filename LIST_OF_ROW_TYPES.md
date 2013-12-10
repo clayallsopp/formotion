@@ -19,6 +19,7 @@
 [Subform](#subform)<br/>
 [Template](#template)<br/>
 [MapView](#mapview)<br/>
+[WebLink](#weblink)<br/>
 [WebView](#webview)<br/>
 [PagedImage](#pagedimage)<br/>
 [Tags](#tags)<br/>
@@ -460,6 +461,15 @@ Shows a map with a pin at the coordinates from value. If you pass a `CLLocationC
 ```
 
 If you pass `pin: nil` the map will not display an annotation. Annotations with titles will automatically pop open the annotation. _Note: If you set a title on an annotation it will automatically invalidate `enabled:false` and the map will be interactable._
+
+### <a name="weblink"></a> WebLink row
+```ruby
+{
+  title: "My Awesome Site",
+  type: :web_link,
+  value: "http://www.myawesomesite.com" # URL to be opened
+}
+```
 
 ### <a name="webview"></a> WebView row
 ![WebView row](https://github.com/rheoli/formotion/wiki/row-types/Webview.png)
