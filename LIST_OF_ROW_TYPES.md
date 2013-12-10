@@ -19,6 +19,7 @@
 [Subform](#subform)<br/>
 [Template](#template)<br/>
 [MapView](#mapview)<br/>
+[WebLink](#weblink)<br/>
 [WebView](#webview)<br/>
 [PagedImage](#pagedimage)<br/>
 [Tags](#tags)<br/>
@@ -440,6 +441,15 @@ Use a `:display_key` to show the value of the subform in the row:
 
 Shows a map with a pin at the coordinates from value.
 
+
+### <a name="weblink"></a> WebLink row
+```ruby
+{
+  title: "My Awesome Site",
+  type: :web_link,
+  value: "http://www.myawesomesite.com" # URL to be opened
+}
+```
 
 ### <a name="webview"></a> WebView row
 ![WebView row](https://github.com/rheoli/formotion/wiki/row-types/Webview.png)
