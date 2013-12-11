@@ -17,7 +17,7 @@ module Formotion
 
         field.clearButtonMode = UITextFieldViewModeWhileEditing
         field.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter
-        field.textAlignment = row.text_alignment || UITextAlignmentRight
+        field.textAlignment = row.text_alignment || NSTextAlignmentRight
 
         field.keyboardType = keyboardType
 
@@ -54,7 +54,7 @@ module Formotion
         field
 
       end
-      
+
       # Used when row.value changes
       def update_text_field(new_value)
         self.row.text_field.text = row_value.to_s
