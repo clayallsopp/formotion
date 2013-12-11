@@ -9,6 +9,8 @@ module Formotion
       :value,
       # set as cell.titleLabel.text
       :title,
+      # set as cell.imageView.image
+      :image,
       # set as cell.detailLabel.text
       :subtitle,
       # configures the type of input this is (string, phone, switch, etc)
@@ -306,7 +308,7 @@ module Formotion
     def on_begin(&block)
       self.on_begin_callback = block
     end
-    
+
     def on_end(&block)
       self.on_end_callback = block
     end

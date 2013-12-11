@@ -23,13 +23,18 @@ module Formotion
         cell.textLabel.text = new_value
       end
 
+      cell.imageView.image = (row.image.is_a? String) ? UIImage.imageNamed(row.image) : row.image
+      observe(row, "image") do |old_value, new_value|
+        cell.imageView.image = (row.image.is_a? String) ? UIImage.imageNamed(row.image) : row.image
+      end
+
       cell.detailTextLabel.text = row.subtitle
       observe(row, "subtitle") do |old_value, new_value|
         cell.detailTextLabel.text = new_value
       end
 
       edit_field = row.object.build_cell(cell)
-      
+
       if edit_field and edit_field.respond_to?("accessibilityLabel=")
         label = row.accessibility
         label = row.title unless label
