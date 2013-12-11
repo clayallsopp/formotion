@@ -434,13 +434,33 @@ Use a `:display_key` to show the value of the subform in the row:
 {
   title: "Map",
   type: :map,
-  value: coordinates,  # of type CLLocationCoordinate2D
+  value: coordinates,  # of type CLLocationCoordinate2D, CLCircularRegion, or a Hash of options
   row_height: 200      # for better viewing
 }
 ```
 
-Shows a map with a pin at the coordinates from value.
+Shows a map with a pin at the coordinates from value. If you pass a `CLLocationCoordinate2D` or `CLCircularRegion`, a pin will be placed at the coordinates. You can pass a hash of options like this:
 
+```ruby
+{
+  title: "Map",
+  type: :map,
+  value: {
+    coord: coordinates,
+    enabled: true, # Whether the user can interact with the map.
+    type: MKMapTypeStandard, # The type of map to show. See MKMapType documentation.
+    animated: true, # Whether setting the region should animate. This property also applies to annotation titles.
+    pin: {
+      coord: coordinates, # Must be a CLLocationCoordinate2D
+      title: nil, # Title of the annotation
+      subtitle: nil # Subtitle of the annotation
+    }
+  }
+  row_height: 200 # for better viewing
+}
+```
+
+If you pass `pin: nil` the map will not display an annotation. Annotations with titles will automatically pop open the annotation. _Note: If you set a title on an annotation it will automatically invalidate `enabled:false` and the map will be interactable._
 
 ### <a name="weblink"></a> WebLink row
 ```ruby
