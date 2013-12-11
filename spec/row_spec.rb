@@ -1,4 +1,17 @@
 describe "Rows" do
+
+  before do
+    @image_name = "tags_row"
+    @image = UIImage.imageNamed(@image_name)
+    string_hash = {title: "TITLE", subtitle: "SUBTITLE", image: @image_name, type: :object, section: Formotion::Section.new({index: 0})}
+    image_hash = string_hash.merge({image: @image})
+    @string_image_row = Formotion::Row.new(string_hash)
+    @string_image_row.index = 0
+
+    @image_row = Formotion::Row.new(image_hash)
+    @image_row.index = 0
+  end
+
   it "method_missing should work" do
     r = Formotion::Row.new
     r.title = "LABEL"
@@ -16,25 +29,31 @@ describe "Rows" do
     r.image.should == nil
   end
 
-  it "should sent an image on the cell with a String" do
-    hash = {title: "TITLE", subtitle: "SUBTITLE", image: "tags_row", type: :object, section: Formotion::Section.new({index: 0})}
-    r = Formotion::Row.new(hash)
-    r.index = 0
-    cell = r.make_cell
+  it "should set an image on the cell with a String" do
+    @string_image_row.image.should == @image_name
 
-    r.image.should == "tags_row"
+    cell = @string_image_row.make_cell
     cell.imageView.image.should.not == nil
   end
 
-  it "should sent an image on the cell with a UIImage" do
-    image = UIImage.imageNamed("tags_row")
-    hash = {title: "TITLE", subtitle: "SUBTITLE", image: image, type: :object, section: Formotion::Section.new({index: 0})}
-    r = Formotion::Row.new(hash)
-    r.index = 0
-    cell = r.make_cell
+  it "should set an image on the cell with a UIImage" do
+    @image_row.image.should == @image
 
-    r.image.should == image
-    cell.imageView.image.should == image
+    cell = @image_row.make_cell
+    cell.imageView.image.should == @image
+  end
+
+  it "should change the image after cell creation" do
+    @image_row.image.should == @image
+
+    cell = @image_row.make_cell
+    cell.imageView.image.should == @image
+
+    new_image = UIImage.imageNamed("camera")
+    @image_row.image = new_image
+
+    cell.imageView.image.should.not == @image
+    cell.imageView.image.should == new_image
   end
 
   it "the question mark methods should work" do
