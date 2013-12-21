@@ -16,13 +16,15 @@ class AppDelegate
           placeholder: "me@mail.com",
           type: :email,
           auto_correction: :no,
-          auto_capitalization: :none
+          auto_capitalization: :none,
+          input_accessory: :done
         }, {
           title: "Gender",
           key: :gender,
           type: :picker,
-          items: [['Female', 'f'], ['Male', 'm']],
-          value: 'm'
+          items: [['Female', 'f'],['fds', 'df'],['fddfsfds', 'f3'],['fdfafds', 'f33'], ['Male', 'm']],
+          value: 'm',
+          input_accessory: :done
         }, {
           title: "Password",
           key: :password,
@@ -35,14 +37,16 @@ class AppDelegate
           placeholder: "555-555-5555",
           type: :phone,
           auto_correction: :no,
-          auto_capitalization: :none
+          auto_capitalization: :none,
+          input_accessory: :done
         }, {
           title: "Number",
           key: :number,
           placeholder: "12345",
           type: :number,
           auto_correction: :no,
-          auto_capitalization: :none
+          auto_capitalization: :none,
+          input_accessory: :done
         }, {
           title: "Subtitle",
           subtitle: "Confirmation",
