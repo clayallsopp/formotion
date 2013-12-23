@@ -467,7 +467,7 @@ If you pass `pin: nil` the map will not display an annotation. Annotations with 
 {
   title: "My Awesome Site",
   type: :web_link,
-  value: "http://www.myawesomesite.com" # URL to be opened
+  value: "http://www.myawesomesite.com" # URL to be opened. Can also be an NSURL
 }
 ```
 
