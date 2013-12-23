@@ -451,6 +451,26 @@ Shows a map with a pin at the coordinates from value.
 }
 ```
 
+You can also allow the user to confirm leaving your app:
+```ruby
+{
+  title: "My Awesome Site",
+  type: :web_link,
+  value: {
+    url: "http://www.myawesomesite.com", # URL to be opened
+    warn: true
+    # or pass a hash to :warn. 
+    # Here are the default values (Bubblewrap alert options):
+    # warn: {
+    #   title: "Leaving #{App.name}",
+    #   message: "This action will leave #{App.name} and open Safari.",
+    #   buttons: ["Cancel", "OK"]
+    # }
+  }
+}
+```
+
+
 ### <a name="webview"></a> WebView row
 ![WebView row](https://github.com/rheoli/formotion/wiki/row-types/Webview.png)
 ```ruby
