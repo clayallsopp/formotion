@@ -49,7 +49,7 @@ module Formotion
       # Setting @form.controller assigns
       # @form as the datasource and delegate
       # and reloads the data.
-      @form.controller = self
+      @form.controller = WeakRef.new(self)
     end
 
     def viewWillAppear(animated)

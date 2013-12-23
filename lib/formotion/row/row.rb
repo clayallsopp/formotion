@@ -266,7 +266,7 @@ module Formotion
     end
 
     def text_alignment=(alignment)
-      @text_alignment = const_int_get("UITextAlignment", alignment)
+      @text_alignment = const_int_get("NSTextAlignment", alignment)
     end
 
     def selection_style=(style)
@@ -306,7 +306,7 @@ module Formotion
     def on_begin(&block)
       self.on_begin_callback = block
     end
-    
+
     def on_end(&block)
       self.on_end_callback = block
     end
@@ -404,7 +404,7 @@ module Formotion
         UITextFieldViewModeNever, UITextFieldViewModeAlways, UITextFieldViewModeWhileEditing,
         UITextFieldViewModeUnlessEditing, NSDateFormatterShortStyle, NSDateFormatterMediumStyle,
         NSDateFormatterLongStyle, NSDateFormatterFullStyle,
-        UITextAlignmentRight, UITextAlignmentCenter, UITextAlignmentLeft
+        NSTextAlignmentRight, NSTextAlignmentCenter, NSTextAlignmentLeft
       ]
     end
   end
