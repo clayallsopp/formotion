@@ -14,9 +14,15 @@ class AppDelegate
           title: "Email",
           key: :email,
           placeholder: "me@mail.com",
+          image: "email",
           type: :email,
           auto_correction: :no,
           auto_capitalization: :none
+        }, {
+          title: "Image Accessory",
+          subtitle: "You can add an image to any row type",
+          image: "arrow-up",
+          type: :static
         }, {
           title: "Gender",
           key: :gender,
