@@ -71,11 +71,12 @@ All character based row types accept following properties:
   type: :string,
   placeholder: 'James Bond',
   auto_correction: :no,
-  auto_capitalization: :none
+  auto_capitalization: :none,
+  input_accessory: :done
 }
 ```
 
-The `StringRow` is a simple text input row and opens a `UIKeyboardTypeDefault` keyboard when editing.
+The `StringRow` is a simple text input row and opens a `UIKeyboardTypeDefault` keyboard when editing. `input_accessory` can be nil or `:done`, and shows a toolbar with a done button above the keyboard.
 
 
 ### <a name="text"></a> Text row
@@ -356,7 +357,8 @@ The `SliderRow` takes a ruby range as `range` property that defines the min and 
   key: :pick,
   type: :picker,
   items: ["Ruby", "Motion", "Rocks"],
-  value: "Motion"
+  value: "Motion",
+  input_accessory: :done
 }
 ```
 
