@@ -15,7 +15,7 @@ module Formotion
       def build_cell(cell)
         cell.selectionStyle = self.row.selection_style || UITableViewCellSelectionStyleBlue
         # only show the "plus" when editable
-        add_plus_accessory(cell) if row.editable?
+        add_plus_accessory(cell) if row.editable? && (row.value == nil)
 
         observe(self.row, "value") do |old_value, new_value|
           @image_view.image = new_value
@@ -25,7 +25,7 @@ module Formotion
           else
             self.row.row_height = 44
             # only show the "plus" when editable
-            add_plus_accessory(cell) if row.editable?
+            add_plus_accessory(cell) if row.editable? && (row.value == nil)
           end
           row.form.reload_data
         end
