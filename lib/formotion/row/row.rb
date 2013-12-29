@@ -9,6 +9,8 @@ module Formotion
       :value,
       # set as cell.titleLabel.text
       :title,
+      # set as cell.imageView.image
+      :image,
       # set as cell.detailLabel.text
       :subtitle,
       # configures the type of input this is (string, phone, switch, etc)

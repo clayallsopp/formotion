@@ -11,6 +11,7 @@ class AppDelegate
           title: "Photo",
           key: :photo,
           type: :image,
+          image: "camera",
           deletable: true
         },{
           title: "Picker",
