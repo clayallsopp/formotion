@@ -476,17 +476,15 @@ You can also allow the user to confirm leaving your app:
 {
   title: "My Awesome Site",
   type: :web_link,
-  value: {
-    url: "http://www.myawesomesite.com", # URL to be opened
-    warn: true
-    # or pass a hash to :warn. 
-    # Here are the default values (Bubblewrap alert options):
-    # warn: {
-    #   title: "Leaving #{App.name}",
-    #   message: "This action will leave #{App.name} and open Safari.",
-    #   buttons: ["Cancel", "OK"]
-    # }
-  }
+  warn: true,
+  # or pass a hash to :warn. 
+  # Here are the default values (Bubblewrap alert options):
+  # warn: {
+  #   title: "Leaving #{App.name}",
+  #   message: "This action will leave #{App.name} and open Safari.",
+  #   buttons: ["Cancel", "OK"]
+  # }  
+  value: "http://www.myawesomesite.com", # URL to be opened
 }
 ```
 
