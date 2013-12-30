@@ -7,41 +7,39 @@ module Formotion
 
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator
         self.row.text_field.hidden = true
-        row.value = {url: row.value} unless row.value.is_a?(Hash)
-        row.value = {
-          warn: false
-        }.merge(row.value)
       end
 
       def on_select(tableView, tableViewDelegate)
         if is_url?
-          if row.value[:warn] == false
-            App.open_url row.value[:url]
+          if row.warn.nil? || row.warn == false
+            App.open_url row.value
           else
             warn
           end
+        else
+          raise StandardError, "Row value for WebLinkRow should be a URL string or instance of NSURL."
         end
       end
 
       def is_url?
-        (row.value[:url].is_a?(String) && row.value[:url][0..3] == "http") || row.value[:url].is_a?(NSURL)
+        (row.value.is_a?(String) && row.value[0..3] == "http") || row.value.is_a?(NSURL)
       end
 
       def warn
-        row.value[:warn] = {} unless row.value[:warn].is_a? Hash #Convert value from true to a hash
-        row.value[:warn] = {
+        row.warn = {} unless row.warn.is_a? Hash #Convert value from true to a hash
+        row.warn = {
           title: "Leaving #{App.name}",
           message: "This action will leave #{App.name} and open Safari.",
           buttons: ["Cancel", "OK"]
-        }.merge(row.value[:warn])
+        }.merge(row.warn)
 
         BW::UIAlertView.new({
-          title: row.value[:warn][:title],
-          message: row.value[:warn][:message],
-          buttons: row.value[:warn][:buttons],
+          title: row.warn[:title],
+          message: row.warn[:message],
+          buttons: row.warn[:buttons],
           cancel_button_index: 0
         }) do |alert|
-          App.open_url(row.value[:url]) unless alert.clicked_button.cancel?
+          App.open_url(row.value) unless alert.clicked_button.cancel?
         end.show
       end
 
