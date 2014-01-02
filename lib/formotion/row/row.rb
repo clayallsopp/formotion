@@ -103,7 +103,13 @@ module Formotion
       # Cell selection style
       # OPTIONS: :blue, :gray, :none
       # DEFAULT is :blue
-      :selection_style
+      :selection_style,
+
+      # The following apply only to weblink rows
+
+      # Whether or not to display a warning to the user before leaving the app.
+      # DEFAULT is false
+      :warn
     ]
     PROPERTIES.each {|prop|
       attr_accessor prop
