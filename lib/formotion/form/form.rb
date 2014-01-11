@@ -268,6 +268,8 @@ module Formotion
 
     def open
       @form_observer ||= lambda { |form, saved_render|
+        no_saved_render = saved_render.nil?
+        saved_render ||= {}
         form.sections.each_with_index do |section, s_index|
           section.rows.each_with_index do |row, index|
             next if row.templated?
@@ -279,7 +281,7 @@ module Formotion
               row.value = saved_row_value
               row.object.update_template_rows
             else
-              row.value = saved_row_value
+              row.value = saved_row_value if !no_saved_render
             end
           end
         end
