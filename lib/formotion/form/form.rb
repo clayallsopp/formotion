@@ -294,8 +294,10 @@ module Formotion
 
     # places hash of values into application persistance
     def save
-      App::Persistence[persist_key] = render
-      App::Persistence[original_persist_key] ||= render
+      rendered = render
+      recursive_delete_nil(rendered)
+      App::Persistence[persist_key] = rendered
+      App::Persistence[original_persist_key] ||= rendered
     end
 
     def reset
