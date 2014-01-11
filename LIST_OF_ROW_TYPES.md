@@ -39,6 +39,7 @@ All row types accept following properties:
   value:      'Some Value',   # The initial value passed to the row
   title:      'Title',        # Title of the row
   subtitle:   'Subtitle',     # Subtitle of the row
+  image:      nil,            # Image for the cell's imageView. Accepts a string or UIImage
   type:       :string,        # The type of row (string, phone, switch, etc)
   row_height: 100             # Height of the row
 }
@@ -469,9 +470,27 @@ If you pass `pin: nil` the map will not display an annotation. Annotations with 
 {
   title: "My Awesome Site",
   type: :web_link,
-  value: "http://www.myawesomesite.com" # URL to be opened
+  value: "http://www.myawesomesite.com" # URL to be opened. Can also be an NSURL
 }
 ```
+
+You can also allow the user to confirm leaving your app:
+```ruby
+{
+  title: "My Awesome Site",
+  type: :web_link,
+  warn: true,
+  # or pass a hash to :warn. 
+  # Here are the default values (Bubblewrap alert options):
+  # warn: {
+  #   title: "Leaving #{App.name}",
+  #   message: "This action will leave #{App.name} and open Safari.",
+  #   buttons: ["Cancel", "OK"]
+  # }  
+  value: "http://www.myawesomesite.com", # URL to be opened
+}
+```
+
 
 ### <a name="webview"></a> WebView row
 ![WebView row](https://github.com/rheoli/formotion/wiki/row-types/Webview.png)
