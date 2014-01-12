@@ -116,7 +116,7 @@ class UITextField_Delegate
     end
 
     if Device.ios_version >= "7.0"
-      theTextField.text = theTextField.text.gsub("\u00a0", " ")
+      theTextField.text = theTextField.text.gsub("\u00a0", " ").strip
     end
 
     true
