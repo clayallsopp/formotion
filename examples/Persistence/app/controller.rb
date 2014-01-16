@@ -21,6 +21,24 @@ class AccountSettingsController < Formotion::FormController
     }]
   }
 
+  DISPLAY_KEY_HASH = {
+    title: "Alert Sounds",
+    sections: [{
+      key: :sound,
+      select_one: true,
+      rows: [{
+        title: "Beeps",
+        key: :Beeps,
+        value: true,
+        type: :check
+      },{
+        title: "Boops",
+        key: :Boops,
+        type: :check
+      }]
+    }]
+  }
+
   SETTINGS_HASH = {
       title: "Application",
       persist_as: PERSIST_AS,
@@ -65,6 +83,12 @@ class AccountSettingsController < Formotion::FormController
           type: :subform,
           key: :special_options,
           subform: SPECIAL_OPTIONS_HASH
+        }, {
+          title: "w/ Display Key",
+          type: :subform,
+          key: :alert_sound,
+          display_key: :sound,
+          subform: DISPLAY_KEY_HASH
         }]
       }]
     }

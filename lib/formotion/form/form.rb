@@ -267,16 +267,21 @@ module Formotion
     end
 
     def open
-      @form_observer ||= lambda { |form, saved_render|
+      @form_observer ||= ->(form, saved_render, uses_display_key = false) {
         no_saved_render = saved_render.nil?
         saved_render ||= {}
+
         form.sections.each_with_index do |section, s_index|
           section.rows.each_with_index do |row, index|
             next if row.templated?
             saved_row_value = saved_render[row.key]
 
+            if uses_display_key && section.select_one && saved_render.include?(section.key.to_s)
+              saved_row_value = row.key.to_s == saved_render[section.key.to_s].to_s
+            end
+
             if row.subform?
-              @form_observer.call(row.subform.to_form, saved_row_value)
+              @form_observer.call(row.subform.to_form, saved_row_value, !!row.display_key)
             elsif row.type == :template
               row.value = saved_row_value
               row.object.update_template_rows
