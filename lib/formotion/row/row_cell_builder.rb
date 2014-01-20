@@ -23,9 +23,11 @@ module Formotion
         cell.textLabel.text = new_value
       end
 
-      Formotion::RowCellBuilder.set_image(cell, row)
-      observe(row, "image") do |old_value, new_value|
+      if row.image
         Formotion::RowCellBuilder.set_image(cell, row)
+        observe(row, "image") do |old_value, new_value|
+          Formotion::RowCellBuilder.set_image(cell, row)
+        end
       end
 
       cell.detailTextLabel.text = row.subtitle
@@ -45,7 +47,24 @@ module Formotion
     end
 
     def self.set_image(cell, row)
-      cell.imageView.image = (row.image.is_a? String) ? UIImage.imageNamed(row.image) : row.image
+      if row.image.is_a?(NSURL) || (row.image.is_a?(String) && row.image.include?("http"))
+        # Use a remote image helper to set the image.
+        image_url = row.image
+        image_url = NSURL.URLWithString(image_url) unless image_url.is_a?(NSURL)
+
+        placeholder = row.image_placeholder
+        placeholder = UIImage.imageNamed(placeholder) if placeholder.is_a?(String)
+
+        if cell.imageView.respond_to?("setImageWithURL:placeholder:")
+          cell.imageView.setImageWithURL(image_url, placeholder: placeholder)
+        else
+          raise "Please add pod 'JMImageCache' to your Rakefile to use remote images in formotion"
+        end
+
+      else
+        # Just set the image like normal
+        cell.imageView.image = (row.image.is_a? String) ? UIImage.imageNamed(row.image) : row.image
+      end
     end
 
   end
