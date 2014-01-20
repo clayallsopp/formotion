@@ -23,9 +23,9 @@ module Formotion
         cell.textLabel.text = new_value
       end
 
-      cell.imageView.image = (row.image.is_a? String) ? UIImage.imageNamed(row.image) : row.image
+      Formotion::RowCellBuilder.set_image(cell, row)
       observe(row, "image") do |old_value, new_value|
-        cell.imageView.image = (row.image.is_a? String) ? UIImage.imageNamed(row.image) : row.image
+        Formotion::RowCellBuilder.set_image(cell, row)
       end
 
       cell.detailTextLabel.text = row.subtitle
@@ -42,6 +42,10 @@ module Formotion
       end
 
       [cell, edit_field]
+    end
+
+    def self.set_image(cell, row)
+      cell.imageView.image = (row.image.is_a? String) ? UIImage.imageNamed(row.image) : row.image
     end
 
   end
