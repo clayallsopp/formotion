@@ -56,6 +56,18 @@ describe "Rows" do
     cell.imageView.image.should == new_image
   end
 
+  it "should set an image on the cell using a remote URL" do
+
+  end
+
+  it "should set a remote image with a placeholder" do
+
+  end
+
+  it "should set a remote image after another image has already been set" do
+
+  end
+
   it "the question mark methods should work" do
     r = Formotion::Row.new({secure: true, title: "Not Boolean"})
     r.secure?.should == true
