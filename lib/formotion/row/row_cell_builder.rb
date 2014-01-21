@@ -56,13 +56,13 @@ module Formotion
         placeholder = UIImage.imageNamed(placeholder) if placeholder.is_a?(String)
 
         if cell.imageView.respond_to?("setImageWithURL:placeholderImage:")
-          # Use AFNetworking / AFMotion
+          # Use AFNetworking / SDWebImage
           cell.imageView.setImageWithURL(image_url, placeholderImage: placeholder)
         elsif cell.imageView.respond_to?("setImageWithURL:placeholder:")
           # Use JMImageCache
           cell.imageView.setImageWithURL(image_url, placeholder: placeholder)
         else
-          raise "Please add the afmotion gem of the JMImageCache cocoapod to your project to use remote images in formotion"
+          raise "Please add the AFNetworking, SDWebImage, or JMImageCache pods to your project to use remote images in Formotion"
         end
 
       else
