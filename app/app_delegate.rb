@@ -35,7 +35,7 @@ class AppDelegate
         }, {
           title: "Remote Loaded Image",
           type: :static,
-          image: 'http://www.placekitten.com/40/40',
+          image: "http://placekitten.com/80/80?t=#{Time.now.to_i}",
           image_placeholder: "camera"
         }, {
           title: "Password",
