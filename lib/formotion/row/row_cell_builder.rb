@@ -55,10 +55,14 @@ module Formotion
         placeholder = row.image_placeholder
         placeholder = UIImage.imageNamed(placeholder) if placeholder.is_a?(String)
 
-        if cell.imageView.respond_to?("setImageWithURL:placeholder:")
+        if cell.imageView.respond_to?("setImageWithURL:placeholderImage:")
+          # Use AFNetworking / AFMotion
+          cell.imageView.setImageWithURL(image_url, placeholderImage: placeholder)
+        elsif cell.imageView.respond_to?("setImageWithURL:placeholder:")
+          # Use JMImageCache
           cell.imageView.setImageWithURL(image_url, placeholder: placeholder)
         else
-          raise "Please add pod 'JMImageCache' to your Rakefile to use remote images in formotion"
+          raise "Please add the afmotion gem of the JMImageCache cocoapod to your project to use remote images in formotion"
         end
 
       else
