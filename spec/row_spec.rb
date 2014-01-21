@@ -107,6 +107,22 @@ describe "Rows" do
 
   end
 
+  it "should set a local image after a remote image has already been set" do
+    cell = @remote_placeholder_image_row.make_cell
+
+    wait 1 do
+      img = cell.imageView.image
+      cell.imageView.image.size.should != @remote_placeholder_image.size
+
+      new_image = UIImage.imageNamed("camera")
+      @remote_placeholder_image_row.image = new_image
+
+      cell.imageView.image.should.not == img
+      cell.imageView.image.should == new_image
+    end
+
+  end
+
   it "the question mark methods should work" do
     r = Formotion::Row.new({secure: true, title: "Not Boolean"})
     r.secure?.should == true
