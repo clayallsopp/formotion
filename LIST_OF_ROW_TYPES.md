@@ -39,7 +39,8 @@ All row types accept following properties:
   value:      'Some Value',   # The initial value passed to the row
   title:      'Title',        # Title of the row
   subtitle:   'Subtitle',     # Subtitle of the row
-  image:      nil,            # Image for the cell's imageView. Accepts a string or UIImage
+  image:      nil,            # Image for the cell's imageView. Accepts a string, UIImage, URL string, or NSURL
+  image_placeholder: nil      # Used only when you are loading remote images. Accpets a string or UIImage
   type:       :string,        # The type of row (string, phone, switch, etc)
   row_height: 100             # Height of the row
 }
