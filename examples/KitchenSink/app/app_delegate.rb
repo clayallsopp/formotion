@@ -27,7 +27,7 @@ class AppDelegate
         }, {
           title: "Image from URL",
           subtitle: "Or from a URL!",
-          image: "http://placekitten.com/80/80p",
+          image: "http://placekitten.com/80/80?t=#{Time.now.to_i}",
           type: :static
         }, {
           title: "Gender",

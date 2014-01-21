@@ -55,12 +55,26 @@ module Formotion
         placeholder = row.image_placeholder
         placeholder = UIImage.imageNamed(placeholder) if placeholder.is_a?(String)
 
-        if cell.imageView.respond_to?("setImageWithURL:placeholderImage:")
-          # Use AFNetworking / SDWebImage
-          cell.imageView.setImageWithURL(image_url, placeholderImage: placeholder)
+        if cell.imageView.respond_to?("setImageWithURLRequest:placeholderImage:success:failure:")
+          # Use AFNetworking
+          request = NSURLRequest.requestWithURL(image_url)
+          cell.imageView.setImageWithURLRequest(request, placeholderImage: placeholder, success: ->(request, response, image) {
+            cell.imageView.image = image
+            cell.setNeedsLayout
+          }, failure: ->(request, response, error) {
+
+          })
+        elsif cell.imageView.respond_to?("setImageWithURL:placeholderImage:completed:")
+          cell.imageView.setImageWithURL(image_url, placeholderImage: placeholder, completed: ->(image, error, cacheType) {
+            cell.imageView.image = image
+            cell.setNeedsLayout
+          })
         elsif cell.imageView.respond_to?("setImageWithURL:placeholder:")
           # Use JMImageCache
-          cell.imageView.setImageWithURL(image_url, placeholder: placeholder)
+          JMImageCache.sharedCache.imageForURL(image_url, completionBlock: ->(downloadedImage) {
+              cell.imageView.image = downloadedImage
+              cell.setNeedsLayout
+          })
         else
           raise "Please add the AFNetworking, SDWebImage, or JMImageCache pods to your project to use remote images in Formotion"
         end
