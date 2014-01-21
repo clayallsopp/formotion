@@ -25,6 +25,11 @@ class AppDelegate
           image: "arrow-up",
           type: :static
         }, {
+          title: "Image from URL",
+          subtitle: "Or from a URL!",
+          image: "http://placekitten.com/80/80p",
+          type: :static
+        }, {
           title: "Gender",
           key: :gender,
           type: :picker,
