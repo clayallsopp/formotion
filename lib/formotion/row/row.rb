@@ -11,6 +11,8 @@ module Formotion
       :title,
       # set as cell.imageView.image
       :image,
+      # an image placeholder for cell.imageView.image when using remote images
+      :image_placeholder,
       # set as cell.detailLabel.text
       :subtitle,
       # configures the type of input this is (string, phone, switch, etc)

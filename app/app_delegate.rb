@@ -33,6 +33,11 @@ class AppDelegate
           type: :string,
           secure: true
         }, {
+          title: "Remote Loaded Image",
+          type: :static,
+          image: "http://placekitten.com/80/80?t=#{Time.now.to_i}",
+          image_placeholder: "camera"
+        }, {
           title: "Password",
           subtitle: "Confirmation",
           key: :confirm,

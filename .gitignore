@@ -9,3 +9,4 @@ resources/*.storyboardc
 Gemfile.lock
 pkg/*
 .rvmrc
+vendor
