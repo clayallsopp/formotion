@@ -114,6 +114,11 @@ class UITextField_Delegate
     if self.textFieldShouldEndEditing_callback
       return self.textFieldShouldEndEditing_callback.call(theTextField)
     end
+
+    if Device.ios_version >= "7.0"
+      theTextField.text = theTextField.text.gsub("\u00a0", " ").strip
+    end
+
     true
   end
 
@@ -127,6 +132,15 @@ class UITextField_Delegate
     if self.shouldChangeCharactersInRange_callback
       return self.shouldChangeCharactersInRange_callback.call(theTextField, range, string)
     end
+
+    # fix for UITextField in iOS7 http://stackoverflow.com/questions/19569688/uitextfield-spacebar-does-not-advance-cursor-in-ios-7/20129483#20129483
+    if Device.ios_version >= "7.0"
+      if range.location == theTextField.text.length && string == " "
+        theTextField.text = theTextField.text.stringByAppendingString("\u00a0")
+        return false
+      end
+    end
+
     true
   end
 

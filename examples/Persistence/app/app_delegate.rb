@@ -6,6 +6,8 @@ class AppDelegate
 
     @view_controller.navigationItem.leftBarButtonItem = UIBarButtonItem.alloc.initWithTitle("Render", style: UIBarButtonItemStyleBordered, target:self, action:'reset_form')
 
+    @view_controller.navigationItem.rightBarButtonItem = UIBarButtonItem.alloc.initWithTitle("Save", style: UIBarButtonItemStyleBordered, target:self, action:'submit')
+
     @navigation_controller = UINavigationController.alloc.initWithRootViewController(@view_controller)
 
     @window.rootViewController = @navigation_controller

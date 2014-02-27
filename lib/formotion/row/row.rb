@@ -9,6 +9,10 @@ module Formotion
       :value,
       # set as cell.titleLabel.text
       :title,
+      # set as cell.imageView.image
+      :image,
+      # an image placeholder for cell.imageView.image when using remote images
+      :image_placeholder,
       # set as cell.detailLabel.text
       :subtitle,
       # configures the type of input this is (string, phone, switch, etc)
@@ -101,7 +105,13 @@ module Formotion
       # Cell selection style
       # OPTIONS: :blue, :gray, :none
       # DEFAULT is :blue
-      :selection_style
+      :selection_style,
+
+      # The following apply only to weblink rows
+
+      # Whether or not to display a warning to the user before leaving the app.
+      # DEFAULT is false
+      :warn
     ]
     PROPERTIES.each {|prop|
       attr_accessor prop
@@ -266,7 +276,7 @@ module Formotion
     end
 
     def text_alignment=(alignment)
-      @text_alignment = const_int_get("UITextAlignment", alignment)
+      @text_alignment = const_int_get("NSTextAlignment", alignment)
     end
 
     def selection_style=(style)
@@ -306,7 +316,7 @@ module Formotion
     def on_begin(&block)
       self.on_begin_callback = block
     end
-    
+
     def on_end(&block)
       self.on_end_callback = block
     end
@@ -404,7 +414,7 @@ module Formotion
         UITextFieldViewModeNever, UITextFieldViewModeAlways, UITextFieldViewModeWhileEditing,
         UITextFieldViewModeUnlessEditing, NSDateFormatterShortStyle, NSDateFormatterMediumStyle,
         NSDateFormatterLongStyle, NSDateFormatterFullStyle,
-        UITextAlignmentRight, UITextAlignmentCenter, UITextAlignmentLeft
+        NSTextAlignmentRight, NSTextAlignmentCenter, NSTextAlignmentLeft
       ]
     end
   end

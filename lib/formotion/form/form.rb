@@ -267,19 +267,26 @@ module Formotion
     end
 
     def open
-      @form_observer ||= lambda { |form, saved_render|
+      @form_observer ||= ->(form, saved_render, uses_display_key = false) {
+        no_saved_render = saved_render.nil?
+        saved_render ||= {}
+
         form.sections.each_with_index do |section, s_index|
           section.rows.each_with_index do |row, index|
             next if row.templated?
             saved_row_value = saved_render[row.key]
 
+            if uses_display_key && section.select_one && saved_render.include?(section.key.to_s)
+              saved_row_value = row.key.to_s == saved_render[section.key.to_s].to_s
+            end
+
             if row.subform?
-              @form_observer.call(row.subform.to_form, saved_row_value)
+              @form_observer.call(row.subform.to_form, saved_row_value, !!row.display_key)
             elsif row.type == :template
               row.value = saved_row_value
               row.object.update_template_rows
             else
-              row.value = saved_row_value
+              row.value = saved_row_value if !no_saved_render
             end
           end
         end
@@ -294,8 +301,10 @@ module Formotion
 
     # places hash of values into application persistance
     def save
-      App::Persistence[persist_key] = render
-      App::Persistence[original_persist_key] ||= render
+      rendered = render
+      recursive_delete_nil(rendered)
+      App::Persistence[persist_key] = rendered
+      App::Persistence[original_persist_key] ||= rendered
     end
 
     def reset

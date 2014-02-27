@@ -14,15 +14,28 @@ class AppDelegate
           title: "Email",
           key: :email,
           placeholder: "me@mail.com",
+          image: "email",
           type: :email,
           auto_correction: :no,
-          auto_capitalization: :none
+          auto_capitalization: :none,
+          input_accessory: :done
+        }, {
+          title: "Image Accessory",
+          subtitle: "You can add an image to any row type",
+          image: "arrow-up",
+          type: :static
+        }, {
+          title: "Image from URL",
+          subtitle: "Or from a URL!",
+          image: "http://placekitten.com/80/80?t=#{Time.now.to_i}",
+          type: :static
         }, {
           title: "Gender",
           key: :gender,
           type: :picker,
-          items: [['Female', 'f'], ['Male', 'm']],
-          value: 'm'
+          items: [['Female', 'f'],['fds', 'df'],['fddfsfds', 'f3'],['fdfafds', 'f33'], ['Male', 'm']],
+          value: 'm',
+          input_accessory: :done
         }, {
           title: "Password",
           key: :password,
@@ -35,14 +48,16 @@ class AppDelegate
           placeholder: "555-555-5555",
           type: :phone,
           auto_correction: :no,
-          auto_capitalization: :none
+          auto_capitalization: :none,
+          input_accessory: :done
         }, {
           title: "Number",
           key: :number,
           placeholder: "12345",
           type: :number,
           auto_correction: :no,
-          auto_capitalization: :none
+          auto_capitalization: :none,
+          input_accessory: :done
         }, {
           title: "Subtitle",
           subtitle: "Confirmation",

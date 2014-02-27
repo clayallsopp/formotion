@@ -1,8 +1,8 @@
 $:.unshift("/Library/RubyMotion/lib")
-require 'motion/project'
+require 'motion/project/template/ios'
 require "bundler/gem_tasks"
 require "bundler/setup"
-
+Bundler.require
 $:.unshift("./lib/")
 require './lib/formotion'
 require 'guard/motion'
@@ -10,6 +10,10 @@ require 'guard/motion'
 Motion::Project::App.setup do |app|
   # Use `rake config' to see complete project settings.
   app.name = 'Formotion'
+
+  app.pods do
+    pod 'JMImageCache'
+  end
 end
 
 namespace :spec do

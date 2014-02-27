@@ -20,6 +20,7 @@
 [Subform](#subform)<br/>
 [Template](#template)<br/>
 [MapView](#mapview)<br/>
+[WebLink](#weblink)<br/>
 [WebView](#webview)<br/>
 [PagedImage](#pagedimage)<br/>
 [Tags](#tags)<br/>
@@ -39,6 +40,8 @@ All row types accept following properties:
   value:      'Some Value',   # The initial value passed to the row
   title:      'Title',        # Title of the row
   subtitle:   'Subtitle',     # Subtitle of the row
+  image:      nil,            # Image for the cell's imageView. Accepts a string, UIImage, URL string, or NSURL
+  image_placeholder: nil      # Used only when you are loading remote images. Accpets a string or UIImage
   type:       :string,        # The type of row (string, phone, switch, etc)
   row_height: 100             # Height of the row
 }
@@ -71,11 +74,12 @@ All character based row types accept following properties:
   type: :string,
   placeholder: 'James Bond',
   auto_correction: :no,
-  auto_capitalization: :none
+  auto_capitalization: :none,
+  input_accessory: :done
 }
 ```
 
-The `StringRow` is a simple text input row and opens a `UIKeyboardTypeDefault` keyboard when editing.
+The `StringRow` is a simple text input row and opens a `UIKeyboardTypeDefault` keyboard when editing. `input_accessory` can be nil or `:done`, and shows a toolbar with a done button above the keyboard.
 
 
 ### <a name="text"></a> Text row
@@ -377,7 +381,8 @@ The `SliderRow` takes a ruby range as `range` property that defines the min and 
   key: :pick,
   type: :picker,
   items: ["Ruby", "Motion", "Rocks"],
-  value: "Motion"
+  value: "Motion",
+  input_accessory: :done
 }
 ```
 
@@ -454,13 +459,60 @@ Use a `:display_key` to show the value of the subform in the row:
 ```ruby
 {
   title: "Map",
-  type: :map_view,
-  value: coordinates,  # of type CLLocationCoordinate2D
+  type: :map,
+  value: coordinates,  # of type CLLocationCoordinate2D, CLCircularRegion, or a Hash of options
   row_height: 200      # for better viewing
 }
 ```
 
-Shows a map with a pin at the coordinates from value.
+Shows a map with a pin at the coordinates from value. If you pass a `CLLocationCoordinate2D` or `CLCircularRegion`, a pin will be placed at the coordinates. You can pass a hash of options like this:
+
+```ruby
+{
+  title: "Map",
+  type: :map,
+  value: {
+    coord: coordinates,
+    enabled: true, # Whether the user can interact with the map.
+    type: MKMapTypeStandard, # The type of map to show. See MKMapType documentation.
+    animated: true, # Whether setting the region should animate. This property also applies to annotation titles.
+    pin: {
+      coord: coordinates, # Must be a CLLocationCoordinate2D
+      title: nil, # Title of the annotation
+      subtitle: nil # Subtitle of the annotation
+    }
+  }
+  row_height: 200 # for better viewing
+}
+```
+
+If you pass `pin: nil` the map will not display an annotation. Annotations with titles will automatically pop open the annotation. _Note: If you set a title on an annotation it will automatically invalidate `enabled:false` and the map will be interactable._
+
+### <a name="weblink"></a> WebLink row
+```ruby
+{
+  title: "My Awesome Site",
+  type: :web_link,
+  value: "http://www.myawesomesite.com" # URL to be opened. Can also be an NSURL
+}
+```
+
+You can also allow the user to confirm leaving your app:
+```ruby
+{
+  title: "My Awesome Site",
+  type: :web_link,
+  warn: true,
+  # or pass a hash to :warn. 
+  # Here are the default values (Bubblewrap alert options):
+  # warn: {
+  #   title: "Leaving #{App.name}",
+  #   message: "This action will leave #{App.name} and open Safari.",
+  #   buttons: ["Cancel", "OK"]
+  # }  
+  value: "http://www.myawesomesite.com", # URL to be opened
+}
+```
 
 
 ### <a name="webview"></a> WebView row

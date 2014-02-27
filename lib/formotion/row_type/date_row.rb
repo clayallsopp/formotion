@@ -40,6 +40,12 @@ module Formotion
 
       def after_build(cell)
         self.row.text_field.inputView = self.picker
+        # work around an iOS7 bug: http://bit.ly/KcwKSv
+        if row.picker_mode == :countdown
+          self.picker.setDate(self.picker.date, animated:true)
+          picker.countDownDuration = self.row.value
+        end
+
         update
       end
 
@@ -49,13 +55,14 @@ module Formotion
           picker.datePickerMode = self.picker_mode
           picker.hidden = false
           picker.date = self.date_value || Time.now
+          picker.countDownDuration = self.row.value if row.picker_mode == :countdown
           picker.minuteInterval = self.row.minute_interval if self.row.minute_interval
 
           picker.when(UIControlEventValueChanged) do
             if self.row.picker_mode == :countdown
               self.row.value = @picker.countDownDuration
             else
-              self.row.value = Time.at(@picker.date).to_i 
+              self.row.value = Time.at(@picker.date).to_i
             end
             update
           end

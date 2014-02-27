@@ -1,12 +1,17 @@
 # -*- coding: utf-8 -*-
 $:.unshift("/Library/RubyMotion/lib")
-require 'motion/project'
+require 'motion/project/template/ios'
 
-require 'rubygems'
-require 'bundler'
-Bundler.require :default
+begin
+  require 'bundler'
+  Bundler.require
+rescue LoadError
+end
 
 Motion::Project::App.setup do |app|
   # Use `rake config' to see complete project settings.
   app.name = 'KitchenSink'
+  app.pods do
+    pod 'SDWebImage'
+  end
 end

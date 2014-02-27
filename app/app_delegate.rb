@@ -11,6 +11,7 @@ class AppDelegate
           title: "Photo",
           key: :photo,
           type: :image,
+          image: "camera",
           deletable: true
         },{
           title: "Picker",
@@ -31,6 +32,11 @@ class AppDelegate
           placeholder: "required",
           type: :string,
           secure: true
+        }, {
+          title: "Remote Loaded Image",
+          type: :static,
+          image: "http://placekitten.com/80/80?t=#{Time.now.to_i}",
+          image_placeholder: "camera"
         }, {
           title: "Password",
           subtitle: "Confirmation",

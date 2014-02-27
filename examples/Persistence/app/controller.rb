@@ -4,6 +4,41 @@ class AccountSettingsController < Formotion::FormController
   API_SERVER = "hello_world"
   API_KEY = "123123secret"
 
+  SPECIAL_OPTIONS_HASH = {
+    title: "Special options",
+    sections: [{
+      rows: [{
+        title: "Phone Number",
+        value: "555-555-5555",
+        type: "phone",
+        key: "phone"
+      }, {
+        title: "Address",
+        value: "90210",
+        type: "string",
+        key: "address"
+      }]
+    }]
+  }
+
+  DISPLAY_KEY_HASH = {
+    title: "Alert Sounds",
+    sections: [{
+      key: :sound,
+      select_one: true,
+      rows: [{
+        title: "Beeps",
+        key: :Beeps,
+        value: true,
+        type: :check
+      },{
+        title: "Boops",
+        key: :Boops,
+        type: :check
+      }]
+    }]
+  }
+
   SETTINGS_HASH = {
       title: "Application",
       persist_as: PERSIST_AS,
@@ -23,6 +58,37 @@ class AccountSettingsController < Formotion::FormController
           secure: false,
           auto_correction: :no,
           auto_capitalization: :none
+        }]
+      }, {
+        rows: [{
+          title: "Name",
+          type: :string,
+          key: :name,
+          value: "Clay",
+          auto_correction: :no,
+          auto_capitalization: :none
+        }, {
+          title: "Password",
+          value: "Secret",
+          type: :string,
+          key: :password,
+          secure: false,
+          auto_correction: :no,
+          auto_capitalization: :none
+        }]
+      }, {
+        title: "w/ Subforms",
+        rows: [{
+          title: "Special Options",
+          type: :subform,
+          key: :special_options,
+          subform: SPECIAL_OPTIONS_HASH
+        }, {
+          title: "w/ Display Key",
+          type: :subform,
+          key: :alert_sound,
+          display_key: :sound,
+          subform: DISPLAY_KEY_HASH
         }]
       }]
     }
