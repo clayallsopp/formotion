@@ -4,5 +4,6 @@ before_install:
     - (ruby --version)
     - mkdir -p ~/Library/RubyMotion/build
     - sudo motion update
+    - bundle install
     - bundle exec rake pod:install
 script: bundle exec rake spec:units
