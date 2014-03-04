@@ -15,7 +15,7 @@ describe "Date Row" do
   it "should have no value by default" do
     cell = @row.make_cell
 
-    @row.text_field.text.should == nil
+    @row.text_field.text.to_s.should == ""
   end
 
   it "should use custom value" do
@@ -35,7 +35,7 @@ describe "Date Row" do
     cell = @row.make_cell
 
     @row.object.picker.date = Time.at MILLENIUM
-    @row.object.picker.trigger UIControlEventValueChanged
+    @row.object.picker.sendActionsForControlEvents UIControlEventValueChanged
 
     @row.value.should == MILLENIUM
     @row.text_field.text.should == '1/1/00'
@@ -73,7 +73,7 @@ describe "Date Row" do
       @row.picker_mode = mode
       cell = @row.make_cell
       @row.object.picker.date = Time.at MILLENIUM
-      @row.object.picker.trigger UIControlEventValueChanged
+      @row.object.picker.sendActionsForControlEvents UIControlEventValueChanged
 
       @row.text_field.text.should == expected_output
     end
