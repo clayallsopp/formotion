@@ -121,7 +121,7 @@ module Formotion
           end
         end
 
-        @map_view
+        nil
       end
 
       def on_select(tableView, tableViewDelegate)
