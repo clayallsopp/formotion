@@ -120,6 +120,8 @@ module Formotion
             formotion_field.frame = field_frame
           end
         end
+
+        nil
       end
 
       def on_select(tableView, tableViewDelegate)
