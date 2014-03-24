@@ -33,8 +33,12 @@ module Formotion
 
       def update_cell(cell)
         subform = row.subform.to_form
-        if row.display_key and subform.render[row.display_key]
-          self.display_key_label.text = subform.render[row.display_key]
+        if row.display_key && render_row = subform.row(row.display_key)
+          rendered_value = render_row.value_for_save_hash
+          if render_row.object && render_row.object.respond_to?('row_value')
+            rendered_value = render_row.object.row_value
+          end
+          self.display_key_label.text = rendered_value
         end
       end
 
