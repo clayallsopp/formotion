@@ -5,7 +5,7 @@ module Formotion
     class NumberRow < StringRow
 
       def keyboardType
-        if Device.ipad?
+        if BW::Device.ipad?
           return UIKeyboardTypeNumberPad
         end
         UIKeyboardTypeDecimalPad
