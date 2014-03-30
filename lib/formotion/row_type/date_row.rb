@@ -43,7 +43,7 @@ module Formotion
         # work around an iOS7 bug: http://bit.ly/KcwKSv
         if row.picker_mode == :countdown
           self.picker.setDate(self.picker.date, animated:true)
-          picker.countDownDuration = self.row.value
+          picker.countDownDuration = self.row.value.to_f
         end
 
         update

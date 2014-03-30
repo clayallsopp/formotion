@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.license = 'MIT'
 
-  s.add_dependency "bubble-wrap", "~> 1.4.0"
-  s.add_dependency "motion-require", "~> 0.0.3"
+  s.add_dependency "bubble-wrap", ">= 1.4.0"
+  s.add_dependency "motion-require", ">= 0.1.0"
   s.add_development_dependency 'rake'
 end

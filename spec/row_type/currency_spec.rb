@@ -36,7 +36,8 @@ describe "Number Row" do
     cell = @row.make_cell
     set_formatter_locale("it_IT")
     @row.value = 3004.35
-    @row.text_field.text.should == "€ 3.004,35"
+    @row.text_field.text.should.start_with?("€")
+    @row.text_field.text.should.end_with?("3.004,35")
   end
 
   it "should work with different locale and setting text_field#text" do

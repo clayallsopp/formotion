@@ -4,7 +4,7 @@ module Formotion
       attr_accessor :row, :tableView
 
       def self.field_buffer
-        if Device.iphone? or App.window.size.width <= 320 or Device.ios_version >= "7.0"
+        if BW::Device.iphone? or App.window.size.width <= 320 or BW::Device.ios_version >= "7.0"
           20
         else
           64
