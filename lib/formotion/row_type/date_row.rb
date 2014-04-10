@@ -57,6 +57,8 @@ module Formotion
           picker.date = self.date_value || Time.now
           picker.countDownDuration = self.row.value if row.picker_mode == :countdown
           picker.minuteInterval = self.row.minute_interval if self.row.minute_interval
+          picker.minimumDate = self.row.minimum_date if self.row.minimum_date
+          picker.maximumDate = self.row.maximum_date if self.row.maximum_date
 
           picker.when(UIControlEventValueChanged) do
             if self.row.picker_mode == :countdown
