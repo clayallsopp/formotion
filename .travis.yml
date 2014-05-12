@@ -2,6 +2,7 @@ language: objective-c
 install: bundle install
 before_install:
     - (ruby --version)
+    - sudo chown -R travis ~/Library/RubyMotion
     - mkdir -p ~/Library/RubyMotion/build
     - sudo motion update
     - bundle install
