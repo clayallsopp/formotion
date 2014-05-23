@@ -102,6 +102,9 @@ module Formotion
       # OPTIONS: :done (a black translucent toolbar with a right-aligned "Done" button)
       # DEFAULT is nil
       :input_accessory,
+      # Call a method when the input accessory is tapped.
+      # Default is nil
+      :done_action,
       # Cell selection style
       # OPTIONS: :blue, :gray, :none
       # DEFAULT is :blue
