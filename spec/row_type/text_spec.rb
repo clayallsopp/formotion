@@ -45,4 +45,13 @@ describe "Text Row" do
     @row.text_field.placeholder.should == 'placeholder'
   end
 
+  # Input Accessory
+  it "should have an input accessory" do
+    cell = @row.make_cell
+    @row.text_field.inputAccessoryView.should != nil
+  end
+
+  it "should call the done_action when hitting the 'done' button" do
+  end
+
 end

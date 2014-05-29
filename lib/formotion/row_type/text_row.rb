@@ -22,6 +22,7 @@ module Formotion
         field.returnKeyType = row.return_key || UIReturnKeyDefault
         field.autocapitalizationType = row.auto_capitalization if row.auto_capitalization
         field.autocorrectionType = row.auto_correction if row.auto_correction
+        field.inputAccessoryView = input_accessory_view(row.input_accessory) if row.input_accessory
 
         # must be set prior to placeholder!
         field.font = BW::Font.new(row.font) if row.font
@@ -87,6 +88,11 @@ module Formotion
 
       def dismissKeyboard
         field.resignFirstResponder
+      end
+
+      def done_editing
+        dismissKeyboard
+        self.row.done_action.call unless self.row.done_action.nil?
       end
 
     end

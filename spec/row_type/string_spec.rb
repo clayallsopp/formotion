@@ -61,6 +61,15 @@ describe "String Row Type" do
     @row.text_field.keyboardType.should == UIKeyboardTypeDefault
   end
 
+  # Input Accessory
+  it "should have an input accessory" do
+    cell = @row.make_cell
+    @row.text_field.inputAccessoryView.should != nil
+  end
+
+  it "should call the done_action when hitting the 'done' button" do
+  end
+
   describe "on_select" do
 
     it "should call _on_select" do

@@ -14,7 +14,12 @@ module Bacon
     def tests_row(row_settings, &block)
       if row_settings.is_a? Symbol
         type = row_settings
-        row_settings = { type: type, key: type, title: type.capitalize.to_s }
+        row_settings = {
+          type: type,
+          key: type,
+          title: type.capitalize.to_s,
+          input_accessory: :done
+        }
       end
       before do
         @row = Formotion::Row.new(row_settings)
