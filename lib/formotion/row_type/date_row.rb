@@ -31,12 +31,18 @@ module Formotion
           formatter = NSDateFormatter.new
 
           date_style = self.row.format
-          if date_style && date_style.to_s[-5..-1] != "style"
-            date_style = (date_style.to_s + "_style").to_sym
+
+          if date_style == :string
+            formatter.dateFormat = self.row.date_format
+          else
+            if date_style && date_style.to_s[-5..-1] != "style"
+              date_style = (date_style.to_s + "_style").to_sym
+            end
+
+            formatter.dateStyle = self.row.send(:const_int_get, "NSDateFormatter", date_style || NSDateFormatterShortStyle)
+            formatter.timeStyle = NSDateFormatterNoStyle
           end
 
-          formatter.dateStyle = self.row.send(:const_int_get, "NSDateFormatter", date_style || NSDateFormatterShortStyle)
-          formatter.timeStyle = NSDateFormatterNoStyle
           formatter
         end
       end
