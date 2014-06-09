@@ -15,12 +15,9 @@ module Formotion
       end
 
       def date_value
-        value = self.row.value
-        if value.is_a? Numeric
-          Time.at value
-        else
-          nil
-        end
+        date_from_numeric(self.row.value)
+      end
+
       def minimum_date
         date_from_numeric(self.row.minimum_date)
       end
