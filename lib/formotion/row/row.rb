@@ -24,8 +24,11 @@ module Formotion
       # DEFAULT is :date
       :picker_mode,
       # Stores possible formatting information (used by date pickers, etc)
-      #   if :type == :date, accepts values in [:short, :medium, :long, :full]
+      #   if :type == :date, accepts values in [:short, :medium, :long, :full, :string]
+      #   if string is specified it uses format string passed in date_format property
       :format,
+      # Defines detailed formatting for date (only used in DateRow)
+      :date_format,
       # alternative title for row (only used in EditRow for now)
       :alt_title,
       # determines if the user can edit the row
