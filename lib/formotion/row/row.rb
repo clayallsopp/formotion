@@ -94,6 +94,10 @@ module Formotion
       # In a date/time or time picker, the minute interval can
       # be set. That allows picking by every 15 minutes, etc.
       :minute_interval,
+      # In a date/time or time picker
+      :minimum_date,
+      # In a date/time or time picker
+      :maximum_date,
       #-Resize image when needed (size as Array [1500,1500])
       :max_image_size,
       # Font for String and Text rows

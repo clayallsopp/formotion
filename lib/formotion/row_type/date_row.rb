@@ -15,12 +15,15 @@ module Formotion
       end
 
       def date_value
-        value = self.row.value
-        if value.is_a? Numeric
-          Time.at value
-        else
-          nil
-        end
+        date_from_numeric(self.row.value)
+      end
+
+      def minimum_date
+        date_from_numeric(self.row.minimum_date)
+      end
+
+      def maximum_date
+        date_from_numeric(self.row.maximum_date)
       end
 
       def formatter
@@ -57,6 +60,8 @@ module Formotion
           picker.date = self.date_value || Time.now
           picker.countDownDuration = self.row.value if row.picker_mode == :countdown
           picker.minuteInterval = self.row.minute_interval if self.row.minute_interval
+          picker.minimumDate = minimum_date if self.row.minimum_date
+          picker.maximumDate = maximum_date if self.row.maximum_date
 
           picker.when(UIControlEventValueChanged) do
             if self.row.picker_mode == :countdown
@@ -127,6 +132,18 @@ module Formotion
       # Used when row.value changes
       def update_text_field(new_value)
         self.row.text_field.text = self.formatted_value
+      end
+
+    private
+
+      def date_from_numeric(value)
+        if value.is_a? Numeric
+          Time.at value
+        elsif value.is_a? NSDate
+          value
+        else
+          nil
+        end
       end
     end
   end
