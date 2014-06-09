@@ -8,3 +8,5 @@ before_install:
     - bundle install
     - bundle exec rake pod:install
 script: bundle exec rake spec:units
+env:
+  - COCOAPODS_NO_REPO_UPDATE_OUTPUT=true
