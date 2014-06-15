@@ -54,6 +54,12 @@ module Formotion
           self.picker.setDate(self.picker.date, animated:true)
           picker.countDownDuration = self.row.value.to_f
         end
+        
+        #ensure the UIDatePicker gets updated if we update the row value 
+        observe(self.row, "value") do |old_value, new_value|
+          self.picker.setDate(date_from_numeric(new_value), animated:true)
+          row.form.reload_data
+        end
 
         update
       end
