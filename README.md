@@ -1,6 +1,7 @@
 # Formotion
 
 [![Build Status](https://travis-ci.org/clayallsopp/formotion.png)](https://travis-ci.org/clayallsopp/formotion)
+[![Readme Score](http://readme-score-api.herokuapp.com/score.svg?url=clayallsopp/formotion)](http://clayallsopp.github.io/readme-score?url=clayallsopp/formotion)
 
 Make this:
 
