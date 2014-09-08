@@ -117,6 +117,11 @@ module Formotion
       # DEFAULT is :blue
       :selection_style,
 
+      # Tint color
+      # Currently, this option is effective only to :switch
+      # DEFAULT is nil
+      :tint_color,
+
       # The following apply only to weblink rows
 
       # Whether or not to display a warning to the user before leaving the app.
