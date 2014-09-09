@@ -117,10 +117,9 @@ module Formotion
       # DEFAULT is :blue
       :selection_style,
 
-      # Tint color
-      # Currently, this option is effective only to :switch
+      # Tint color for switch
       # DEFAULT is nil
-      :tint_color,
+      :switch_tint_color,
 
       # The following apply only to weblink rows
 

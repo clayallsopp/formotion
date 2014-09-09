@@ -11,7 +11,7 @@ module Formotion
         switchView.accessibilityLabel = (row.title || "") + " Switch"
         cell.accessoryView = cell.editingAccessoryView = switchView
         switchView.setOn(row.value || false, animated:false)
-        switchView.setOnTintColor(row.tint_color) if row.tint_color
+        switchView.setOnTintColor(row.switch_tint_color) if row.switch_tint_color
         switchView.when(UIControlEventValueChanged) do
           break_with_semaphore do
             row.value = switchView.isOn
