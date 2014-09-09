@@ -282,6 +282,7 @@ The `StaticRow` has no input funcitonality and therefore needs no `key` property
   title: "Remember?",
   key: :remember,
   type: :switch,
+  switch_tint_color: "#00ff88" # optional
 }
 ```
 
