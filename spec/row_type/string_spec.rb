@@ -67,8 +67,8 @@ describe "String Row Type" do
     @row.text_field.inputAccessoryView.should != nil
   end
 
-  it "should call the done_action when hitting the 'done' button" do
-  end
+  #it "should call the done_action when hitting the 'done' button" do
+  #end
 
   describe "on_select" do
 

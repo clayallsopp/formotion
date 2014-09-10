@@ -51,7 +51,7 @@ describe "Text Row" do
     @row.text_field.inputAccessoryView.should != nil
   end
 
-  it "should call the done_action when hitting the 'done' button" do
-  end
+  #it "should call the done_action when hitting the 'done' button" do
+  #end
 
 end

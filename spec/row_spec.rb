@@ -3,7 +3,7 @@ describe "Rows" do
   before do
     @image_name = "tags_row"
     @image = UIImage.imageNamed(@image_name)
-    @remote_image_url = "http://placekitten.com/80/80?t=#{Time.now.to_i}"
+    @remote_image_url = "http://lorempixel.com/80/80?t=#{Time.now.to_i}"
     @remote_placeholder_image_name = 'camera'
     @remote_placeholder_image = UIImage.imageNamed(@remote_placeholder_image_name)
 
@@ -99,7 +99,7 @@ describe "Rows" do
       img = cell.imageView.image
       cell.imageView.image.size.should != @remote_placeholder_image.size
 
-      @remote_placeholder_image_row.image = "http://placekitten.com/80/80?t=#{Time.now.to_i}"
+      @remote_placeholder_image_row.image = "http://lorempixel.com/80/80?t=#{Time.now.to_i}"
       wait 1 do
         cell.imageView.image.should != img
       end
