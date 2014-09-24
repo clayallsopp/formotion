@@ -15,7 +15,7 @@
 [Check](#check)<br/>
 [Slider](#slider)<br/>
 [Image](#image)<br/>
-[Option](#option)<br/>
+[Option](#options)<br/>
 [Picker](#picker)<br/>
 [Subform](#subform)<br/>
 [Template](#template)<br/>
