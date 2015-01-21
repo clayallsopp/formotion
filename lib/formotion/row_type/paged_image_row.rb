@@ -80,6 +80,8 @@ module Formotion
             scroll_view.delegate.clearPages
           end
         end
+
+	nil
       end
 
       def on_select(tableView, tableViewDelegate)
