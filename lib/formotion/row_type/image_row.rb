@@ -71,7 +71,7 @@ module Formotion
         @action_sheet.showInView @image_view
       end
 
-      def actionSheet actionSheet, clickedButtonAtIndex: index
+      def actionSheet actionSheet, didDismissWithButtonIndex: index
         source = nil
 
         if index == actionSheet.destructiveButtonIndex
