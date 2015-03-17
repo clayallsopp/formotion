@@ -18,16 +18,18 @@ module Formotion
         add_plus_accessory(cell) if row.editable? && (row.value == nil)
 
         observe(self.row, "value") do |old_value, new_value|
-          @image_view.image = new_value
-          if new_value
-            self.row.row_height = 200
-            cell.accessoryView = cell.editingAccessoryView = nil
-          else
-            self.row.row_height = 44
-            # only show the "plus" when editable
-            add_plus_accessory(cell) if row.editable? && (row.value == nil)
+          if new_value.present?
+            @image_view.image = new_value
+            if new_value
+              self.row.row_height = 200
+              cell.accessoryView = cell.editingAccessoryView = nil
+            else
+              self.row.row_height = 44
+              # only show the "plus" when editable
+              add_plus_accessory(cell) if row.editable? && (row.value == nil)
+            end
+            row.form.reload_data
           end
-          row.form.reload_data
         end
 
         @image_view = UIImageView.alloc.init
