@@ -18,7 +18,7 @@ module Formotion
         add_plus_accessory(cell) if row.editable? && (row.value == nil)
 
         observe(self.row, "value") do |old_value, new_value|
-          if new_value.present?
+          if old_value and new_value
             @image_view.image = new_value
             if new_value
               self.row.row_height = 200
