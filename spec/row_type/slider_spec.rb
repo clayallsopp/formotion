@@ -29,6 +29,15 @@ describe "Slider Row" do
     cell.accessoryView.value.should == 75
   end
 
+  it "should use the range's min in the absence of a value" do
+    @row.range = (1..10)
+    @row.value = 4
+    cell = @row.make_cell
+
+    @row.value = nil
+    cell.accessoryView.value.should == 1
+  end
+
   # Range
   it "should use default range" do
     @row.range = nil
