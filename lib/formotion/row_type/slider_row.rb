@@ -26,7 +26,7 @@ module Formotion
         end
         observe(self.row, "value") do |old_value, new_value|
           break_with_semaphore do
-            slideView.setValue(row.value, animated:false)
+            slideView.setValue(row.value || self.row.range.min, animated:false)
           end
         end
 
