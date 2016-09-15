@@ -1,3 +1,9 @@
+## 1.8.1 - September 14, 2016
+
+### Bug Fixes
+
+- Fixed a bug in `picker_row` where the value of picker wasn't being set in `didSelectRow`.
+
 ## 1.3.1 - April 15, 2013
 
 ### Features

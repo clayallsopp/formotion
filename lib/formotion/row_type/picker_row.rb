@@ -43,6 +43,7 @@ module Formotion
 
       def pickerView(pickerView, didSelectRow:index, inComponent:component)
         update_text_field(value_for_name_index(index))
+        on_change(self.row.text_field)
       end
 
       def on_change(text_field)
