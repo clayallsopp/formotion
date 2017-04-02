@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/clayallsopp/formotion.png)](https://travis-ci.org/clayallsopp/formotion)
 [![Readme Score](http://readme-score-api.herokuapp.com/score.svg?url=clayallsopp/formotion)](http://clayallsopp.github.io/readme-score?url=clayallsopp/formotion)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fclayallsopp%2Fformotion.svg?size=small)](https://app.fossa.io/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fclayallsopp%2Fformotion?ref=badge_small)
 
 Make this:
 
@@ -224,6 +225,10 @@ end
 ## Forking
 
 Feel free to fork and submit pull requests! And if you end up using Formotion in your app, I'd love to hear about your experience.
+
+## License
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fclayallsopp%2Fformotion.svg?size=large)](https://app.fossa.io/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fclayallsopp%2Fformotion?ref=badge_large)
 
 ## Todo
 
